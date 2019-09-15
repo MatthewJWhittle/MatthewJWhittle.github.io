@@ -1,5 +1,5 @@
 ---
-title: "Raptor Persecution - Extracting Organised Data From Strings"
+title: "Raptor Persecution Extracting Organised Data From Strings"
 author: "Matthew Whittle"
 date: "14/09/2019"
 output: html_document
