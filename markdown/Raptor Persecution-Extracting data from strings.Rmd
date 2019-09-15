@@ -2,7 +2,9 @@
 title: "Raptor Persecution Extracting Organised Data From Strings"
 author: "Matthew Whittle"
 date: "14/09/2019"
-output: html_document
+output: 
+  html_document:
+    css: styles.css
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

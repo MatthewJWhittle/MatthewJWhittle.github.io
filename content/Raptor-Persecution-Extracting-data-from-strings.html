@@ -1133,6 +1133,9 @@ h6 {
 }
 </style>
 
+<style type="text/css">h1 {
+color: grey;
+}</style>
 
 
 
@@ -1293,12 +1296,12 @@ summary {
 <p>We’ll use functions from the <code>stringr</code> package to extract, remove and split strings. Most functions in this package take a string argument (our <code>Details</code> variable) and a pattern argument (our regex). ### Quick example using <code>str_view</code> For example, We can extract all digits within the <code>Details</code> variable using the regex <code>[0-9]+</code>. FYI - <code>str_view</code>and <code>str_view_all</code> allow you to view what you are matching within a string.</p>
 <pre class="r"><code>string &lt;- &quot;Species targeted: Birds of prey. Species involved: Raven x 1. Tested positive for: Carbofuran.&quot;
 str_view_all(string = string, pattern = &quot;[0-9]+&quot;)</code></pre>
-<p><div id="htmlwidget-326161ff8bb3aebc28e1" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-326161ff8bb3aebc28e1">{"x":{"html":"<ul>\n  <li>Species targeted: Birds of prey. Species involved: Raven x <span class='match'>1<\/span>. Tested positive for: Carbofuran.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script> We can match every character string with the regex <code>[A-za-z]+</code>.</p>
+<p><div id="htmlwidget-fc724e37d99e2ab0ebd2" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fc724e37d99e2ab0ebd2">{"x":{"html":"<ul>\n  <li>Species targeted: Birds of prey. Species involved: Raven x <span class='match'>1<\/span>. Tested positive for: Carbofuran.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script> We can match every character string with the regex <code>[A-za-z]+</code>.</p>
 <pre class="r"><code>string &lt;- &quot;Species targeted: Birds of prey. Species involved: Raven x 1. Tested positive for: Carbofuran.&quot;
 str_view_all(string = string, pattern = &quot;[A-za-z]+&quot;)</code></pre>
-<p><div id="htmlwidget-7afbe1d74a8dcffd2131" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7afbe1d74a8dcffd2131">{"x":{"html":"<ul>\n  <li><span class='match'>Species<\/span> <span class='match'>targeted<\/span>: <span class='match'>Birds<\/span> <span class='match'>of<\/span> <span class='match'>prey<\/span>. <span class='match'>Species<\/span> <span class='match'>involved<\/span>: <span class='match'>Raven<\/span> <span class='match'>x<\/span> 1. <span class='match'>Tested<\/span> <span class='match'>positive<\/span> <span class='match'>for<\/span>: <span class='match'>Carbofuran<\/span>.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script> ## Extracting data on the species targeted Using regular expressions is an iterative process, requiring a number of attempts to get what you want. Instead of writing a really complicated regex, it’s worth trying to split it into a few steps with each performing a specific action.</p>
+<p><div id="htmlwidget-3f73f2216c76b37d6221" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3f73f2216c76b37d6221">{"x":{"html":"<ul>\n  <li><span class='match'>Species<\/span> <span class='match'>targeted<\/span>: <span class='match'>Birds<\/span> <span class='match'>of<\/span> <span class='match'>prey<\/span>. <span class='match'>Species<\/span> <span class='match'>involved<\/span>: <span class='match'>Raven<\/span> <span class='match'>x<\/span> 1. <span class='match'>Tested<\/span> <span class='match'>positive<\/span> <span class='match'>for<\/span>: <span class='match'>Carbofuran<\/span>.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script> ## Extracting data on the species targeted Using regular expressions is an iterative process, requiring a number of attempts to get what you want. Instead of writing a really complicated regex, it’s worth trying to split it into a few steps with each performing a specific action.</p>
 <p>The <code>Details</code> variable begins with the text “Species involved:” or “Species targeted:” followed by the species name (sometimes with multiple species) and the further details about the incident.</p>
 <p>Firstly, we’re going to convert the string entirely to lower case using <code>mutate</code> and <code>str_to_lower</code>. This is because upper case tends to complicate matters if text has been inconsistently capitalised.</p>
 <pre class="r"><code>data &lt;- data %&gt;% mutate(Details = Details %&gt;% str_to_lower())</code></pre>
