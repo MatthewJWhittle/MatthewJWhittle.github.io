@@ -6,14 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
-<div class="jumbotron text-center">
-  <h1>My First Bootstrap Page</h1>
-  <p>Resize this responsive page to see the effect!</p> 
-</div>
+
+<div id="banner" class="jumbotron text-center" style="margin-bottom:0">
+  <h1>My First Bootstrap 4 Page</h1>
+  <p>Resize this responsive page to see the effect!</p>
+  </div>
+
+  <nav id='nav_bar'>
+    <ul class='nav_links'>
+      <li><a href="url">Nav Bar</a></li>
+      <li><a href="url">Sign In</a></li>
+      <li><a href="url">Blog</a></li>
+      <li><a href="url">About</a></li>
+    </ul>
+  </nav>
+  
   <!--#include virtual="navigation.ssi" -->
+  
+<div id='body_div'>
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
@@ -33,6 +48,7 @@
     </div>
   </div>
 </div>
+  </div>
 
 </body>
 </html>
