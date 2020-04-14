@@ -1,1 +1,8 @@
 https://www.gatsbyjs.org/tutorial/part-zero/
+
+
+Markdown files: 
+https://www.gatsbyjs.org/docs/adding-markdown-pages/
+
+GraphQL
+https://www.howtographql.com/
