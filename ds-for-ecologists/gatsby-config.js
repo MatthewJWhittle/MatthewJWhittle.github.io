@@ -6,6 +6,13 @@
 
 module.exports = {
   /* Your site config here */
+  siteMetadata: {
+    title: `Data Science for Ecologists`,
+    url: `https://matthewjwhittle.github.io/`,
+    description: `Tutorials and blogs about data science for consultant ecologists`,
+    twitterUsername: '@matthewjwhittle',
+    image: 'src/images/IMG_3031.jpg',
+  },
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
@@ -15,5 +22,6 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    `gatsby-plugin-react-helmet`,
   ]
 }

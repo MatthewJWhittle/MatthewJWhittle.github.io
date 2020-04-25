@@ -1,0 +1,27 @@
+:root {
+    --color1-lightbrown: rgba(221, 209, 199, 1);
+    --color2-lightgreen: rgba(194, 207, 178, 1);
+    --color3-green: rgba(141, 181, 128, 1);
+    --color4-slate: rgba(126, 137, 135, 1);
+    --color5-purple: rgba(75, 74, 103, 1);
+    --color6-grey: rgb(98, 102, 101);
+
+}
+
+h1, h2, h3, h4, h5, h6, p, li, ul {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: var(--color6-grey);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.3cm;
+    margin-bottom: 0.0cm;
+}
+
+p, code {
+    margin-top: 0.1cm;
+    margin-bottom: 0.3cm;
+}
+p, li, code {
+    font-size: medium;
+}
