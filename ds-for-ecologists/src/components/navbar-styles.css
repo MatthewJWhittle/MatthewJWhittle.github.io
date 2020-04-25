@@ -1,27 +1,31 @@
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
   .topnav {
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
   }
   
-  .topnav a {
+  .navlink-container {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .topnav a.header {
     float: left;
-    color: rgb(0,0,0);
     text-align: center;
-    padding: 14px 16px;
+    padding: 16px 16px;
     text-decoration: none;
     font-size: 17px;
+    height: 60px;
+    vertical-align: auto;
   }
   
-  .topnav a:hover {
+  .topnav a.header:hover {
     background-color: #ddd;
     color: black;
   }
-  
+  /* I don't know if this is actually doing anything as I think the js it uses is missing */
   .topnav a.active {
     background-color: rgb(200, 200, 200, 0.2);
     color: black;
@@ -33,9 +37,10 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 10;
   }
   
   /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-  .sticky {
+  .sticky + .content {
     padding-top: 60px;
   }

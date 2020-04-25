@@ -1,16 +1,9 @@
 ---
-title: "Bat Tree Habitat Key - Roost Height Preferences"
-author: "Matthew Whittle"
+path: "/tutorials/bthk-data-roost-preference"
 date: "2020-04-14"
-path: "tutorials/bthk-data-roost-preference"
+title: "Bat Tree Habitat Key - Roost Height Preferences"
 category: "tutorial"
-output: 
-  html_document:
-    highlight: tango
-    css: styles/styles.css
-    toc: true
-    toc_float: true
-    keep_md: yes
+author: "Matthew Whittle"
 ---
 
 
