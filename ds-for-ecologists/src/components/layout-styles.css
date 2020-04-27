@@ -5,7 +5,6 @@
     --color4-slate: rgba(126, 137, 135, 1);
     --color5-purple: rgba(75, 74, 103, 1);
     --color6-grey: rgb(98, 102, 101);
-
 }
 
 h1, h2, h3, h4, h5, h6, p, li, ul {
@@ -17,7 +16,6 @@ h1, h2, h3, h4, h5, h6, p, li, ul {
     margin-top: 60px;
     padding-left: 50px;
     padding-right: 50px;
-
 }
 
 a.header {
@@ -29,10 +27,18 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.0cm;
 }
 
+.page-title {
+    text-align: center;
+    width: 100%;
+    padding: 25px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.1);
+}
+
 p, code {
     margin-top: 0.1cm;
     margin-bottom: 0.3cm;
 }
+
 p, li, code {
     font-size: medium;
 }
@@ -43,39 +49,77 @@ pre {
     width: 100%;
 }
 
- .container-fluid{
+.container-fluid {
     padding: 0 !important;
 }
 
 div.linkrow {
-    background-color: grey;
     align-content: center;
     vertical-align: middle;
     margin: 25px;
-}
-
-.page-title {
-    text-align: center;
-    width: 100%;
-    padding: 25px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
-
+    min-height: 250px;
 }
 
 img.linkrow {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    margin: 0 auto;
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: 200px;
+    margin-left: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-right: 12.5px;
+    margin-left: 12.5px;
 }
 
-div.img-wrapper{
-    width: 200px;
-    height: 200px;
-    border: 1px solid black;
-    vertical-align: middle;
-    text-align: center;
-    display: table-cell;
+
+.link-title {
+    text-align: left;
+    width: 90%;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
 }
+
+.link-category {
+    text-align: left;
+    padding-bottom: 2.5px;
+    color: rgba(128, 128, 128, 0.7);
+    font-weight: 700;
+    font-size: 90%;
+}
+
+.link-description {
+    text-align: left;
+    width: 80%;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    color: rgba(141, 181, 128, 1);
+    font-size: 90%;
+}
+
+.link-details {
+    text-align: left;
+    padding-bottom: 2.5px;
+    color: rgba(128, 128, 128, 0.7);
+    font-size: 90%;
+}
+
+.truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title-banner {
+    width: 100%;
+    text-align: center;
+    padding: 50px;
+    margin: 10px;
+}
+
+.link-description-container {
+    border-bottom: 2px solid rgba(245, 245, 245, 0.8);
+    padding-left: 25px;
+    padding-bottom: 3rem;
+    margin-top: 3rem;
+}
+
