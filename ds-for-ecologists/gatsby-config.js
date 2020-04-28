@@ -15,6 +15,7 @@ module.exports = {
     image: 'src/images/IMG_3031.jpg',
   },
   plugins: [
+    // Source filesystem
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -22,7 +23,24 @@ module.exports = {
         name: `markdown-pages`,
       },
     },
+    // Render markdown
     `gatsby-transformer-remark`,
+    // SEO
     `gatsby-plugin-react-helmet`,
+    // Source and render inline images:
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+            },
+          },
+        ],
+      },
+    },
   ]
 }

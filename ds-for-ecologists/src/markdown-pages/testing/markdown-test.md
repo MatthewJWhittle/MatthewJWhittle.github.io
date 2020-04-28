@@ -1,3 +1,11 @@
+---
+path: "/md/test"
+date: "2020-04-09"
+title: "Testing MD"
+category: "tests"
+author: "Matthew Whittle"
+---
+
 R Markdown
 ----------
 
@@ -52,4 +60,9 @@ prevent printing of the R code that generated the plot.
     leaflet() %>% 
       addProviderTiles(providers$OpenStreetMap)
 
-![](markdown-test_files/figure-markdown_strict/unnamed-chunk-1-1.png)
+    ## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+
+<!--html_preserve-->
+
+<script type="application/json" data-for="htmlwidget-1a6da235166d968d7372">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}]},"evals":[],"jsHooks":[]}</script>
+<!--/html_preserve-->
