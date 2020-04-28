@@ -70,7 +70,6 @@ img.linkrow {
     margin-left: 12.5px;
 }
 
-
 .link-title {
     text-align: left;
     width: 90%;
@@ -91,7 +90,6 @@ img.linkrow {
     width: 80%;
     padding-top: 2.5px;
     padding-bottom: 2.5px;
-    color: rgba(141, 181, 128, 1);
     font-size: 90%;
 }
 
@@ -102,6 +100,14 @@ img.linkrow {
     font-size: 90%;
 }
 
+.link-tags {
+    text-align: left;
+    padding-bottom: 2.5px;
+    color: rgba(128, 128, 128, 0.7);
+    font-size: 90%;
+    font-weight: 700;
+}
+
 .truncate {
     width: 250px;
     white-space: nowrap;
@@ -109,11 +115,42 @@ img.linkrow {
     text-overflow: ellipsis;
 }
 
-.title-banner {
-    width: 100%;
-    text-align: center;
-    padding: 50px;
-    margin: 10px;
+h1.title-banner-overlay {
+    z-index: 10;
+    position: absolute;
+    color: rgb(104, 104, 104);
+}
+
+p.title-banner-overlay {
+    padding: 5px;
+    z-index: 10;
+    position: absolute;
+}
+
+div.banner-container {
+    width: 700px;
+    height: 250px;
+    position: relative;
+    background-color: white;
+}
+
+div.title-banner-overlay {
+    width: 400px;
+    height: 250px;
+    position: absolute;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+
+img.title-banner {
+    width: 800px;
+    height: 250px;
+    z-index: 1;
+    object-fit: cover;
+    object-position: 0px -100px;
+    position: absolute;
+    opacity: 0.4;
 }
 
 .link-description-container {
@@ -122,4 +159,3 @@ img.linkrow {
     padding-bottom: 3rem;
     margin-top: 3rem;
 }
-

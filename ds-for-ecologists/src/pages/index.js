@@ -7,11 +7,14 @@ import SiteTitle from "../components/site-title"
 export default () => (
     <div>
         <Layout>
-            <div class="row title-banner">
-                <h1 class="title-banner"><SiteTitle /></h1>
-                <p>Data science tutorials and blogging with a focus on ecology</p>
+            <div class="row">
+                <div class="banner-container">
+                    <img src={require("../images/Bombus pascorum-9352.png")} class="title-banner" />
+                    <div class="title-banner-overlay">
+                        <h1 class="title-banner-overlay"><SiteTitle /></h1>
+                    </div>
+                </div>
             </div>
-            <Fillerp /><Fillerp /><Fillerp /><Fillerp /><Fillerp /><Fillerp /><Fillerp /><Fillerp /><Fillerp />
         </Layout>
     </div>
 )
