@@ -1,6 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+/* This is not pulling through leaflet maps because they need to be wrapped in some code
+    the wrapping can be added using a knitr hook when knitting the markdown document
+    developing solution in: "R/data-science-for-ecologists-R/knitr hook function.R"
+
+    It is also neccessary to add relevant dependencies into html header for leaflet
+
+*/
+
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {

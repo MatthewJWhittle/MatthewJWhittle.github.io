@@ -159,3 +159,7 @@ img.title-banner {
     padding-bottom: 3rem;
     margin-top: 3rem;
 }
+
+.leaflet{
+    height: 180px;
+}
