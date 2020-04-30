@@ -6,3 +6,10 @@ category: "blog"
 ---
 
 # Heading 1
+
+```javascript
+const var = "A String"
+```
+```js
+this.willBe(highlighted);
+```

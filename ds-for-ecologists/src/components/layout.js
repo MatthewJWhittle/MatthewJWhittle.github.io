@@ -3,6 +3,7 @@ import Navbar from "./navbar"
 import React from "react"
 import layoutStyles from "./layout-styles.css"
 import bootstrap from 'bootstrap/dist/css/bootstrap.css'
+import codeHighlight from '../styles/code-highlighting.css'
 import { Helmet } from "react-helmet"
 
 export default ({ children }) => (
