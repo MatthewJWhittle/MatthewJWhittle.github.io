@@ -1,8 +1,8 @@
 import Gatsby from "gatsby"
 import React from "react"
-import Fillerp from "./filler-text"
+import Fillerp from "../src/components/filler-text"
 
-const  ContentRow = ({ post }) => (
+export default () => (
     <div class="row linkrow">
         <div class="container">
             <div class="row pt-4">
@@ -12,21 +12,21 @@ const  ContentRow = ({ post }) => (
                 <div class="col-8">
                     <div class="link-description-container">
                         <div class="row">
-                            <p class="link-category">{post.frontmatter.category}</p>
+                            <p class="link-category">Tutorial</p>
                         </div>
                         <div class="row">
-                            <h1 class="link-title">{post.frontmatter.title}</h1>
+                            <h1 class="link-title">Really Long Article Title About Something Interesting</h1>
                         </div>
                         <div class="row">
                             <div>
                                 <p class="link-description">
-                                    {post.excerpt}
+                                    <Fillerp />
                                 </p>
                             </div>
                         </div>
                         <div class="row">
                             <p class="link-details">
-                                By {post.frontmatter.author} on {post.frontmatter.date}
+                                By Matthew Whittle on 3rd April, 2020
                             </p>
                         </div>
                     </div>
@@ -35,4 +35,3 @@ const  ContentRow = ({ post }) => (
         </div>
     </div >
 )
-export default ContentRow
