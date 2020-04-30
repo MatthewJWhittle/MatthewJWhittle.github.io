@@ -60,6 +60,10 @@ div.linkrow {
     min-height: 250px;
 }
 
+.linkrow:hover{
+ background-color: rgba(245, 245, 245, 0.5);  
+}
+
 img.linkrow {
     width: auto;
     height: 200px;
@@ -70,12 +74,23 @@ img.linkrow {
     margin-left: 12.5px;
 }
 
+
+
 .link-title {
     text-align: left;
     width: 90%;
     padding-top: 2.5px;
     padding-bottom: 2.5px;
+    color: var(--color6-grey);
 }
+
+a.link-title:hover{
+    text-decoration: none;
+    color: lightslategrey;
+
+    
+}
+
 
 .link-category {
     text-align: left;
@@ -163,3 +178,4 @@ img.title-banner {
 .leaflet{
     height: 180px;
 }
+

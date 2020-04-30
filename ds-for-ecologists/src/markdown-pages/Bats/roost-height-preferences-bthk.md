@@ -4,6 +4,7 @@ title: "Roost Height Preferences with Bat Tree Habitat Key Data"
 category: "tutorial"
 author: "Matthew Whittle"
 date: "2020-04-10"
+featured_image: "src/images/bat-genus-roosts.png"
 ---
 <br/>
 

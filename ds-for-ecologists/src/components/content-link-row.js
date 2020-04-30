@@ -15,7 +15,7 @@ const  ContentRow = ({ post }) => (
                             <p class="link-category">{post.frontmatter.category}</p>
                         </div>
                         <div class="row">
-                            <h1 class="link-title">{post.frontmatter.title}</h1>
+                            <h1 class="link-title"><a class = "link-title" href = {post.frontmatter.path}>{post.frontmatter.title}</a></h1>
                         </div>
                         <div class="row">
                             <div>
