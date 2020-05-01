@@ -4,12 +4,15 @@ author: "Matthew Whittle"
 date: "28/04/2020"
 always_allow_html: true
 output: 
-  md_document
+  html_document:
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+https://cran.r-project.org/web/packages/widgetframe/vignettes/widgetframe_and_knitr.html
 
 ## R Markdown
 
@@ -34,7 +37,7 @@ plot(pressure)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 
-```{r}
+```{r }
 require(leaflet)
 
 leaflet() %>% 

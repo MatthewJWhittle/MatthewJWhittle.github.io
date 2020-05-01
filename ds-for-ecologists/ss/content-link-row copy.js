@@ -6,7 +6,10 @@ const  ContentRow = ({ post }) => (
     <div class="row linkrow">
         <div class="container">
             <div class="row pt-4">
-                <div class="col-12">
+                <div class="col-4 link-image-container">
+                    <img src={require("../images/IMG_3031.jpg")} class="linkrow" ></img>
+                </div>
+                <div class="col-8">
                     <div class="link-description-container">
                         <div class="row">
                             <p class="link-category">{post.frontmatter.category}</p>

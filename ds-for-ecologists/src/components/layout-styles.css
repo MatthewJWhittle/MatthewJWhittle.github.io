@@ -41,6 +41,7 @@ p, code {
 
 p, li, code {
     font-size: medium;
+    line-height: 1.8;
 }
 
 pre {
@@ -60,9 +61,14 @@ div.linkrow {
     min-height: 250px;
 }
 
+
+.linkrow:hover {
+    background-color: rgba(245, 245, 245, 0.5);
+}
+
 img.linkrow {
-    width: auto;
-    height: 200px;
+    width: 100%;
+    height: auto;
     margin-left: auto;
     margin-top: 25px;
     margin-bottom: 25px;
@@ -75,6 +81,11 @@ img.linkrow {
     width: 90%;
     padding-top: 2.5px;
     padding-bottom: 2.5px;
+    color: var(--color6-grey);
+}
+a.link-title:hover {
+    text-decoration: none;
+    color: lightslategrey;
 }
 
 .link-category {
@@ -128,7 +139,7 @@ p.title-banner-overlay {
 }
 
 div.banner-container {
-    width: 700px;
+    width: 100%;
     height: 250px;
     position: relative;
     background-color: white;
@@ -144,18 +155,65 @@ div.title-banner-overlay {
 }
 
 img.title-banner {
-    width: 800px;
+    width: 100%;
     height: 250px;
     z-index: 1;
     object-fit: cover;
-    object-position: 0px -100px;
+    object-position: 0px -300px;
     position: absolute;
     opacity: 0.4;
 }
+
+
 
 .link-description-container {
     border-bottom: 2px solid rgba(245, 245, 245, 0.8);
     padding-left: 25px;
     padding-bottom: 3rem;
     margin-top: 3rem;
+}
+
+.leaflet {
+    height: 180px;
+}
+
+.container-center {
+    text-align: center;
+    width: 100%;
+}
+
+div.contact {
+    padding: 25px;
+    display: inline-block;
+    width: 500px;
+}
+
+div.about-blurb {
+    padding: 25px;
+    display: inline-block;
+    width: 80%;
+    text-align: justify;
+}
+
+ul.clean{
+    padding: 0;
+    list-style-type: none;
+}
+
+li.clean {
+    list-style-type: none;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+a.clean {
+    color: var(--color6-grey);
+    text-decoration: none;
+    color: lightslategrey;    
+    text-align: center;
+}
+
+a.clean:hover {
+    text-decoration: none; 
+    color: rgb(79, 78, 110);
 }

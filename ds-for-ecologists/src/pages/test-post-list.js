@@ -1,8 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+//import PostLink from "../../ss/post-list"
 import ContentRow from "../components/content-link-row"
-
+import { Link } from "gatsby"
 
 const IndexPage = ({
   data: {

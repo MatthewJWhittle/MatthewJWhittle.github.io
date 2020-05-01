@@ -1,3 +1,11 @@
+---
+path: "/md/test"
+date: "2020-04-09"
+title: "Testing MD"
+category: "tests"
+author: "Matthew Whittle"
+---
+
 R Markdown
 ----------
 
