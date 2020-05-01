@@ -16,8 +16,10 @@ const IndexPage = ({
   return (
     <Layout>
       <h1 class="page-title">Blogs</h1>
-      <div class="col">
-        {Posts}
+      <div class="container-fluid">
+        <div class="col">
+          {Posts}
+        </div>
       </div>
     </Layout>
   )
