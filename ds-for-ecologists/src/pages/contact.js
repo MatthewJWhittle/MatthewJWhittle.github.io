@@ -1,8 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
-import Header from "../components/header"
 import Layout from "../components/layout"
-import FillerP from "../components/filler-text"
 
 export default () => (
     <Layout>

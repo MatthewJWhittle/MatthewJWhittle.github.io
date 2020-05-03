@@ -8,11 +8,6 @@ featured_image: "src/images/bat-genus-roosts.png"
 ---
 <br/>
 
-Introduction
-============
-
-------------------------------------------------------------------------
-
 In this tutorial we’re going to explore data from the [Bat Tree Habitat
 Key (BHTK)
 Database](https://drive.google.com/open?id=1Ebw8LNVZto2hYLlATRc25tGPepYRxxF5).

@@ -1,9 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-//import PostLink from "../../ss/post-list"
 import ContentRow from "../components/content-link-row"
-import { Link } from "gatsby"
+
 
 const IndexPage = ({
   data: {
@@ -16,9 +15,13 @@ const IndexPage = ({
 
   return (
     <Layout>
-      <h1 class="page-title">Tutorials</h1>
-      <div class="col">
+      <div class = "page-container">
+      <div class = "col-4 page-left">
+      <h2 class = "page-title">Tutorials</h2>
+      </div>
+      <div class = "col-8 page-right">
         {Posts}
+      </div>
       </div>
     </Layout>
   )
@@ -34,7 +37,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          excerpt(pruneLength: 250)
+          excerpt(pruneLength: 150)
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             path

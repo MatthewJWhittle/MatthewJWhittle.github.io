@@ -27,12 +27,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.0cm;
 }
 
-.page-title {
-    text-align: center;
-    width: 100%;
-    padding: 25px;
-    border-bottom: 2px solid rgba(128, 128, 128, 0.1);
-}
+
 
 p, code {
     margin-top: 0.1cm;
@@ -54,17 +49,50 @@ pre {
     padding: 0 !important;
 }
 
+
+div.page-container {
+    display: flex;
+    padding-top: 25px;
+}
+
+div.page-left {
+    float: left;
+    order: 1;
+    padding: 50px;
+    margin-right: 1.69492%;
+    width: 32.20339%;
+}
+
+div.page-right {
+    float: left;
+    order: 2;
+    padding: 50px;
+    margin-right: 1.69492%;
+    width: 57.62712%;
+}
+
+.page-title {
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    font-weight: 600;
+    color: var(--color5-purple);
+}
+
+
+
+div.post-rows-container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
 div.linkrow {
     align-content: center;
     vertical-align: middle;
-    margin: 25px;
-    min-height: 250px;
+    min-height: 150px;
 }
 
 
-.linkrow:hover {
-    background-color: rgba(245, 245, 245, 0.5);
-}
 
 img.linkrow {
     width: 100%;
@@ -82,6 +110,7 @@ img.linkrow {
     padding-top: 2.5px;
     padding-bottom: 2.5px;
     color: var(--color6-grey);
+    font-weight: 550;
 }
 a.link-title:hover {
     text-decoration: none;
@@ -98,8 +127,8 @@ a.link-title:hover {
 
 .link-description {
     text-align: left;
-    width: 80%;
-    padding-top: 2.5px;
+    width: 90%;
+    padding-top: 5px;
     padding-bottom: 2.5px;
     font-size: 90%;
 }
@@ -167,10 +196,10 @@ img.title-banner {
 
 
 .link-description-container {
-    border-bottom: 2px solid rgba(245, 245, 245, 0.8);
+    border-bottom: 2px solid rgb(124, 124, 124, 0.2);
     padding-left: 25px;
     padding-bottom: 3rem;
-    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .leaflet {
@@ -209,11 +238,11 @@ li.clean {
 a.clean {
     color: var(--color6-grey);
     text-decoration: none;
-    color: lightslategrey;    
+    color: rgb(72, 83, 94);    
     text-align: center;
 }
 
 a.clean:hover {
     text-decoration: none; 
-    color: rgb(79, 78, 110);
+    color: rgba(58, 73, 155, 0.726);    
 }

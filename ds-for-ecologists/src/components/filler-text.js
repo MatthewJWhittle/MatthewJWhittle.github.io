@@ -1,5 +1,5 @@
 import React from "react"
-import Gatsby from "gatsby"
+
 
 export default () => (
     <>

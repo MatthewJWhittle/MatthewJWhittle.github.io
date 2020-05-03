@@ -15,11 +15,13 @@ const IndexPage = ({
 
   return (
     <Layout>
-      <h1 class="page-title">Blogs</h1>
-      <div class="container-fluid">
-        <div class="col">
-          {Posts}
-        </div>
+      <div class = "page-container">
+      <div class = "col-3 page-left">
+      <h2 class = "page-title">Blog</h2>
+      </div>
+      <div class = "col-9 page-right">
+        {Posts}
+      </div>
       </div>
     </Layout>
   )
@@ -35,7 +37,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          excerpt(pruneLength: 250)
+          excerpt(pruneLength: 150)
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             path

@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import Navbar from "../components/navbar"
+import Navbar from "../src/components/navbar"
 
 export default () => (
   <div style={{ color: `purple` }}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Layout from "../components/layout"
-import ContentRow from "../components/content-link-row"
+import Layout from "../src/components/layout"
+import ContentRow from "../src/components/content-link-row"
 
 import { Map } from 'react-leaflet'
 

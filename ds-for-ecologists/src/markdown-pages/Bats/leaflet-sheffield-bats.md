@@ -4,12 +4,13 @@ title: "Exploring Bat Records using leaflet"
 category: "tutorial"
 author: "Matthew Whittle"
 date: "2020-04-20"
+tags: 
+ - leaflet
+ - Spatial data
+ - Ecological records data
 ---
 
 ------------------------------------------------------------------------
-
-Introduction
-============
 
 In this tutorial we’re going to explore some bat records from sheffield.
 We’ll explore the use of a few packages for manipulating and visualising
