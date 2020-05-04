@@ -108,6 +108,11 @@ div.background-white {
     background-color: whitesmoke;
 }
 
+div.blog-post-content {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
 /* Navbar */
 
 .topnav {
