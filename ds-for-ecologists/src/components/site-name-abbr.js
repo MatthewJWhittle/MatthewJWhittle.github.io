@@ -13,9 +13,9 @@ export default () => (
       }
     `}
     render={data => (
-      <header>
+      <>
         {data.site.siteMetadata.titleabbr}
-      </header>
+      </>
     )}
   />
 )

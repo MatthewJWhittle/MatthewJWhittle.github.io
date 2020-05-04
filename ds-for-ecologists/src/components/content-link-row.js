@@ -18,7 +18,7 @@ const  ContentRow = ({ post }) => (
                         </div>
                         <div class="row">
                             <p class="link-details">
-                                By <a href = "/about" class = "clean">{post.frontmatter.author}</a> on {post.frontmatter.date}
+                                By <a href = "/about" class = "clean highlight-text-minor">{post.frontmatter.author}</a> on {post.frontmatter.date}
                             </p>
                         </div>
                     </div>

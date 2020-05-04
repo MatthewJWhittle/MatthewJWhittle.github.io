@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import ContentRow from "../components/content-link-row"
-
+import PageContent from "../components/page-content"
 
 const IndexPage = ({
   data: {
@@ -15,14 +15,16 @@ const IndexPage = ({
 
   return (
     <Layout>
-      <div class = "page-container">
-      <div class = "col-3 page-left">
-      <h2 class = "page-title">Tutorials</h2>
-      </div>
-      <div class = "col-9 page-right">
-        {Posts}
-      </div>
-      </div>
+      <PageContent>
+        <div class="page-container">
+          <div class="col-3 page-left">
+            <h2 class="page-title highlight-text-major">Tutorials</h2>
+          </div>
+          <div class="col-9 page-right">
+            {Posts}
+          </div>
+        </div>
+      </PageContent>
     </Layout>
   )
 }
