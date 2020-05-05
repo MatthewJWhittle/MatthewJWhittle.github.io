@@ -39,12 +39,17 @@ module.exports = {
             options: {
               maxWidth: 800,
             },
-            /*
+          },
+          `gatsby-remark-autolink-headers`,
+          /*
+          {
             resolve: `gatsby-remark-vscode`,
             options: {
               theme: 'Abyss' // Or install your favorite theme from GitHub
-            }, 
-            */
+            },
+          },
+          */
+          {
             resolve: `gatsby-remark-prismjs`,
             options: {
               // Class prefix for <pre> tags containing syntax highlighting;
@@ -109,6 +114,7 @@ module.exports = {
               escapeEntities: {},
             },
           },
+          
         ],
       },
     },

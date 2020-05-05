@@ -35,13 +35,11 @@ a.header {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin-top: 0.3cm;
     margin-bottom: 0.0cm;
 }
 
 p, code {
-    margin-top: 0.1cm;
-    margin-bottom: 0.3cm;
+    margin-top: 0.3cm;
 }
 
 p, li, code {
@@ -109,8 +107,8 @@ div.background-white {
 }
 
 div.blog-post-content {
-    margin-left: 150px;
-    margin-right: 150px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 /* Navbar */
@@ -171,7 +169,7 @@ pre {
     background-color: rgba(var(--color-5), 0.05);
     background-color: rgba(211, 211, 211, 0.103);
     padding: 10px;
-    max-height: 250px;
+    max-height: 300px;
     width: 100%;
 }
 
@@ -335,6 +333,7 @@ div.about-blurb {
 ul.clean {
     padding: 0;
     list-style-type: none;
+    
 }
 
 li.clean {
@@ -366,14 +365,45 @@ a:hover {
     color: rgba(148, 185, 175, 1);
 }
 
+/* table of contents */
+
+div.toc {
+    position: fixed;
+    left: 50px;
+    top: 80px;
+    max-width: 300px;
+    background-color:#FFF;
+}
+
+ul.toc {
+    padding: 0;
+    list-style-type: none;
+    
+}
+
+li.toc {
+    list-style-type: none;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    padding-top: 70px;
+    padding-bottom: 5px;
+}
+
+
+.anchor {
+    padding-top: 70px;
+}
+
+
+
 /* Code Highlighting ---------------------------- */
 
 /* Markdown */
-/*
-code.language-code-output {
 
-}
-*/
+
 
 code {
     max-height: 200px;
@@ -392,7 +422,7 @@ code.language-code-output {
 
 
 
-/* Inline code */
+/* Inline code  */
 :not(pre) > code[class*="language-"] {
 	padding: .2em;
     border-radius: .3em;
@@ -404,11 +434,11 @@ code.language-code-output {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: rgba(var(--color-1), 0.9); /* base1 */
+	color: rgba(var(--color-1), 0.9);
 }
 
 .token.punctuation {
-	color: #586e75; /* base01 */
+	color: #586e75; 
 }
 
 .token.namespace {
@@ -425,7 +455,7 @@ code.language-code-output {
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: #268bd2; /* blue */
+	color: #268bd2; 
 }
 
 .token.selector,
@@ -435,18 +465,18 @@ code.language-code-output {
 .token.builtin,
 .token.url,
 .token.inserted {
-	color: #2aa198; /* cyan */
+	color: #2aa198; 
 }
 
 .token.entity {
-	color: #657b83; /* base00 */
-	background: #eee8d5; /* base2 */
+	color: #657b83; 
+	background: #eee8d5; 
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: #859900; /* green */
+	color: #859900; 
 }
 
 .token.function,
@@ -457,7 +487,7 @@ code.language-code-output {
 .token.regex,
 .token.important,
 .token.variable {
-	color: #cb4b16; /* orange */
+	color: #cb4b16; 
 }
 
 .token.important,
