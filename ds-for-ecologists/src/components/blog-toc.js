@@ -10,7 +10,7 @@ export default ({ headings, path }) => (
             {headings
                 .filter(heading => heading.depth <= 2)
                 .map(heading => (
-                    <li class = "toc" key={heading.value}>
+                    <li class = {"toc toc-level-" + heading.depth} key={heading.value} >
                         <Link to={path + '#' + slugger.slug(heading.value)}>{heading.value}</Link>
                     </li>
                 ))}

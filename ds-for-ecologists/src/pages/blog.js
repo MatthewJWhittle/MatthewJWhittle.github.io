@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import ContentRow from "../components/content-link-row"
+import PageContent from "../components/page-content"
 
 
 const IndexPage = ({
@@ -15,14 +16,16 @@ const IndexPage = ({
 
   return (
     <Layout>
-      <div class="page-container">
-        <div class="col-3 page-left">
-          <h2 class="page-title">Blog</h2>
+      <PageContent>
+        <div class="page-container">
+          <div class="col-3 page-left">
+            <h2 class="page-title highlight-text-major">Blog</h2>
+          </div>
+          <div class="col-9 page-right">
+            {Posts}
+          </div>
         </div>
-        <div class="col-9 page-right">
-          {Posts}
-        </div>
-      </div>
+      </PageContent>
     </Layout>
   )
 }
@@ -42,6 +45,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             path
             title
+            subtitle
             category
             author
           }

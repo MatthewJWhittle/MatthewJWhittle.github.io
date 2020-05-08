@@ -12,7 +12,7 @@ const  ContentRow = ({ post }) => (
                         <div class="row">
                             <div>
                                 <p class="link-description">
-                                    {post.excerpt}
+                                    {post.frontmatter.subtitle}
                                 </p>
                             </div>
                         </div>

@@ -1,9 +1,11 @@
 ---
 path: "/tutorials/importing-multiple-spreadsheets"
-title: "Importing multiple spreadsheets in R"
+title: "How to Import All of Your Survey Data Using One R Script"
+subtitle: "Importing 45 spreadsheets of great crested newt survey data and extracting structured data from their file paths"
 category: "tutorial"
 author: "Matthew Whittle"
 date: "2020-05-02"
+featuredImage: "./great-crested-newt.jpg"
 ---
 
 <!--html_preserve-->
@@ -12,13 +14,12 @@ date: "2020-05-02"
   addKlippy('right', 'top', '#BEBEBE', '1', 'Copy code', 'Copied!');
 </script>
 <!--/html_preserve-->
-![](images/great-crested-newt.jpg)
 
 
-Importing Survey Data
+Introduction
 ============
 
-------------------------------------------------------------------------
+
 
 You’ve finished a tough season of great crested newt surveys and you’ve
 been asked to pick up the analysis of the survey data.
@@ -44,11 +45,10 @@ In this tutorial, we’re going to learn how to:
 -   Read them into R and combine them into one data frame; and,
 -   Extract structured data from the file names.
 
-
 Data
 ====
 
-------------------------------------------------------------------------
+
 
 The data for this tutorial was originally sourced from Natural England’s
 dataset: [Great Crested Newts eDNA Pond Surveys for District Level
@@ -72,7 +72,7 @@ These problems are solvable but beyond the scope of this tutorial!
 Packages
 ========
 
-------------------------------------------------------------------------
+
 
 We’ll be using the following packages from the `tidyverse` in this
 tutorial:
@@ -100,7 +100,7 @@ library(lubridate)
 First Steps: checking the data
 ==============================
 
-------------------------------------------------------------------------
+
 
 It is a good idea to perform a few quick checks on the dataset and file
 system before we get started. We want to understand what the file naming
@@ -168,8 +168,10 @@ Let’s perform another check. Read in two of the files using read\_csv,
 and compare them by using the glimpse function.
 
 ``` r
-file1 <- read_csv("data/raw/gcn survey results/Site D - May 2018.csv")
-file2 <- read_csv("data/raw/gcn survey results/Site E - June 2019.csv")
+file1 <-
+  read_csv("data/raw/gcn survey results/Site D - May 2018.csv")
+file2 <-
+  read_csv("data/raw/gcn survey results/Site E - June 2019.csv")
 ```
 
 Do they have the same number of columns? Are they in the same order and
@@ -231,11 +233,10 @@ spreadsheet. These are key pieces of information that will be used in
 analysis and reporting. Without them our data are useless so we’ll need
 to extract somehow extract this information.
 
-
 List the files
 ==============
 
-------------------------------------------------------------------------
+
 
 The first step in importing the data is to build a list of files. This
 can be achieved using `list.files()`. This function takes a path to a
@@ -287,11 +288,10 @@ a [regular
 expression](https://stringr.tidyverse.org/articles/regular-expressions.html)
 (more on them later).
 
-
 Import the data
 ===============
 
-------------------------------------------------------------------------
+
 
 Now we have a path to each file in `files_to_import` we can write some
 code to import them.
@@ -464,11 +464,10 @@ head(survey_data)
 
 Looks like it worked. Great!
 
-
 From a list to a data frame
 ===========================
 
-------------------------------------------------------------------------
+
 
 We’ve read in the data, but we can’t actually do any analysis yet. There
 are still a couple of problems to solve. `map` has given us a list
@@ -485,11 +484,10 @@ We’ll solve the above problems in the following order:
 3.  Extract the survey date and location from the file path and
     construct two variables: `site_id` and `date`.
 
-
 Add the file path variable
 --------------------------
 
-------------------------------------------------------------------------
+
 
 To add the file path in as a variable to each data frame we can use
 `mutate()`. However, mutate only handles one data frame at a time. We
@@ -545,11 +543,10 @@ survey_data[[1]]
 ## #   day_of_month <dbl>, file_path <chr>
 ```
 
-
 Bind the data
 -------------
 
-------------------------------------------------------------------------
+
 
 Because all of the data frames have a consistent set of columns, binding
 them together is straightforward. There are a few functions for stacking
@@ -585,68 +582,10 @@ head(data)
 ## #   file_path <chr>
 ```
 
-
 Extract date and location
 =========================
 
-------------------------------------------------------------------------
 
-The dataset still needs some work before its useful. The survey location
-and date are stored in the file path. We’ll need to extract this
-information and construct two new variables within the data: `site_id`
-and `date`. For the site location, we can simply extract this from the
-file path and assign it to the variable `site_id`.
-
-The `date` variable is a bit more complex. The `file_path` only contains
-the year and month of the survey. The day is stored within
-`day_of_month`.
-
-``` r
-data %>% select(file_path, day_of_month)
-```
-
-``` code-output
-## # A tibble: 5,870 x 2
-##    file_path                                           day_of_month
-##    <chr>                                                      <dbl>
-##  1 data/raw/gcn survey results/Site A - April 2018.csv           17
-##  2 data/raw/gcn survey results/Site A - April 2018.csv           18
-##  3 data/raw/gcn survey results/Site A - April 2018.csv           18
-##  4 data/raw/gcn survey results/Site A - April 2018.csv           18
-##  5 data/raw/gcn survey results/Site A - April 2018.csv           19
-##  6 data/raw/gcn survey results/Site A - April 2018.csv           19
-##  7 data/raw/gcn survey results/Site A - April 2018.csv           19
-##  8 data/raw/gcn survey results/Site A - April 2018.csv           25
-##  9 data/raw/gcn survey results/Site A - April 2018.csv           24
-## 10 data/raw/gcn survey results/Site A - April 2018.csv           24
-## # … with 5,860 more rows
-```
-
-We’ll need to first extract the month and year, then construct the
-`date` variable from the day, month and year.
-
-Extracting data from strings - Regex
-------------------------------------
-
-To extract structured information from the `file_path` we’ll need to
-make use of regular expressions and the `stringr` package.
-
-Regular expressions or *regexes* are sequences of characters which
-define a pattern. The pattern can be used to match parts of a string.
-Two types of characters comprise a regex: regular characters which match
-themselves literally and metacharacters which match a subset of
-characters.
-
-Regexes are *really* useful tools for wrangling data. I think I’ve used
-them in almost every analysis pipeline I’ve written. A good general
-introduction on working with strings and regexes can be found in [R for
-Data Science](https://r4ds.had.co.nz/strings.html#introduction-8) and
-this
-[cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/strings.pdf)
-is a useful reference on the `stringr` package.
-
-For this task, we’ll need a couple of patterns which I will demonstrate
-below.
 
 The dataset still needs some work before its useful. The survey location
 and date are stored in the file path. We’ll need to extract this
@@ -884,7 +823,6 @@ solve more complex problems:
 -   **Write a more specific pattern.** You could match a specific number
     of characters using `{n}` instead of `+`, or use `^` or `$` to match
     the start or end of the string.
-
 
 Constructing the survey date
 ----------------------------
