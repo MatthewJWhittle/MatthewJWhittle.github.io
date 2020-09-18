@@ -93,6 +93,15 @@ a {
     padding: 0 !important;
 }
 
+.container-index-img {
+    text-align: center;
+}
+
+.index-img {
+    width: 80%;
+    height: auto;
+}
+
 .fade-container {
     position: fixed;
     bottom: 0;
@@ -141,14 +150,31 @@ div.feature-image {
     margin-left: 10%;
     margin-right: 10%;
     height: auto;
-    border: 1px solid black;
 }
-
 
 div.blog-post-content {
     margin-left: 20%;
     margin-right: 20%;
 }
+
+/* Navigation */
+
+/* Buttons */
+
+.nav-button-big {
+    height: 50px;
+    width: 150px;
+    padding: 5px;
+    background-color: rgba(var(--color-1), 0.2);
+    text-align: center;
+}
+
+.container-nav-button {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
 
 /* Navbar */
 
@@ -246,7 +272,7 @@ img.linkrow {
 
 .link-title {
     text-align: left;
-    width: 90%;
+    width: 100%;
     padding-top: 2.5px !important;
     padding-bottom: 2.5px !important;
     color: rgba(var(--color-5), 1);
@@ -269,7 +295,7 @@ a.link-title:hover {
 
 .link-description {
     text-align: left;
-    width: 90%;
+    width: 100%;
     margin-top: 5px !important;
     margin-bottom: 2.5px !important;
     font-size: 90%;
@@ -299,7 +325,7 @@ a.link-title:hover {
 }
 
 h1.title-banner-overlay {
-    z-index: 10;
+    z-index: 2;
     position: absolute;
     color: rgb(83, 83, 83);
     border-bottom: none;
@@ -320,7 +346,7 @@ div.banner-container {
 }
 
 div.title-banner-overlay {
-    width: 600px;
+    width: 70%;
     height: 250px;
     position: absolute;
     padding-top: 50px;
@@ -387,6 +413,11 @@ a.clean {
 a.clean:hover {
     text-decoration: none;
     color: rgba(var(--color-5), 0.9);
+}
+
+a.no-highlight:hover {
+    text-decoration: none;
+    color: rgb(0, 0, 0) !important;
 }
 
 .clean {
@@ -459,7 +490,7 @@ p.blog-header-subtitle {
     text-align: justify;
     margin-top: 20px !important;
     color: rgba(var(--color-grey), 1);
-    font-size: 20px;  
+    font-size: 20px;
     font-weight: 400;
 }
 

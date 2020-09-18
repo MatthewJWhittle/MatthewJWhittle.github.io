@@ -1,6 +1,7 @@
 ---
 path: "/tutorials/exploring-bat-records-leaflet"
-title: "Exploring Bat Records using leaflet"
+title: "How to Map Ecological Records using R and Leaflet"
+subtitle: "Making interactive maps of biological records center data using R and leaflet"
 category: "tutorial"
 author: "Matthew Whittle"
 date: "2020-04-20"

@@ -1,6 +1,7 @@
 ---
 path: "/tutorials/bat-roost-height-preferences"
-title: "Roost Height Preferences with Bat Tree Habitat Key Data"
+title: "Do Bats Prefer to Roosting at Certain Heights in Trees?"
+subtitle: "Exploring the Bat Tree Habitat Key database in R with ggplot2"
 category: "tutorial"
 author: "Matthew Whittle"
 date: "2020-04-10"

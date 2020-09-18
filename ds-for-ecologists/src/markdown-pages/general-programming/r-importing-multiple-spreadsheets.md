@@ -5,20 +5,8 @@ subtitle: "Importing 45 spreadsheets of great crested newt survey data and extra
 category: "tutorial"
 author: "Matthew Whittle"
 date: "2020-05-02"
-featuredImage: "./great-crested-newt.jpg"
+featuredImage: "./pond-sunset.png"
 ---
-
-<!--html_preserve-->
-<script>
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('right', 'top', '#BEBEBE', '1', 'Copy code', 'Copied!');
-</script>
-<!--/html_preserve-->
-
-
-Introduction
-============
-
 
 
 You’ve finished a tough season of great crested newt surveys and you’ve

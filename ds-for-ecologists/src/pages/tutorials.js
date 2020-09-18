@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import ContentRow from "../components/content-link-row"
 import PageContent from "../components/page-content"
 
-const IndexPage = ({
+const TutorialIndexPage = ({
   data: {
     allMarkdownRemark: { edges },
   },
@@ -29,7 +29,7 @@ const IndexPage = ({
   )
 }
 
-export default IndexPage
+export default TutorialIndexPage
 
 // Filter the posts and order them by descending date
 export const pageQuery = graphql`

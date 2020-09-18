@@ -5,7 +5,7 @@ import ContentRow from "../components/content-link-row"
 import PageContent from "../components/page-content"
 
 
-const IndexPage = ({
+const BlogIndexPage = ({
   data: {
     allMarkdownRemark: { edges },
   },
@@ -30,7 +30,7 @@ const IndexPage = ({
   )
 }
 
-export default IndexPage
+export default BlogIndexPage
 
 // Filter the posts and order them by descending date
 export const pageQuery = graphql`

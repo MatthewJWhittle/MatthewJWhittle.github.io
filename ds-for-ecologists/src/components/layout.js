@@ -1,8 +1,8 @@
 import Gatsby from "gatsby"
 import Navbar from "./navbar"
 import React from "react"
-import layoutStyles from "./styles.css"
 import bootstrap from 'bootstrap/dist/css/bootstrap.css'
+import layoutStyles from "./styles.css"
 
 
 export default ({ children }) => (

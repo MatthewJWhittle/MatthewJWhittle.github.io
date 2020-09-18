@@ -20,7 +20,7 @@ export default function Template({
               <div class="blog-post-title">
                 <h1 class="blog-header-title">{frontmatter.title}</h1>
                 <p class="blog-header-subtitle">{frontmatter.subtitle}</p>
-                <p class="blog-header-details">By <a href="/about" class="clean highlight-text-minor">{frontmatter.author}</a> on {frontmatter.date}</p>
+                <p class="blog-header-details">By <a href="/about" class="clean">{frontmatter.author}</a> on {frontmatter.date}</p>
               </div>
             </div>
             <div class="">

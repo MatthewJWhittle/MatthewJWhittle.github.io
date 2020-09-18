@@ -8,8 +8,8 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `Data Science for Ecologists`,
-    titleabbr: `DS for Ecologists`,
+    title: `Counting Bats: Data Science for Ecologists`,
+    titleabbr: `Counting Bats`,
     url: `https://matthewjwhittle.github.io/`,
     description: `Tutorials and blogs about data science for consultant ecologists`,
     twitterUsername: '@matthewjwhittle',
