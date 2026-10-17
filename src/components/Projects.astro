@@ -1,52 +1,64 @@
 ---
-import SignalLattice from './demos/SignalLattice';
-import LatencySpark from './demos/LatencySpark';
-import FocusFilter from './demos/FocusFilter';
+import HabitatExplorer from './demos/HabitatExplorer';
+import RiskScreen from './demos/RiskScreen';
+import TriageBoard from './demos/TriageBoard';
 ---
 
-<section id="projects" class="section projects">
+<section id="work" class="section projects">
   <div class="wrap">
-    <p class="section__label reveal">Projects</p>
-    <h2 class="section__title reveal" data-delay="1">Demos first, case studies next</h2>
+    <p class="section__label reveal">Selected work</p>
+    <h2 class="section__title reveal" data-delay="1">Projects with a pulse</h2>
     <p class="section__lede reveal" data-delay="2">
-      Two or three interactive islands to prove the stack. Content below is marked as
-      prototype — swap in real work when ready.
+      Real engagements from SLR and earlier ecology practice — each paired with a small interactive
+      sketch so the idea is felt, not only listed. Production systems stay behind the curtain.
     </p>
 
-    <div class="projects__grid">
-      <article class="project reveal" data-delay="1" id="signal-lattice">
-        <p class="project__status">Prototype demo</p>
-        <h3 class="project__title">Signal lattice</h3>
-        <p class="project__blurb">
-          Placeholder interaction: resample a sparse activity grid. Stand-in for systems/ops
-          visualizations — real project write-up TBD.
-        </p>
+    <div class="projects__list">
+      <article class="project reveal" data-delay="1" id="habitat-mapping">
+        <div class="project__copy">
+          <p class="project__meta">SLR Consulting · Geospatial ML</p>
+          <h3 class="project__title">Intelligent UK Habitat Mapping</h3>
+          <p class="project__blurb">
+            Designed and built an end-to-end PyTorch Vision Transformer habitat-mapping service —
+            imagery processing, training data, tiled inference, Azure ML — from proof of concept to
+            live site use across nine upland/afforestation sites covering over 2,000 hectares, with
+            ecologist QA. Semi-automated support for baselines, not a finished self-serve product.
+          </p>
+        </div>
         <div class="project__demo">
-          <SignalLattice client:visible />
+          <HabitatExplorer client:visible />
         </div>
       </article>
 
-      <article class="project reveal" data-delay="2" id="latency-spark">
-        <p class="project__status">Prototype demo</p>
-        <h3 class="project__title">Latency window</h3>
-        <p class="project__blurb">
-          Placeholder interaction: step through synthetic latency windows. Stand-in for
-          observability charts — replace with a real case study.
-        </p>
+      <article class="project reveal" data-delay="2" id="book-chain">
+        <div class="project__copy">
+          <p class="project__meta">SLR Consulting · API / due diligence</p>
+          <h3 class="project__title">Book Chain EUDR risk API</h3>
+          <p class="project__blurb">
+            Led design and implementation of a deforestation-risk API for publishing supply-chain
+            due diligence: FastAPI, PostgreSQL, Azure Container Apps, geospatial validation and risk
+            screening (~170 automated tests). Integration progressed through 2025; wider production
+            adoption is still being verified — described here as delivered engineering, not a market
+            claim.
+          </p>
+        </div>
         <div class="project__demo">
-          <LatencySpark client:visible />
+          <RiskScreen client:visible />
         </div>
       </article>
 
-      <article class="project reveal" data-delay="3" id="focus-filter">
-        <p class="project__status">Prototype demo</p>
-        <h3 class="project__title">Focus filter</h3>
-        <p class="project__blurb">
-          Placeholder interaction: filter a short capability list. Honest scaffold only — not a
-          claim about past employers.
-        </p>
+      <article class="project reveal" data-delay="3" id="camera-triage">
+        <div class="project__copy">
+          <p class="project__meta">SLR Consulting · Computer vision</p>
+          <h3 class="project__title">Camera-trap triage</h3>
+          <p class="project__blurb">
+            Led a SpeciesNet-based video triage workflow for a client study — 60 cameras across
+            ~260 km², screening 8,924 videos and shortlisting around 1,600 for expert review.
+            Triage for specialists; not a claim of reliable automated species identification.
+          </p>
+        </div>
         <div class="project__demo">
-          <FocusFilter client:visible />
+          <TriageBoard client:visible />
         </div>
       </article>
     </div>
@@ -54,53 +66,48 @@ import FocusFilter from './demos/FocusFilter';
 </section>
 
 <style>
-  .projects__grid {
+  .projects__list {
     display: grid;
-    gap: var(--space-5);
+    gap: var(--space-6);
   }
 
   .project {
-    padding-block: var(--space-4);
+    display: grid;
+    gap: var(--space-4);
+    padding-block: var(--space-5);
     border-top: 1px solid var(--line);
   }
 
-  .project__status {
+  .project__meta {
     margin: 0 0 var(--space-2);
-    color: var(--warn);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
   }
 
   .project__title {
-    margin: 0 0 var(--space-2);
+    margin: 0 0 var(--space-3);
     font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
   }
 
   .project__blurb {
-    margin: 0 0 var(--space-4);
-    max-width: 40rem;
+    margin: 0;
+    max-width: 38rem;
     color: var(--ink-muted);
   }
 
   .project__demo {
-    max-width: 40rem;
+    max-width: 36rem;
   }
 
-  @media (min-width: 900px) {
-    .projects__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-5) var(--space-4);
+  @media (min-width: 960px) {
+    .project {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--space-5);
       align-items: start;
-    }
-
-    .project:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
-      max-width: 40rem;
     }
   }
 </style>

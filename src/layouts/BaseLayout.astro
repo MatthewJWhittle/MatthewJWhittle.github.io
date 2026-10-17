@@ -8,7 +8,8 @@ interface Props {
 
 const {
   title = 'Matthew Whittle',
-  description = 'Product-minded engineer. Interactive CV and project demos.',
+  description =
+    'Applied data scientist and technical lead — ecology, geospatial ML, and human-centered analytics.',
 } = Astro.props;
 ---
 
@@ -24,7 +25,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
@@ -49,7 +50,7 @@ const {
               observer.unobserve(entry.target);
             }
           },
-          { threshold: 0.16, rootMargin: '0px 0px -8% 0px' },
+          { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
         );
 
         nodes.forEach((node) => observer.observe(node));

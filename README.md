@@ -1,6 +1,8 @@
 # Matthew Whittle — GitHub Pages portfolio
 
-Astro + React islands portfolio styled with **Signal Grid**. Built for a quiet job search: interactive CV shell and prototype project demos.
+Astro + React islands portfolio with an **IDEO-inspired / natural stylized** direction: editorial warmth, generous space, ecology-tinged accents — not a technical “Signal Grid” look.
+
+Quiet interactive CV grounded in real SLR / Jacobs work from Matthew’s Notion Master CV.
 
 ## Local preview
 
@@ -11,8 +13,6 @@ npm ci
 npm run dev
 ```
 
-Open the URL printed by Astro (usually `http://localhost:4321`).
-
 ```bash
 npm run build
 npm run preview
@@ -21,15 +21,15 @@ npm run preview
 ## GitHub Pages
 
 - Static output: `dist/`
-- Workflow: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds on push to `master` and deploys with the official Pages actions (no extra secrets).
-- In the repo **Settings → Pages**, set **Source** to **GitHub Actions** once before the first deploy lands.
+- Workflow: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+- Set **Settings → Pages → Source: GitHub Actions** once
 
 Site URL: <https://matthewjwhittle.github.io>
 
-## What’s real vs placeholder
+## What’s real vs sketch
 
-| Real | Placeholder |
+| Real | Sketch / caveat |
 | --- | --- |
-| Stack, Signal Grid design, layout, motion | Project case studies / employer history |
-| Interactive demo islands (toy data) | Preferred email / broader social links |
-| GitHub profile link | Full About / CV narrative |
+| Career narrative & project write-ups from Master CV | Interactive demos use synthetic UI data |
+| Contact links (email, LinkedIn, GitHub) | Book Chain production adoption still verified carefully |
+| Habitat mapping / triage / API roles as described | Not a pixel clone of IDEO — feel, not brand |
