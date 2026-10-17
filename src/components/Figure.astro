@@ -1,0 +1,48 @@
+---
+interface Props {
+  id: string;
+  caption: string;
+  class?: string;
+}
+
+const { id, caption, class: className } = Astro.props;
+---
+
+<figure class:list={['figure', className]}>
+  <div class="figure__frame">
+    <slot />
+  </div>
+  <figcaption class="figure__caption">
+    <span class="figure__id">{id}</span>
+    {caption}
+  </figcaption>
+</figure>
+
+<style>
+  .figure {
+    margin: 0;
+  }
+
+  .figure__frame {
+    border: 1px solid var(--colour-rule);
+    background: var(--colour-paper);
+    overflow: hidden;
+  }
+
+  .figure__caption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    margin-top: 0.65rem;
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
+
+  .figure__id {
+    color: var(--colour-rust);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+</style>

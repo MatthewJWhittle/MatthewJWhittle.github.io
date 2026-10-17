@@ -1,0 +1,65 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import ProjectFigure from '../../components/ProjectFigure.astro';
+import { formatDate, getPublishedWork } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const work = await getPublishedWork();
+  return work.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const meta = `${formatDate(entry.data.date)} · ${entry.data.status} · ${entry.data.tags.join(' · ')}`;
+---
+
+<ArticleLayout title={entry.data.title} description={entry.data.summary} meta={meta}>
+  {
+    entry.data.figureId && (
+      <div class="case-figure">
+        <ProjectFigure figureId={entry.data.figureId} title={entry.data.title} />
+      </div>
+    )
+  }
+  <Content />
+  {
+    (entry.data.repositoryUrl || entry.data.demoUrl) && (
+      <p class="case-links">
+        {entry.data.repositoryUrl && (
+          <a href={entry.data.repositoryUrl} target="_blank" rel="noopener noreferrer">
+            Source repository
+          </a>
+        )}
+        {entry.data.demoUrl && (
+          <a href={entry.data.demoUrl} target="_blank" rel="noopener noreferrer">
+            Live demo
+          </a>
+        )}
+      </p>
+    )
+  }
+  <p class="case-back"><a href="/work/">← All work</a></p>
+</ArticleLayout>
+
+<style>
+  .case-figure {
+    margin-bottom: 2rem;
+    max-width: 40rem;
+  }
+
+  .case-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+    font-weight: 500;
+  }
+
+  .case-back {
+    margin-top: 2.5rem;
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  note: CollectionEntry<'notes'>;
+}
+
+const { note } = Astro.props;
+const href = `/notes/${note.id}/`;
+const date = note.data.date.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<article class="note-preview">
+  <p class="note-preview__meta">{date}</p>
+  <h3 class="note-preview__title">
+    <a href={href}>{note.data.title}</a>
+  </h3>
+  <p class="note-preview__desc">{note.data.description}</p>
+</article>
+
+<style>
+  .note-preview {
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--colour-rule);
+  }
+
+  .note-preview__meta {
+    margin: 0 0 var(--space-2);
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+  }
+
+  .note-preview__title {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .note-preview__title a {
+    color: var(--colour-ink);
+    text-decoration: none;
+  }
+
+  .note-preview__title a:hover {
+    color: var(--colour-moss);
+  }
+
+  .note-preview__desc {
+    margin: 0;
+    color: var(--colour-muted);
+    max-width: 38rem;
+  }
+</style>

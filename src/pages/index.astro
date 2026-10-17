@@ -1,19 +1,115 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import Hero from '../components/Hero.astro';
-import Projects from '../components/Projects.astro';
-import AboutContact from '../components/AboutContact.astro';
+import ProjectPreview from '../components/ProjectPreview.astro';
+import NotePreview from '../components/NotePreview.astro';
+import ProjectFigure from '../components/ProjectFigure.astro';
+import { site } from '../data/site';
+import { getPublishedNotes, getPublishedWork } from '../lib/content';
+
+const work = await getPublishedWork();
+const featured = work.find((item) => item.data.featured) ?? work[0];
+const selected = work.filter((item) => item.id !== featured?.id).slice(0, 3);
+const notes = (await getPublishedNotes()).slice(0, 3);
 ---
 
-<BaseLayout
-  title="Matthew Whittle — portfolio"
-  description="Applied data scientist and technical lead — ecology, geospatial ML, and interactive project demos."
->
-  <SiteHeader />
-  <main id="main">
-    <Hero />
-    <Projects />
-    <AboutContact />
-  </main>
+<BaseLayout>
+  <section class="hero wrap">
+    <p class="hero__kicker">{site.kicker}</p>
+    <h1 class="hero__headline">{site.headline}</h1>
+    <p class="hero__intro">{site.intro}</p>
+    <p class="hero__cta">
+      <a href="/work/">Browse selected work</a>
+      <span aria-hidden="true"> · </span>
+      <a href="#featured">Jump to featured project</a>
+    </p>
+  </section>
+
+  {
+    featured && (
+      <section id="featured" class="section wrap" aria-labelledby="featured-heading">
+        <p class="section__label">Featured</p>
+        <h2 id="featured-heading" class="section__title">One project in focus</h2>
+        <ProjectPreview project={featured} featured>
+          <ProjectFigure
+            slot="figure"
+            figureId={featured.data.figureId}
+            title={featured.data.title}
+          />
+        </ProjectPreview>
+      </section>
+    )
+  }
+
+  <section class="section wrap" aria-labelledby="work-heading">
+    <p class="section__label">Selected work</p>
+    <h2 id="work-heading" class="section__title">More projects &amp; experiments</h2>
+    <p class="section__lede">
+      Compact entries with clear problems and contributions. Full write-ups live under Work.
+    </p>
+    <div class="list">
+      {selected.map((project) => <ProjectPreview project={project} />)}
+    </div>
+    <p class="section__more">
+      <a href="/work/">All work →</a>
+    </p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="notes-heading">
+    <p class="section__label">Field notes</p>
+    <h2 id="notes-heading" class="section__title">Recent notes</h2>
+    <p class="section__lede">Short observations from building and shipping.</p>
+    <div class="list">
+      {notes.map((note) => <NotePreview note={note} />)}
+    </div>
+    <p class="section__more">
+      <a href="/notes/">All notes →</a>
+    </p>
+  </section>
 </BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-7) var(--space-6);
+    max-width: calc(var(--measure) + var(--gutter) * 2);
+  }
+
+  .hero__kicker {
+    margin: 0 0 var(--space-3);
+    color: var(--colour-moss);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero__headline {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 2.85rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    max-width: 18ch;
+  }
+
+  .hero__intro {
+    margin: 0 0 var(--space-5);
+    max-width: var(--measure);
+    color: var(--colour-muted);
+    font-size: 1.125rem;
+  }
+
+  .hero__cta {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .list {
+    display: grid;
+  }
+
+  .section__more {
+    margin: var(--space-4) 0 0;
+    font-weight: 500;
+  }
+</style>

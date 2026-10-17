@@ -1,19 +1,29 @@
 ---
+import { site } from '../data/site';
+
 const links = [
-  { href: '#work', label: 'Work' },
-  { href: '#about', label: 'About' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/work/', label: 'Work' },
+  { href: '/notes/', label: 'Notes' },
+  { href: '/about/', label: 'About' },
+  { href: site.github, label: 'GitHub', external: true },
 ];
 ---
 
 <header class="site-header">
   <div class="wrap site-header__inner">
     <a class="site-header__skip" href="#main">Skip to content</a>
+    <a class="site-header__wordmark" href="/">{site.name}</a>
     <nav class="site-header__nav" aria-label="Primary">
       {
-        links.map((link) => (
-          <a href={link.href}>{link.label}</a>
-        ))
+        links.map((link) =>
+          link.external ? (
+            <a href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.label}
+            </a>
+          ) : (
+            <a href={link.href}>{link.label}</a>
+          ),
+        )
       }
     </nav>
   </div>
@@ -21,46 +31,61 @@ const links = [
 
 <style>
   .site-header {
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 2;
-    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--colour-rule);
+    padding-block: 1.1rem;
   }
 
   .site-header__inner {
     display: flex;
-    justify-content: flex-end;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
   }
 
   .site-header__skip {
     position: absolute;
     left: 1rem;
     top: -3rem;
-    padding: 0.45rem 0.75rem;
-    background: var(--bg-elevated);
-    color: var(--ink);
-    border: 1px solid var(--line);
-    transition: top var(--dur-fast) var(--ease-out);
+    padding: 0.4rem 0.65rem;
+    background: var(--colour-paper);
+    border: 1px solid var(--colour-rule);
+    color: var(--colour-ink);
+    z-index: 10;
   }
 
   .site-header__skip:focus {
-    top: 1rem;
+    top: 0.75rem;
+  }
+
+  .site-header__wordmark {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--colour-ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .site-header__wordmark:hover {
+    color: var(--colour-moss);
   }
 
   .site-header__nav {
     display: flex;
-    gap: 1.75rem;
+    flex-wrap: wrap;
+    gap: 1rem 1.35rem;
   }
 
   .site-header__nav a {
-    color: var(--ink-muted);
+    color: var(--colour-muted);
     font-size: 0.95rem;
     font-weight: 500;
     text-decoration: none;
   }
 
   .site-header__nav a:hover {
-    color: var(--accent);
+    color: var(--colour-moss);
+    text-decoration: underline;
   }
 </style>

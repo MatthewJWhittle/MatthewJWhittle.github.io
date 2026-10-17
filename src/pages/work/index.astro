@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectPreview from '../../components/ProjectPreview.astro';
+import { getPublishedWork } from '../../lib/content';
+
+const work = await getPublishedWork();
+---
+
+<BaseLayout
+  title="Work"
+  description="Selected projects in geospatial ML, APIs and ecological computer vision."
+>
+  <section class="section wrap">
+    <p class="section__label">Work</p>
+    <h1 class="section__title">Projects</h1>
+    <p class="section__lede">
+      Case studies grounded in public, attributable work. Confidential client detail is omitted.
+    </p>
+    <div>
+      {work.map((project) => <ProjectPreview project={project} />)}
+    </div>
+  </section>
+</BaseLayout>

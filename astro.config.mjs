@@ -6,6 +6,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://matthewjwhittle.github.io',
   base: '/',
+  trailingSlash: 'always',
   integrations: [react()],
   output: 'static',
 });

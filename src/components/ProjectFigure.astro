@@ -1,0 +1,56 @@
+---
+import Figure from './Figure.astro';
+import HabitatFigure from './figures/HabitatFigure.astro';
+import ApiFigure from './figures/ApiFigure.astro';
+import TriageFigure from './figures/TriageFigure.astro';
+
+interface Props {
+  figureId?: string;
+  title: string;
+}
+
+const { figureId, title } = Astro.props;
+
+const captions: Record<string, { id: string; caption: string }> = {
+  habitat: {
+    id: 'FIG. 01',
+    caption: 'Illustrative habitat patches from aerial tiling — schematic, not live model output.',
+  },
+  api: {
+    id: 'FIG. 02',
+    caption: 'Request path for geospatial risk screening — schematic architecture sketch.',
+  },
+  triage: {
+    id: 'FIG. 03',
+    caption: 'Triage funnel from raw clips to expert shortlist — counts from the client study.',
+  },
+};
+
+const meta = figureId ? captions[figureId] : undefined;
+---
+
+{
+  meta && (
+    <Figure id={meta.id} caption={meta.caption}>
+      {figureId === 'habitat' && <HabitatFigure />}
+      {figureId === 'api' && <ApiFigure />}
+      {figureId === 'triage' && <TriageFigure />}
+    </Figure>
+  )
+}
+
+{
+  !meta && (
+    <Figure id="FIG." caption={`${title} — artefact forthcoming.`}>
+      <div class="placeholder" aria-hidden="true" />
+    </Figure>
+  )
+}
+
+<style>
+  .placeholder {
+    aspect-ratio: 16 / 9;
+    background:
+      linear-gradient(135deg, var(--colour-blue-soft), var(--colour-moss-soft));
+  }
+</style>

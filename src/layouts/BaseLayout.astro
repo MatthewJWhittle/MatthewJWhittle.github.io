@@ -1,63 +1,41 @@
 ---
 import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { site } from '../data/site';
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const {
-  title = 'Matthew Whittle',
-  description =
-    'Applied data scientist and technical lead — ecology, geospatial ML, and human-centered analytics.',
-} = Astro.props;
+const { title = site.title, description = site.description } = Astro.props;
+const pageTitle = title === site.title ? title : `${title} · ${site.name}`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Source+Sans+3:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
-    <slot />
-    <script>
-      const reveal = () => {
-        const nodes = document.querySelectorAll('.reveal:not(.is-visible)');
-        if (!nodes.length) return;
-
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          nodes.forEach((node) => node.classList.add('is-visible'));
-          return;
-        }
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (!entry.isIntersecting) continue;
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          },
-          { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
-        );
-
-        nodes.forEach((node) => observer.observe(node));
-      };
-
-      reveal();
-      document.addEventListener('astro:page-load', reveal);
-    </script>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
   </body>
 </html>

@@ -1,10 +1,8 @@
-# Matthew Whittle — GitHub Pages portfolio
+# Matthew Whittle — field notebook portfolio
 
-Astro + React islands portfolio with an **IDEO-inspired / natural stylized** direction: editorial warmth, generous space, ecology-tinged accents — not a technical “Signal Grid” look.
+Static **Astro** site with the **Working Field Notebook** aesthetic (see project store field-notebook spec). Content collections for work and notes; GitHub Pages via Actions.
 
-Quiet interactive CV grounded in real SLR / Jacobs work from Matthew’s Notion Master CV.
-
-## Local preview
+## Local development
 
 Requires Node `>= 22.22`.
 
@@ -18,18 +16,18 @@ npm run build
 npm run preview
 ```
 
-## GitHub Pages
+## Adding content
 
-- Static output: `dist/`
-- Workflow: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
-- Set **Settings → Pages → Source: GitHub Actions** once
+1. Copy `src/content/work/_template.example.md` or `src/content/notes/_template.example.md`.
+2. Rename (drop `_template` / set a slug filename), set `draft: false`.
+3. Fill frontmatter and Markdown body — indexes and detail pages update automatically.
 
-Site URL: <https://matthewjwhittle.github.io>
+Draft items (`draft: true`) are excluded from production pages.
 
-## What’s real vs sketch
+## Deploy
 
-| Real | Sketch / caveat |
-| --- | --- |
-| Career narrative & project write-ups from Master CV | Interactive demos use synthetic UI data |
-| Contact links (email, LinkedIn, GitHub) | Book Chain production adoption still verified carefully |
-| Habitat mapping / triage / API roles as described | Not a pixel clone of IDEO — feel, not brand |
+`.github/workflows/deploy.yml` builds `dist/` on push to `master`. Set **Settings → Pages → Source: GitHub Actions** once. No extra secrets required.
+
+## Design tokens
+
+Exact palette in `src/styles/tokens.css`: paper, ink, moss, rust, blue. Fonts: Newsreader, Source Sans 3, IBM Plex Mono.
