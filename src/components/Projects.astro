@@ -1,0 +1,106 @@
+---
+import SignalLattice from './demos/SignalLattice';
+import LatencySpark from './demos/LatencySpark';
+import FocusFilter from './demos/FocusFilter';
+---
+
+<section id="projects" class="section projects">
+  <div class="wrap">
+    <p class="section__label reveal">Projects</p>
+    <h2 class="section__title reveal" data-delay="1">Demos first, case studies next</h2>
+    <p class="section__lede reveal" data-delay="2">
+      Two or three interactive islands to prove the stack. Content below is marked as
+      prototype — swap in real work when ready.
+    </p>
+
+    <div class="projects__grid">
+      <article class="project reveal" data-delay="1" id="signal-lattice">
+        <p class="project__status">Prototype demo</p>
+        <h3 class="project__title">Signal lattice</h3>
+        <p class="project__blurb">
+          Placeholder interaction: resample a sparse activity grid. Stand-in for systems/ops
+          visualizations — real project write-up TBD.
+        </p>
+        <div class="project__demo">
+          <SignalLattice client:visible />
+        </div>
+      </article>
+
+      <article class="project reveal" data-delay="2" id="latency-spark">
+        <p class="project__status">Prototype demo</p>
+        <h3 class="project__title">Latency window</h3>
+        <p class="project__blurb">
+          Placeholder interaction: step through synthetic latency windows. Stand-in for
+          observability charts — replace with a real case study.
+        </p>
+        <div class="project__demo">
+          <LatencySpark client:visible />
+        </div>
+      </article>
+
+      <article class="project reveal" data-delay="3" id="focus-filter">
+        <p class="project__status">Prototype demo</p>
+        <h3 class="project__title">Focus filter</h3>
+        <p class="project__blurb">
+          Placeholder interaction: filter a short capability list. Honest scaffold only — not a
+          claim about past employers.
+        </p>
+        <div class="project__demo">
+          <FocusFilter client:visible />
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .project {
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .project__status {
+    margin: 0 0 var(--space-2);
+    color: var(--warn);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .project__title {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .project__blurb {
+    margin: 0 0 var(--space-4);
+    max-width: 40rem;
+    color: var(--ink-muted);
+  }
+
+  .project__demo {
+    max-width: 40rem;
+  }
+
+  @media (min-width: 900px) {
+    .projects__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5) var(--space-4);
+      align-items: start;
+    }
+
+    .project:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: 40rem;
+    }
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+---
+
+<section id="about" class="section about">
+  <div class="wrap about__grid">
+    <div class="reveal">
+      <p class="section__label">About</p>
+      <h2 class="section__title">Quiet search. Clear work.</h2>
+      <p class="about__copy">
+        Matthew Whittle — engineer focused on clear systems and useful interfaces. This site is a
+        personal static portfolio for a quiet job search: stylish, modern, and demo-led. Bio details
+        and employment history will land here once confirmed — this prototype does not invent them.
+      </p>
+    </div>
+
+    <div id="contact" class="contact reveal" data-delay="2">
+      <p class="section__label">Contact</p>
+      <h2 class="section__title">Say hello</h2>
+      <p class="about__copy">
+        Prefer email or GitHub for now. Links below are the durable ones; LinkedIn and other
+        channels can be added later.
+      </p>
+      <ul class="contact__list">
+        <li>
+          <a href="https://github.com/MatthewJWhittle">github.com/MatthewJWhittle</a>
+        </li>
+        <li>
+          <span class="contact__pending">Email</span>
+          <span class="contact__note">add preferred address when ready</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <p>© {new Date().getFullYear()} Matthew Whittle</p>
+    <p class="site-footer__meta">Astro · React islands · Signal Grid</p>
+  </div>
+</footer>
+
+<style>
+  .about__grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .about__copy {
+    margin: 0;
+    max-width: 36rem;
+    color: var(--ink-muted);
+  }
+
+  .contact__list {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .contact__list a,
+  .contact__pending {
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.15rem;
+    color: var(--ink);
+  }
+
+  .contact__list a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .contact__note {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding-block: var(--space-4);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2);
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  @media (min-width: 800px) {
+    .about__grid {
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-6);
+      align-items: start;
+    }
+  }
+</style>

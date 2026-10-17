@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
+import AboutContact from '../components/AboutContact.astro';
+---
+
+<BaseLayout
+  title="Matthew Whittle — portfolio"
+  description="Interactive CV and project demos by Matthew Whittle."
+>
+  <SiteHeader />
+  <main id="main">
+    <Hero />
+    <Projects />
+    <AboutContact />
+  </main>
+</BaseLayout>
