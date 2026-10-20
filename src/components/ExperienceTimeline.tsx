@@ -25,8 +25,9 @@ export default function ExperienceTimeline() {
   useLayoutEffect(() => {
     const root = viewportRef.current;
     if (!root) return;
-    // Leave room to scroll the final roles up into the focus line (~22% from top).
-    setEndPad(Math.max(96, Math.round(root.clientHeight * 0.7)));
+    // Always keep enough overflow for wheel scroll, even with a tall viewport
+    // that already shows full roles + a compressed stack.
+    setEndPad(Math.max(160, Math.round(root.clientHeight * 0.85)));
   }, []);
 
   useEffect(() => {
@@ -75,7 +76,7 @@ export default function ExperienceTimeline() {
     };
 
     const onResize = () => {
-      setEndPad(Math.max(96, Math.round(root.clientHeight * 0.7)));
+      setEndPad(Math.max(160, Math.round(root.clientHeight * 0.85)));
     };
 
     root.addEventListener('scroll', onScroll, { passive: true });
