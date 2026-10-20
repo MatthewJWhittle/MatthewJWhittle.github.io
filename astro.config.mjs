@@ -11,7 +11,5 @@ export default defineConfig({
   output: 'static',
   redirects: {
     '/about/': '/#about',
-    '/work/': '/#work',
-    '/notes/': '/#notes',
   },
 });

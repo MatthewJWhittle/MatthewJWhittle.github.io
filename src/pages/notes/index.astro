@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NoteTeaser from '../../components/NoteTeaser.astro';
+import { getPublishedNotes } from '../../lib/content';
+
+const notes = await getPublishedNotes();
+---
+
+<BaseLayout title="Notes" description="Short notes.">
+  <section class="section wrap">
+    <p class="section__label">Notes</p>
+    <h1 class="section__title">Notes</h1>
+    {
+      notes.length === 0 ? (
+        <p class="section__lede">Coming soon.</p>
+      ) : (
+        <div>
+          {notes.map((note) => (
+            <NoteTeaser note={note} />
+          ))}
+        </div>
+      )
+    }
+    <p class="back">
+      <a href="/#notes">← Back</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .back {
+    margin-top: var(--space-6);
+    font-weight: 500;
+  }
+</style>

@@ -1,12 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionNav from '../components/SectionNav';
+import WorkTeaser from '../components/WorkTeaser.astro';
+import NoteTeaser from '../components/NoteTeaser.astro';
 import { site } from '../data/site';
+import { getPublishedNotes, getPublishedWork } from '../lib/content';
+
+const TEASER_CAP = 3;
+const allWork = await getPublishedWork();
+const allNotes = await getPublishedNotes();
+const workTeasers = allWork.slice(0, TEASER_CAP);
+const noteTeasers = allNotes.slice(0, TEASER_CAP);
+const showAllWork = allWork.length > TEASER_CAP;
+const showAllNotes = allNotes.length > TEASER_CAP;
 ---
 
 <BaseLayout>
   <div class="shell">
-    <aside class="shell__nav">
+    <aside class="shell__nav" aria-label="Section navigation">
       <SectionNav client:load />
     </aside>
 
@@ -23,15 +34,53 @@ import { site } from '../data/site';
       <section id="work" class="block" aria-labelledby="work-heading">
         <p class="section__label">Work</p>
         <h2 id="work-heading" class="block__title">Projects</h2>
-        <p class="block__lede">Coming soon.</p>
-        <p class="muted">Case studies will appear here when they're ready.</p>
+        {
+          workTeasers.length === 0 ? (
+            <>
+              <p class="block__lede">Coming soon.</p>
+              <p class="muted">Case studies will appear here when they're ready.</p>
+            </>
+          ) : (
+            <div class="teaser-list">
+              {workTeasers.map((project) => (
+                <WorkTeaser project={project} />
+              ))}
+            </div>
+          )
+        }
+        {
+          showAllWork && (
+            <p class="section-more">
+              <a href="/work/">All work →</a>
+            </p>
+          )
+        }
       </section>
 
       <section id="notes" class="block" aria-labelledby="notes-heading">
         <p class="section__label">Notes</p>
         <h2 id="notes-heading" class="block__title">Notes</h2>
-        <p class="block__lede">Coming soon.</p>
-        <p class="muted">Short writing will appear here later.</p>
+        {
+          noteTeasers.length === 0 ? (
+            <>
+              <p class="block__lede">Coming soon.</p>
+              <p class="muted">Short writing will appear here later.</p>
+            </>
+          ) : (
+            <div class="teaser-list">
+              {noteTeasers.map((note) => (
+                <NoteTeaser note={note} />
+              ))}
+            </div>
+          )
+        }
+        {
+          showAllNotes && (
+            <p class="section-more">
+              <a href="/notes/">All notes →</a>
+            </p>
+          )
+        }
       </section>
 
       <section id="contact" class="block" aria-labelledby="contact-heading">
@@ -50,8 +99,6 @@ import { site } from '../data/site';
 
 <style>
   .shell {
-    display: grid;
-    gap: 0;
     min-height: 100vh;
   }
 
@@ -100,6 +147,15 @@ import { site } from '../data/site';
     color: var(--colour-muted);
   }
 
+  .teaser-list {
+    margin-top: var(--space-2);
+  }
+
+  .section-more {
+    margin: var(--space-4) 0 0;
+    font-weight: 500;
+  }
+
   .contact-list {
     margin: 0;
     padding: 0;
@@ -117,28 +173,32 @@ import { site } from '../data/site';
     font-size: 0.75rem;
   }
 
+  /* Desktop: fixed left nav — always one click to Contact */
   @media (min-width: 860px) {
     .shell {
-      grid-template-columns: 11.5rem minmax(0, 1fr);
-      align-items: start;
+      position: relative;
       max-width: var(--max-page);
       margin-inline: auto;
       padding-inline: var(--gutter);
-      gap: var(--space-6);
     }
 
     .shell__nav {
-      position: sticky;
+      position: fixed;
       top: 0;
-      align-self: start;
+      /* Align with shell left edge when page is centered */
+      left: max(var(--gutter), calc((100vw - var(--max-page)) / 2 + var(--gutter)));
+      width: 11.5rem;
       height: 100vh;
+      z-index: 30;
       border-bottom: 0;
-      background: transparent;
+      background: var(--colour-paper);
       backdrop-filter: none;
       padding-block: var(--space-7) var(--space-5);
+      overflow-y: auto;
     }
 
     .shell__main {
+      margin-left: calc(11.5rem + var(--space-6));
       padding-inline: 0;
       padding-block: var(--space-7) var(--space-8);
       max-width: none;
