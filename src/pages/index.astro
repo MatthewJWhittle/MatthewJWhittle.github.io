@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionNav from '../components/SectionNav';
+import ExperienceTimeline from '../components/ExperienceTimeline';
 import WorkTeaser from '../components/WorkTeaser.astro';
 import NoteTeaser from '../components/NoteTeaser.astro';
 import { site } from '../data/site';
@@ -33,18 +34,8 @@ const showAllNotes = allNotes.length > TEASER_CAP;
 
       <section id="experience" class="block" aria-labelledby="experience-heading">
         <p class="section__label">Experience</p>
-        <h2 id="experience-heading" class="block__title">Selected roles</h2>
-        <ol class="timeline">
-          {
-            site.timeline.map((item) => (
-              <li class="timeline__item">
-                <p class="timeline__period">{item.period}</p>
-                <p class="timeline__role">{item.role}</p>
-                <p class="timeline__org">{item.org}</p>
-              </li>
-            ))
-          }
-        </ol>
+        <h2 id="experience-heading" class="block__title">Experience</h2>
+        <ExperienceTimeline client:load />
       </section>
 
       <section id="contact" class="block" aria-labelledby="contact-heading">
@@ -161,35 +152,6 @@ const showAllNotes = allNotes.length > TEASER_CAP;
   }
 
   .muted {
-    margin: 0;
-    color: var(--colour-muted);
-  }
-
-  .timeline {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: var(--space-5);
-    max-width: var(--measure);
-  }
-
-  .timeline__period {
-    margin: 0 0 var(--space-1);
-    color: var(--colour-muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .timeline__role {
-    margin: 0 0 var(--space-1);
-    font-weight: 500;
-    line-height: 1.35;
-  }
-
-  .timeline__org {
     margin: 0;
     color: var(--colour-muted);
   }
