@@ -9,16 +9,15 @@
   max-height: min(28rem, 58vh);
   overflow-y: auto;
   overscroll-behavior: contain;
-  scroll-snap-type: y proximity;
-  padding-inline-end: 0.35rem;
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--colour-moss) 40%, var(--colour-rule)) transparent;
+  /* Keep wheel/trackpad/touch scroll; hide scrollbar chrome */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
 }
 
-.xtl__hint {
-  margin: 0 0 var(--space-3);
-  color: var(--colour-muted);
-  font-size: 0.85rem;
+.xtl__viewport::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+  width: 0;
+  height: 0;
 }
 
 .xtl__list {
@@ -45,8 +44,6 @@
   display: grid;
   grid-template-columns: var(--rail) minmax(0, 1fr);
   gap: 0.55rem 1rem;
-  scroll-snap-align: start;
-  transition: padding 160ms var(--ease);
 }
 
 .xtl__item.is-full {
@@ -54,7 +51,7 @@
 }
 
 .xtl__item.is-compact {
-  padding-block: 0.15rem 0.2rem;
+  padding-block: 0.2rem 0.25rem;
 }
 
 .xtl__marker {
@@ -68,11 +65,9 @@
   background: var(--colour-paper);
   border: 2px solid var(--colour-moss);
   box-shadow: 0 0 0 3px var(--colour-paper);
-  transition: transform 160ms var(--ease), background 160ms var(--ease);
 }
 
-.xtl__item.is-full:first-child .xtl__marker,
-.xtl__item.is-full.is-current .xtl__marker {
+.xtl__item.is-current.is-full .xtl__marker {
   background: var(--colour-moss);
 }
 
@@ -152,12 +147,5 @@
 
   .xtl__item.is-full {
     padding-block: 0.75rem 1.35rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .xtl__item,
-  .xtl__marker {
-    transition: none;
   }
 }

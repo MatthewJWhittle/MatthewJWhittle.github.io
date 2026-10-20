@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { site, type TimelineEntry } from '../data/site';
 import '../styles/experience-timeline.css';
 
 const entries = site.timeline as readonly TimelineEntry[];
+
+/** How many roles show full detail in the viewport at once. */
+const FULL_SLOTS = 3;
 
 function hasNote(entry: TimelineEntry): entry is TimelineEntry & { note: string } {
   return 'note' in entry && typeof entry.note === 'string' && entry.note.length > 0;
@@ -11,56 +14,81 @@ function hasNote(entry: TimelineEntry): entry is TimelineEntry & { note: string 
 export default function ExperienceTimeline() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
-  const [expanded, setExpanded] = useState<boolean[]>(() =>
-    entries.map((_, i) => i < 3),
-  );
+  const focusRef = useRef(0);
+  const pendingAnchor = useRef<{ index: number; offset: number } | null>(null);
+  const [focusIndex, setFocusIndex] = useState(0);
 
   useEffect(() => {
     const root = viewportRef.current;
     if (!root) return;
 
-    const ratios = new Map<number, number>();
+    let frame = 0;
 
-    const observer = new IntersectionObserver(
-      (obsEntries) => {
-        for (const entry of obsEntries) {
-          const index = Number((entry.target as HTMLElement).dataset.index);
-          if (Number.isNaN(index)) continue;
-          ratios.set(index, entry.intersectionRatio);
-        }
+    const readFocus = () => {
+      // Focus line ~20% down the viewport — first item whose bottom crosses it.
+      const focusY = root.scrollTop + root.clientHeight * 0.22;
+      let next = 0;
+      for (let i = 0; i < entries.length; i++) {
+        const el = itemRefs.current[i];
+        if (!el) continue;
+        const top = el.offsetTop;
+        const mid = top + el.offsetHeight * 0.35;
+        if (mid <= focusY) next = i;
+        else break;
+      }
 
-        setExpanded((prev) => {
-          const next = entries.map((_, i) => {
-            const ratio = ratios.get(i) ?? 0;
-            // In view → full treatment; mostly out → compress
-            return ratio >= 0.45;
-          });
-          // Keep at least one expanded if nothing clears the threshold yet
-          if (!next.some(Boolean) && prev.some(Boolean)) return prev;
-          if (!next.some(Boolean)) {
-            next[0] = true;
-          }
-          const changed = next.some((v, i) => v !== prev[i]);
-          return changed ? next : prev;
-        });
-      },
-      {
-        root,
-        threshold: [0, 0.25, 0.45, 0.6, 0.8, 1],
-        rootMargin: '-8% 0px -8% 0px',
-      },
-    );
+      // Hysteresis: ignore 1-step flicker near boundaries
+      const prev = focusRef.current;
+      if (next === prev) return;
 
-    for (const node of itemRefs.current) {
-      if (node) observer.observe(node);
-    }
+      const prevEl = itemRefs.current[prev];
+      const nextEl = itemRefs.current[next];
+      if (prevEl && nextEl && Math.abs(next - prev) === 1) {
+        const boundary = next > prev ? nextEl.offsetTop : prevEl.offsetTop;
+        if (Math.abs(focusY - boundary) < 28) return;
+      }
 
-    return () => observer.disconnect();
+      // Keep the focused item visually pinned while heights change
+      const anchor = itemRefs.current[next];
+      if (anchor) {
+        pendingAnchor.current = {
+          index: next,
+          offset: anchor.offsetTop - root.scrollTop,
+        };
+      }
+
+      focusRef.current = next;
+      setFocusIndex(next);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(readFocus);
+    };
+
+    root.addEventListener('scroll', onScroll, { passive: true });
+    readFocus();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      root.removeEventListener('scroll', onScroll);
+    };
   }, []);
+
+  useLayoutEffect(() => {
+    const root = viewportRef.current;
+    const pending = pendingAnchor.current;
+    if (!root || !pending) return;
+    const el = itemRefs.current[pending.index];
+    if (!el) return;
+    root.scrollTop = el.offsetTop - pending.offset;
+    pendingAnchor.current = null;
+  }, [focusIndex]);
+
+  const fullEnd = Math.min(focusIndex + FULL_SLOTS, entries.length);
 
   return (
     <div className="xtl">
-      <p className="xtl__hint">Scroll the timeline — roles in view expand; others compress.</p>
       <div
         className="xtl__viewport"
         ref={viewportRef}
@@ -69,7 +97,7 @@ export default function ExperienceTimeline() {
       >
         <ol className="xtl__list">
           {entries.map((item, index) => {
-            const isFull = expanded[index] ?? false;
+            const isFull = index >= focusIndex && index < fullEnd;
             const isCurrent = index === 0;
             return (
               <li
@@ -82,13 +110,13 @@ export default function ExperienceTimeline() {
               >
                 <div className="xtl__marker" aria-hidden="true" />
                 <div className="xtl__body">
-                  <div className="xtl__full">
+                  <div className="xtl__full" aria-hidden={!isFull}>
                     <p className="xtl__start">{item.startLabel}</p>
                     <p className="xtl__role">{item.role}</p>
                     <p className="xtl__org">{item.org}</p>
                     {hasNote(item) ? <p className="xtl__note">{item.note}</p> : null}
                   </div>
-                  <div className="xtl__compact">
+                  <div className="xtl__compact" aria-hidden={isFull}>
                     <p className="xtl__compact-line">
                       {item.role} ({item.startYear})
                     </p>
