@@ -22,12 +22,15 @@ export default function ExperienceTimeline() {
 
   const fullEnd = Math.min(focusIndex + FULL_SLOTS, entries.length);
 
-  useLayoutEffect(() => {
+  const refreshEndPad = () => {
     const root = viewportRef.current;
     if (!root) return;
-    // Always keep enough overflow for wheel scroll, even with a tall viewport
-    // that already shows full roles + a compressed stack.
-    setEndPad(Math.max(160, Math.round(root.clientHeight * 0.85)));
+    // Keep wheel scroll available inside a near-full-viewport timeline.
+    setEndPad(Math.max(200, Math.round(root.clientHeight * 0.9)));
+  };
+
+  useLayoutEffect(() => {
+    refreshEndPad();
   }, []);
 
   useEffect(() => {
@@ -75,18 +78,18 @@ export default function ExperienceTimeline() {
       frame = requestAnimationFrame(readFocus);
     };
 
-    const onResize = () => {
-      setEndPad(Math.max(160, Math.round(root.clientHeight * 0.85)));
-    };
-
     root.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('resize', refreshEndPad, { passive: true });
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(refreshEndPad) : null;
+    ro?.observe(root);
     readFocus();
+    refreshEndPad();
 
     return () => {
       cancelAnimationFrame(frame);
       root.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('resize', refreshEndPad);
+      ro?.disconnect();
     };
   }, []);
 

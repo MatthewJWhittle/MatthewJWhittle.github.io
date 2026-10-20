@@ -32,10 +32,14 @@ const showAllNotes = allNotes.length > TEASER_CAP;
         </div>
       </section>
 
-      <section id="experience" class="block" aria-labelledby="experience-heading">
-        <p class="section__label">Experience</p>
-        <h2 id="experience-heading" class="block__title">Experience</h2>
-        <ExperienceTimeline client:load />
+      <section id="experience" class="block block--experience" aria-labelledby="experience-heading">
+        <header class="block--experience__head">
+          <p class="section__label">Experience</p>
+          <h2 id="experience-heading" class="block__title">Experience</h2>
+        </header>
+        <div class="block--experience__body">
+          <ExperienceTimeline client:load />
+        </div>
       </section>
 
       <section id="contact" class="block" aria-labelledby="contact-heading">
@@ -182,6 +186,40 @@ const showAllNotes = allNotes.length > TEASER_CAP;
     font-size: 0.75rem;
   }
 
+  /* Experience: one visual viewport tall; timeline scroll area fills the rest */
+  .block--experience {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100svh;
+    height: 100dvh;
+    max-height: 100svh;
+    max-height: 100dvh;
+    padding-block: var(--space-4) var(--space-4);
+    scroll-margin-top: 0;
+    overflow: hidden;
+  }
+
+  .block--experience__head {
+    flex: 0 0 auto;
+  }
+
+  .block--experience__head .section__label {
+    margin-bottom: var(--space-2);
+  }
+
+  .block--experience__head .block__title {
+    margin-bottom: var(--space-3);
+  }
+
+  .block--experience__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
   @media (min-width: 860px) {
     .shell {
       position: relative;
@@ -218,6 +256,15 @@ const showAllNotes = allNotes.length > TEASER_CAP;
 
     .block:first-child {
       padding-top: var(--space-7);
+    }
+
+    .block--experience {
+      height: 100vh;
+      height: 100dvh;
+      max-height: 100vh;
+      max-height: 100dvh;
+      padding-block: var(--space-5) var(--space-5);
+      scroll-margin-top: 0;
     }
   }
 </style>
