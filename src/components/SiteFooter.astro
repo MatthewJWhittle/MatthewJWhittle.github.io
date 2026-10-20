@@ -1,0 +1,60 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <div class="site-footer__about">
+      <p class="section__label">Contact</p>
+      <p class="site-footer__links">
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <span aria-hidden="true">·</span>
+        <a href={site.linkedin}>LinkedIn</a>
+        <span aria-hidden="true">·</span>
+        <a href={site.github}>GitHub</a>
+        <span aria-hidden="true">·</span>
+        <a href="/about/">About</a>
+      </p>
+    </div>
+    <p class="site-footer__meta">© {new Date().getFullYear()} {site.name}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--colour-rule);
+    padding-block: var(--space-6) var(--space-5);
+    background: color-mix(in srgb, var(--colour-blue) 12%, var(--colour-paper));
+  }
+
+  .site-footer__inner {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .site-footer__links {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.65rem;
+    align-items: center;
+  }
+
+  .site-footer__links a {
+    font-weight: 500;
+  }
+
+  .site-footer__meta {
+    margin: 0;
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 800px) {
+    .site-footer__inner {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+  }
+</style>

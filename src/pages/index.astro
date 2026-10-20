@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout>
+  <section class="hero wrap">
+    <p class="hero__kicker">{site.kicker}</p>
+    <h1 class="hero__headline">{site.headline}</h1>
+    <p class="hero__intro">{site.intro}</p>
+    <p class="hero__cta">
+      <a href="/about/">About &amp; contact</a>
+    </p>
+  </section>
+
+  <section class="section wrap coming-soon" aria-labelledby="coming-heading">
+    <p class="section__label">Elsewhere on this site</p>
+    <h2 id="coming-heading" class="section__title">Work and notes</h2>
+    <p class="section__lede">
+      Case studies and field notes are coming soon — nothing published yet.
+    </p>
+    <p class="coming-soon__links">
+      <a href="/work/">Work</a>
+      <span aria-hidden="true"> · </span>
+      <a href="/notes/">Notes</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-7) var(--space-6);
+    max-width: calc(var(--measure) + var(--gutter) * 2);
+  }
+
+  .hero__kicker {
+    margin: 0 0 var(--space-3);
+    color: var(--colour-moss);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero__headline {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 2.85rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    max-width: 18ch;
+  }
+
+  .hero__intro {
+    margin: 0 0 var(--space-5);
+    max-width: var(--measure);
+    color: var(--colour-muted);
+    font-size: 1.125rem;
+  }
+
+  .hero__cta {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .coming-soon__links {
+    margin: var(--space-4) 0 0;
+    font-weight: 500;
+  }
+</style>

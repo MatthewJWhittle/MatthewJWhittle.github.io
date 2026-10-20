@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="About"
+  description="Background and contact for Matthew Whittle."
+>
+  <section class="section wrap about">
+    <p class="section__label">About</p>
+    <h1 class="section__title">{site.name}</h1>
+    <div class="prose">
+      <p>
+        I started in ecological survey and assessment, moved into applied geospatial machine
+        learning and software, and now lead SLR's Data Warehouse &amp; Analytics function on an
+        interim basis — still hands-on. Based in {site.location}.
+      </p>
+      <p>
+        Previously geospatial data science at SLR and data science / ecology roles at Jacobs.
+      </p>
+      <h2>Contact</h2>
+      <ul>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><a href={site.linkedin}>LinkedIn</a></li>
+        <li><a href={site.github}>GitHub</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about :global(.section__title) {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+  }
+</style>

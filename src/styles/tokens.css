@@ -1,0 +1,35 @@
+:root {
+  /* Exact Field Notebook palette — design-spec §3 */
+  --colour-paper: #f5f2e9;
+  --colour-ink: #252d29;
+  --colour-moss: #506d5a;
+  --colour-rust: #ca754d;
+  --colour-blue: #a7b9bb;
+
+  --colour-paper-deep: color-mix(in srgb, var(--colour-paper) 88%, var(--colour-ink));
+  --colour-blue-soft: color-mix(in srgb, var(--colour-blue) 35%, var(--colour-paper));
+  --colour-moss-soft: color-mix(in srgb, var(--colour-moss) 18%, var(--colour-paper));
+  --colour-rule: color-mix(in srgb, var(--colour-ink) 18%, var(--colour-paper));
+  --colour-muted: color-mix(in srgb, var(--colour-ink) 62%, var(--colour-paper));
+
+  --font-display: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'SFMono-Regular', Menlo, monospace;
+
+  --max-page: 1100px;
+  --measure: 44rem; /* ~704px reading measure */
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2.5rem;
+  --space-7: 4rem;
+  --space-8: 6rem;
+
+  --radius: 4px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --focus: 2px solid var(--colour-moss);
+}
