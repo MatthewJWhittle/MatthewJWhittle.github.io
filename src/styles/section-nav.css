@@ -1,0 +1,73 @@
+.section-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.85rem var(--gutter);
+}
+
+.section-nav__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.section-nav__name a {
+  color: var(--colour-ink);
+  text-decoration: none;
+}
+
+.section-nav__name a:hover {
+  color: var(--colour-moss);
+}
+
+.section-nav__list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.35rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.section-nav__list a {
+  display: inline-block;
+  padding: 0.2rem 0;
+  color: var(--colour-muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.section-nav__list a:hover {
+  color: var(--colour-moss);
+}
+
+.section-nav__list a.is-active {
+  color: var(--colour-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+@media (min-width: 860px) {
+  .section-nav {
+    padding: 0;
+    gap: 1.25rem;
+  }
+
+  .section-nav__list {
+    flex-direction: column;
+    overflow: visible;
+    gap: 0.35rem;
+  }
+
+  .section-nav__list a {
+    padding: 0.15rem 0;
+  }
+}

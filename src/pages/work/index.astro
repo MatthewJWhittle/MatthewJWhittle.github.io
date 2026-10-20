@@ -1,25 +1,35 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkTeaser from '../../components/WorkTeaser.astro';
+import { getPublishedWork } from '../../lib/content';
+
+const work = await getPublishedWork();
 ---
 
-<BaseLayout
-  title="Work"
-  description="Selected projects — coming soon."
->
+<BaseLayout title="Work" description="Selected projects.">
   <section class="section wrap">
     <p class="section__label">Work</p>
     <h1 class="section__title">Projects</h1>
-    <p class="section__lede">Coming soon.</p>
-    <p class="muted">
-      Case studies will be added here when they're ready. Nothing published yet.
+    {
+      work.length === 0 ? (
+        <p class="section__lede">Coming soon.</p>
+      ) : (
+        <div>
+          {work.map((project) => (
+            <WorkTeaser project={project} />
+          ))}
+        </div>
+      )
+    }
+    <p class="back">
+      <a href="/#work">← Back</a>
     </p>
   </section>
 </BaseLayout>
 
 <style>
-  .muted {
-    margin: 0;
-    max-width: var(--measure);
-    color: var(--colour-muted);
+  .back {
+    margin-top: var(--space-6);
+    font-weight: 500;
   }
 </style>
