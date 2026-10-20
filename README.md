@@ -1,6 +1,6 @@
-# Matthew Whittle — field notebook portfolio
+# Matthew Whittle — personal site
 
-Static **Astro** site with the **Working Field Notebook** aesthetic (see project store field-notebook spec). Content collections for work and notes; GitHub Pages via Actions.
+Static **Astro** (+ optional React islands) site on GitHub Pages.
 
 ## Local development
 
@@ -11,23 +11,17 @@ npm ci
 npm run dev
 ```
 
+Then open the URL Astro prints (usually `http://localhost:4321`).
+
 ```bash
 npm run build
 npm run preview
 ```
 
-## Adding content
+## Content
 
-1. Copy `src/content/work/_template.example.md` or `src/content/notes/_template.example.md`.
-2. Rename (drop `_template` / set a slug filename), set `draft: false`.
-3. Fill frontmatter and Markdown body — indexes and detail pages update automatically.
-
-Draft items (`draft: true`) are excluded from production pages.
+The live site is a single long-scroll page (`src/pages/index.astro`). Work and notes case studies can be authored under `src/content/` (keep `draft: true` until ready). Detail routes under `/work/[slug]/` and `/notes/[slug]/` remain for when content is published.
 
 ## Deploy
 
 `.github/workflows/deploy.yml` builds `dist/` on push to `master`. Set **Settings → Pages → Source: GitHub Actions** once. No extra secrets required.
-
-## Design tokens
-
-Exact palette in `src/styles/tokens.css`: paper, ink, moss, rust, blue. Fonts: Newsreader, Source Sans 3, IBM Plex Mono.

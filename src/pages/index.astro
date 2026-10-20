@@ -1,71 +1,156 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionNav from '../components/SectionNav';
 import { site } from '../data/site';
 ---
 
 <BaseLayout>
-  <section class="hero wrap">
-    <p class="hero__kicker">{site.kicker}</p>
-    <h1 class="hero__headline">{site.headline}</h1>
-    <p class="hero__intro">{site.intro}</p>
-    <p class="hero__cta">
-      <a href="/about/">About &amp; contact</a>
-    </p>
-  </section>
+  <div class="shell">
+    <aside class="shell__nav">
+      <SectionNav client:load />
+    </aside>
 
-  <section class="section wrap coming-soon" aria-labelledby="coming-heading">
-    <p class="section__label">Elsewhere on this site</p>
-    <h2 id="coming-heading" class="section__title">Work and notes</h2>
-    <p class="section__lede">
-      Case studies and field notes are coming soon — nothing published yet.
-    </p>
-    <p class="coming-soon__links">
-      <a href="/work/">Work</a>
-      <span aria-hidden="true"> · </span>
-      <a href="/notes/">Notes</a>
-    </p>
-  </section>
+    <main id="main" class="shell__main">
+      <section id="about" class="block" aria-labelledby="about-heading">
+        <p class="section__label">About</p>
+        <h1 id="about-heading" class="block__title">{site.name}</h1>
+        <p class="block__lede">{site.headline}</p>
+        <div class="prose">
+          {site.about.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </section>
+
+      <section id="work" class="block" aria-labelledby="work-heading">
+        <p class="section__label">Work</p>
+        <h2 id="work-heading" class="block__title">Projects</h2>
+        <p class="block__lede">Coming soon.</p>
+        <p class="muted">Case studies will appear here when they're ready.</p>
+      </section>
+
+      <section id="notes" class="block" aria-labelledby="notes-heading">
+        <p class="section__label">Notes</p>
+        <h2 id="notes-heading" class="block__title">Notes</h2>
+        <p class="block__lede">Coming soon.</p>
+        <p class="muted">Short writing will appear here later.</p>
+      </section>
+
+      <section id="contact" class="block" aria-labelledby="contact-heading">
+        <p class="section__label">Contact</p>
+        <h2 id="contact-heading" class="block__title">Get in touch</h2>
+        <ul class="contact-list">
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href={site.linkedin}>LinkedIn</a></li>
+          <li><a href={site.github}>GitHub</a></li>
+        </ul>
+        <p class="footer-meta">© {new Date().getFullYear()} {site.name}</p>
+      </section>
+    </main>
+  </div>
 </BaseLayout>
 
 <style>
-  .hero {
-    padding-block: var(--space-7) var(--space-6);
+  .shell {
+    display: grid;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  .shell__nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--colour-paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--colour-rule);
+  }
+
+  .shell__main {
+    padding-inline: var(--gutter);
+    padding-block: var(--space-5) var(--space-8);
     max-width: calc(var(--measure) + var(--gutter) * 2);
   }
 
-  .hero__kicker {
-    margin: 0 0 var(--space-3);
-    color: var(--colour-moss);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .block {
+    padding-block: var(--space-7);
+    scroll-margin-top: 5.5rem;
   }
 
-  .hero__headline {
+  .block + .block {
+    border-top: 1px solid var(--colour-rule);
+  }
+
+  .block__title {
     margin: 0 0 var(--space-4);
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4.5vw, 2.85rem);
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
     font-weight: 500;
     letter-spacing: -0.03em;
     line-height: 1.15;
-    max-width: 18ch;
   }
 
-  .hero__intro {
+  .block__lede {
     margin: 0 0 var(--space-5);
     max-width: var(--measure);
     color: var(--colour-muted);
     font-size: 1.125rem;
   }
 
-  .hero__cta {
+  .muted {
     margin: 0;
-    font-weight: 500;
+    color: var(--colour-muted);
   }
 
-  .coming-soon__links {
-    margin: var(--space-4) 0 0;
+  .contact-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.65rem;
     font-weight: 500;
+    font-size: 1.1rem;
+  }
+
+  .footer-meta {
+    margin: var(--space-7) 0 0;
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 860px) {
+    .shell {
+      grid-template-columns: 11.5rem minmax(0, 1fr);
+      align-items: start;
+      max-width: var(--max-page);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      gap: var(--space-6);
+    }
+
+    .shell__nav {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      border-bottom: 0;
+      background: transparent;
+      backdrop-filter: none;
+      padding-block: var(--space-7) var(--space-5);
+    }
+
+    .shell__main {
+      padding-inline: 0;
+      padding-block: var(--space-7) var(--space-8);
+      max-width: none;
+    }
+
+    .block {
+      scroll-margin-top: var(--space-6);
+      padding-block: var(--space-8);
+    }
+
+    .block:first-child {
+      padding-top: var(--space-7);
+    }
   }
 </style>

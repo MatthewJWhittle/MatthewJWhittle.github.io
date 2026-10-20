@@ -55,6 +55,21 @@ a:hover {
   border: 0;
 }
 
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 40;
+  padding: 0.4rem 0.65rem;
+  background: var(--colour-paper);
+  border: 1px solid var(--colour-rule);
+  color: var(--colour-ink);
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
 .wrap {
   width: min(100% - (var(--gutter) * 2), var(--max-page));
   margin-inline: auto;

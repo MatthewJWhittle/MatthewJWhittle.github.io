@@ -9,4 +9,9 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [react()],
   output: 'static',
+  redirects: {
+    '/about/': '/#about',
+    '/work/': '/#work',
+    '/notes/': '/#notes',
+  },
 });
