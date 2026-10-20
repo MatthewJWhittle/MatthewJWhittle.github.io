@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const href = `/work/${project.id}/`;
 const year = project.data.date.getFullYear();
 ---
 
@@ -15,7 +16,9 @@ const year = project.data.date.getFullYear();
     <span aria-hidden="true">·</span>
     <span>{project.data.status}</span>
   </p>
-  <h3 class="teaser__title">{project.data.title}</h3>
+  <h3 class="teaser__title">
+    <a href={href}>{project.data.title}</a>
+  </h3>
   <p class="teaser__summary">{project.data.summary}</p>
 </article>
 
@@ -47,6 +50,15 @@ const year = project.data.date.getFullYear();
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.25;
+  }
+
+  .teaser__title a {
+    color: var(--colour-ink);
+    text-decoration: none;
+  }
+
+  .teaser__title a:hover {
+    color: var(--colour-moss);
   }
 
   .teaser__summary {

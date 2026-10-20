@@ -27,8 +27,34 @@ const showAllNotes = allNotes.length > TEASER_CAP;
         <h1 id="about-heading" class="block__title">{site.name}</h1>
         <p class="block__lede">{site.headline}</p>
         <div class="prose">
-          {site.about.map((paragraph) => <p>{paragraph}</p>)}
+          <p>{site.about}</p>
         </div>
+      </section>
+
+      <section id="experience" class="block" aria-labelledby="experience-heading">
+        <p class="section__label">Experience</p>
+        <h2 id="experience-heading" class="block__title">Selected roles</h2>
+        <ol class="timeline">
+          {
+            site.timeline.map((item) => (
+              <li class="timeline__item">
+                <p class="timeline__period">{item.period}</p>
+                <p class="timeline__role">{item.role}</p>
+                <p class="timeline__org">{item.org}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section id="contact" class="block" aria-labelledby="contact-heading">
+        <p class="section__label">Contact</p>
+        <h2 id="contact-heading" class="block__title">Get in touch</h2>
+        <ul class="contact-list">
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href={site.linkedin}>LinkedIn</a></li>
+          <li><a href={site.github}>GitHub</a></li>
+        </ul>
       </section>
 
       <section id="work" class="block" aria-labelledby="work-heading">
@@ -38,7 +64,9 @@ const showAllNotes = allNotes.length > TEASER_CAP;
           workTeasers.length === 0 ? (
             <>
               <p class="block__lede">Coming soon.</p>
-              <p class="muted">Case studies will appear here when they're ready.</p>
+              <p class="muted">
+                Short project teasers will link out from here when ready.
+              </p>
             </>
           ) : (
             <div class="teaser-list">
@@ -64,7 +92,7 @@ const showAllNotes = allNotes.length > TEASER_CAP;
           noteTeasers.length === 0 ? (
             <>
               <p class="block__lede">Coming soon.</p>
-              <p class="muted">Short writing will appear here later.</p>
+              <p class="muted">Short notes will link out from here later.</p>
             </>
           ) : (
             <div class="teaser-list">
@@ -81,16 +109,6 @@ const showAllNotes = allNotes.length > TEASER_CAP;
             </p>
           )
         }
-      </section>
-
-      <section id="contact" class="block" aria-labelledby="contact-heading">
-        <p class="section__label">Contact</p>
-        <h2 id="contact-heading" class="block__title">Get in touch</h2>
-        <ul class="contact-list">
-          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-          <li><a href={site.linkedin}>LinkedIn</a></li>
-          <li><a href={site.github}>GitHub</a></li>
-        </ul>
         <p class="footer-meta">© {new Date().getFullYear()} {site.name}</p>
       </section>
     </main>
@@ -147,6 +165,35 @@ const showAllNotes = allNotes.length > TEASER_CAP;
     color: var(--colour-muted);
   }
 
+  .timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-5);
+    max-width: var(--measure);
+  }
+
+  .timeline__period {
+    margin: 0 0 var(--space-1);
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .timeline__role {
+    margin: 0 0 var(--space-1);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .timeline__org {
+    margin: 0;
+    color: var(--colour-muted);
+  }
+
   .teaser-list {
     margin-top: var(--space-2);
   }
@@ -173,7 +220,6 @@ const showAllNotes = allNotes.length > TEASER_CAP;
     font-size: 0.75rem;
   }
 
-  /* Desktop: fixed left nav — always one click to Contact */
   @media (min-width: 860px) {
     .shell {
       position: relative;
@@ -185,7 +231,6 @@ const showAllNotes = allNotes.length > TEASER_CAP;
     .shell__nav {
       position: fixed;
       top: 0;
-      /* Align with shell left edge when page is centered */
       left: max(var(--gutter), calc((100vw - var(--max-page)) / 2 + var(--gutter)));
       width: 11.5rem;
       height: 100vh;

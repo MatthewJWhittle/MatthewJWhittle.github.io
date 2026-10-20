@@ -10,15 +10,33 @@ export const site = {
   location: 'West Yorkshire, UK',
   /** High-confidence positioning: what he builds / for whom. */
   headline: 'Geospatial ML and data tools for environmental work.',
-  about: [
+  about:
     "I started in ecological survey and assessment, moved into applied geospatial machine learning and software, and now lead SLR's Data Warehouse & Analytics function on an interim basis — still hands-on. Based in West Yorkshire, UK.",
-    'Previously geospatial data science at SLR and data science / ecology roles at Jacobs.',
+  /** Selected experience only — not a full CV. From Notion Master CV. */
+  timeline: [
+    {
+      org: 'SLR Consulting',
+      role: 'Interim Head of Data Warehouse & Analytics',
+      period: 'Jan 2026–present',
+    },
+    {
+      org: 'SLR Consulting',
+      role: 'Data Science Lead, Europe — Geospatial',
+      period: 'Sep 2023–Jan 2026',
+    },
+    {
+      org: 'Jacobs',
+      role: 'Senior Data Scientist; earlier ecology and ecology data science roles',
+      period: '2017–2023',
+    },
   ],
 } as const;
 
+/** Nav order matches page section order. */
 export const sections = [
   { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' },
   { id: 'work', label: 'Work' },
   { id: 'notes', label: 'Notes' },
-  { id: 'contact', label: 'Contact' },
 ] as const;

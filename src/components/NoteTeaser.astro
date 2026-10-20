@@ -7,11 +7,14 @@ interface Props {
 }
 
 const { note } = Astro.props;
+const href = `/notes/${note.id}/`;
 ---
 
 <article class="teaser">
   <p class="teaser__meta">{formatDate(note.data.date)}</p>
-  <h3 class="teaser__title">{note.data.title}</h3>
+  <h3 class="teaser__title">
+    <a href={href}>{note.data.title}</a>
+  </h3>
   <p class="teaser__summary">{note.data.description}</p>
 </article>
 
@@ -39,6 +42,15 @@ const { note } = Astro.props;
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.25;
+  }
+
+  .teaser__title a {
+    color: var(--colour-ink);
+    text-decoration: none;
+  }
+
+  .teaser__title a:hover {
+    color: var(--colour-moss);
   }
 
   .teaser__summary {
