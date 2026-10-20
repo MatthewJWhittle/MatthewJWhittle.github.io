@@ -17,6 +17,17 @@ export default function ExperienceTimeline() {
   const focusRef = useRef(0);
   const pendingAnchor = useRef<{ index: number; offset: number } | null>(null);
   const [focusIndex, setFocusIndex] = useState(0);
+  /** Extra bottom space so the last roles can scroll into the focus band. */
+  const [endPad, setEndPad] = useState(120);
+
+  const fullEnd = Math.min(focusIndex + FULL_SLOTS, entries.length);
+
+  useLayoutEffect(() => {
+    const root = viewportRef.current;
+    if (!root) return;
+    // Leave room to scroll the final roles up into the focus line (~22% from top).
+    setEndPad(Math.max(96, Math.round(root.clientHeight * 0.7)));
+  }, []);
 
   useEffect(() => {
     const root = viewportRef.current;
@@ -25,30 +36,27 @@ export default function ExperienceTimeline() {
     let frame = 0;
 
     const readFocus = () => {
-      // Focus line ~20% down the viewport — first item whose bottom crosses it.
       const focusY = root.scrollTop + root.clientHeight * 0.22;
       let next = 0;
       for (let i = 0; i < entries.length; i++) {
         const el = itemRefs.current[i];
         if (!el) continue;
-        const top = el.offsetTop;
-        const mid = top + el.offsetHeight * 0.35;
+        const mid = el.offsetTop + el.offsetHeight * 0.35;
         if (mid <= focusY) next = i;
         else break;
       }
 
-      // Hysteresis: ignore 1-step flicker near boundaries
       const prev = focusRef.current;
       if (next === prev) return;
 
+      // Mild hysteresis near boundaries
       const prevEl = itemRefs.current[prev];
       const nextEl = itemRefs.current[next];
       if (prevEl && nextEl && Math.abs(next - prev) === 1) {
         const boundary = next > prev ? nextEl.offsetTop : prevEl.offsetTop;
-        if (Math.abs(focusY - boundary) < 28) return;
+        if (Math.abs(focusY - boundary) < 20) return;
       }
 
-      // Keep the focused item visually pinned while heights change
       const anchor = itemRefs.current[next];
       if (anchor) {
         pendingAnchor.current = {
@@ -66,12 +74,18 @@ export default function ExperienceTimeline() {
       frame = requestAnimationFrame(readFocus);
     };
 
+    const onResize = () => {
+      setEndPad(Math.max(96, Math.round(root.clientHeight * 0.7)));
+    };
+
     root.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
     readFocus();
 
     return () => {
       cancelAnimationFrame(frame);
       root.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
@@ -81,11 +95,13 @@ export default function ExperienceTimeline() {
     if (!root || !pending) return;
     const el = itemRefs.current[pending.index];
     if (!el) return;
-    root.scrollTop = el.offsetTop - pending.offset;
+    const nextTop = el.offsetTop - pending.offset;
+    // Only compensate when it actually moves; avoid pinning scrollTop to 0.
+    if (Math.abs(root.scrollTop - nextTop) > 1) {
+      root.scrollTop = nextTop;
+    }
     pendingAnchor.current = null;
   }, [focusIndex]);
-
-  const fullEnd = Math.min(focusIndex + FULL_SLOTS, entries.length);
 
   return (
     <div className="xtl">
@@ -126,6 +142,7 @@ export default function ExperienceTimeline() {
             );
           })}
         </ol>
+        <div className="xtl__end-pad" style={{ height: endPad }} aria-hidden="true" />
       </div>
     </div>
   );

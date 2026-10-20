@@ -6,9 +6,14 @@
 
 .xtl__viewport {
   position: relative;
-  max-height: min(28rem, 58vh);
-  overflow-y: auto;
+  /* Short enough that 3 full + compact roles overflow — otherwise scrollHeight
+     equals clientHeight and wheel never moves the viewport. */
+  height: min(18.5rem, 46vh);
+  max-height: min(18.5rem, 46vh);
+  overflow-x: hidden;
+  overflow-y: scroll; /* always a scroll container; bar hidden below */
   overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   /* Keep wheel/trackpad/touch scroll; hide scrollbar chrome */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* legacy Edge */
@@ -132,13 +137,19 @@
   display: none;
 }
 
+.xtl__end-pad {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
 @media (min-width: 640px) {
   .xtl {
     --rail: 1.35rem;
   }
 
   .xtl__viewport {
-    max-height: min(32rem, 62vh);
+    height: min(20rem, 48vh);
+    max-height: min(20rem, 48vh);
   }
 
   .xtl__role {
