@@ -3,7 +3,7 @@ title: Why semi-automated habitat maps still need ecologists
 description: A short note on keeping specialists in the loop when computer vision proposes UKHab patches.
 date: 2025-11-12
 tags: [geospatial, ML]
-draft: false
+draft: true
 ---
 
 Fully automatic habitat maps look impressive in demos. In assessment work, a wrong polygon still becomes someone’s liability.

@@ -5,7 +5,7 @@ date: 2025-08-01
 status: shipped
 tags: [API, FastAPI, Azure]
 featured: false
-draft: false
+draft: true
 figureId: api
 ---
 

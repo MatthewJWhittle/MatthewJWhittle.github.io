@@ -1,15 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectPreview from '../components/ProjectPreview.astro';
-import NotePreview from '../components/NotePreview.astro';
-import ProjectFigure from '../components/ProjectFigure.astro';
 import { site } from '../data/site';
-import { getPublishedNotes, getPublishedWork } from '../lib/content';
-
-const work = await getPublishedWork();
-const featured = work.find((item) => item.data.featured) ?? work[0];
-const selected = work.filter((item) => item.id !== featured?.id).slice(0, 3);
-const notes = (await getPublishedNotes()).slice(0, 3);
 ---
 
 <BaseLayout>
@@ -18,51 +9,20 @@ const notes = (await getPublishedNotes()).slice(0, 3);
     <h1 class="hero__headline">{site.headline}</h1>
     <p class="hero__intro">{site.intro}</p>
     <p class="hero__cta">
-      <a href="/work/">Browse selected work</a>
-      <span aria-hidden="true"> · </span>
-      <a href="#featured">Jump to featured project</a>
+      <a href="/about/">About &amp; contact</a>
     </p>
   </section>
 
-  {
-    featured && (
-      <section id="featured" class="section wrap" aria-labelledby="featured-heading">
-        <p class="section__label">Featured</p>
-        <h2 id="featured-heading" class="section__title">One project in focus</h2>
-        <ProjectPreview project={featured} featured>
-          <ProjectFigure
-            slot="figure"
-            figureId={featured.data.figureId}
-            title={featured.data.title}
-          />
-        </ProjectPreview>
-      </section>
-    )
-  }
-
-  <section class="section wrap" aria-labelledby="work-heading">
-    <p class="section__label">Selected work</p>
-    <h2 id="work-heading" class="section__title">More projects &amp; experiments</h2>
+  <section class="section wrap coming-soon" aria-labelledby="coming-heading">
+    <p class="section__label">Elsewhere on this site</p>
+    <h2 id="coming-heading" class="section__title">Work and notes</h2>
     <p class="section__lede">
-      Compact entries with clear problems and contributions. Full write-ups live under Work.
+      Case studies and field notes are coming soon — nothing published yet.
     </p>
-    <div class="list">
-      {selected.map((project) => <ProjectPreview project={project} />)}
-    </div>
-    <p class="section__more">
-      <a href="/work/">All work →</a>
-    </p>
-  </section>
-
-  <section class="section wrap" aria-labelledby="notes-heading">
-    <p class="section__label">Field notes</p>
-    <h2 id="notes-heading" class="section__title">Recent notes</h2>
-    <p class="section__lede">Short observations from building and shipping.</p>
-    <div class="list">
-      {notes.map((note) => <NotePreview note={note} />)}
-    </div>
-    <p class="section__more">
-      <a href="/notes/">All notes →</a>
+    <p class="coming-soon__links">
+      <a href="/work/">Work</a>
+      <span aria-hidden="true"> · </span>
+      <a href="/notes/">Notes</a>
     </p>
   </section>
 </BaseLayout>
@@ -104,11 +64,7 @@ const notes = (await getPublishedNotes()).slice(0, 3);
     font-weight: 500;
   }
 
-  .list {
-    display: grid;
-  }
-
-  .section__more {
+  .coming-soon__links {
     margin: var(--space-4) 0 0;
     font-weight: 500;
   }

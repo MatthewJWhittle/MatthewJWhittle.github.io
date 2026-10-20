@@ -3,7 +3,7 @@ title: Engineering practice before flashy products
 description: Version control, review and CI on a previously script-focused geospatial team — influence without line management.
 date: 2025-09-03
 tags: [engineering, teams]
-draft: false
+draft: true
 ---
 
 You can buy cloud GPUs in an afternoon. You cannot buy a shared habit of pull requests.

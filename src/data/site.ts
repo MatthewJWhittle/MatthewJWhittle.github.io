@@ -3,13 +3,14 @@ export const site = {
   name: 'Matthew Whittle',
   title: 'Matthew Whittle — portfolio',
   description:
-    'Data scientist and engineer with roots in ecology and geospatial work. Tools, ML systems and field notes.',
+    'Geospatial ML and data tools for environmental work. Ecology background; applied data science and engineering.',
   email: 'matthewjwhittle@gmail.com',
   github: 'https://github.com/MatthewJWhittle',
   linkedin: 'https://www.linkedin.com/in/matthewjwhittle/',
   location: 'West Yorkshire, UK',
   kicker: 'Field notebook',
-  headline: 'Building tools to make sense of complex data.',
+  /** High-confidence positioning: what he builds / for whom. */
+  headline: 'Geospatial ML and data tools for environmental work.',
   intro:
-    "I'm Matt, a data scientist and engineer with roots in ecology and geospatial work. I build useful software, machine learning systems and small experiments — and write notes on how they work.",
+    "I'm Matt. Ecology background, then applied machine learning and software in environmental consulting. Work and notes will appear here when they're ready.",
 } as const;

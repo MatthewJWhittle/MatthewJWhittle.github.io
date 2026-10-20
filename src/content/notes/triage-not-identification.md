@@ -3,7 +3,7 @@ title: Triage is not identification
 description: Camera-trap ML that shortlists footage for experts — and why the wording matters.
 date: 2025-07-21
 tags: [ecology, computer-vision]
-draft: false
+draft: true
 ---
 
 Reducing thousands of clips to a few hundred for specialists is a success metric. Calling that “AI identified the species” is a different claim entirely.

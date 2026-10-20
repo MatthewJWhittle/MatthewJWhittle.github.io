@@ -1,23 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectPreview from '../../components/ProjectPreview.astro';
-import { getPublishedWork } from '../../lib/content';
-
-const work = await getPublishedWork();
 ---
 
 <BaseLayout
   title="Work"
-  description="Selected projects in geospatial ML, APIs and ecological computer vision."
+  description="Selected projects — coming soon."
 >
   <section class="section wrap">
     <p class="section__label">Work</p>
     <h1 class="section__title">Projects</h1>
-    <p class="section__lede">
-      Case studies grounded in public, attributable work. Confidential client detail is omitted.
+    <p class="section__lede">Coming soon.</p>
+    <p class="muted">
+      Case studies will be added here when they're ready. Nothing published yet.
     </p>
-    <div>
-      {work.map((project) => <ProjectPreview project={project} />)}
-    </div>
   </section>
 </BaseLayout>
+
+<style>
+  .muted {
+    margin: 0;
+    max-width: var(--measure);
+    color: var(--colour-muted);
+  }
+</style>

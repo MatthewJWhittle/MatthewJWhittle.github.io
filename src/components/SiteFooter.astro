@@ -5,11 +5,7 @@ import { site } from '../data/site';
 <footer class="site-footer">
   <div class="wrap site-footer__inner">
     <div class="site-footer__about">
-      <p class="section__label">About</p>
-      <p>
-        Ecology-trained data scientist and engineer. Applied geospatial ML and analytics at SLR;
-        previously Jacobs. Based in {site.location}.
-      </p>
+      <p class="section__label">Contact</p>
       <p class="site-footer__links">
         <a href={`mailto:${site.email}`}>{site.email}</a>
         <span aria-hidden="true">·</span>
@@ -17,7 +13,7 @@ import { site } from '../data/site';
         <span aria-hidden="true">·</span>
         <a href={site.github}>GitHub</a>
         <span aria-hidden="true">·</span>
-        <a href="/about/">More</a>
+        <a href="/about/">About</a>
       </p>
     </div>
     <p class="site-footer__meta">© {new Date().getFullYear()} {site.name}</p>
@@ -36,14 +32,8 @@ import { site } from '../data/site';
     gap: var(--space-5);
   }
 
-  .site-footer__about p {
-    margin: 0;
-    max-width: 36rem;
-    color: var(--colour-muted);
-  }
-
   .site-footer__links {
-    margin-top: var(--space-4) !important;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 0.65rem;

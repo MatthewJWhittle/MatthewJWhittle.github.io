@@ -5,7 +5,7 @@ date: 2024-09-01
 status: shipped
 tags: [geospatial, computer-vision, Azure ML]
 featured: true
-draft: false
+draft: true
 figureId: habitat
 ---
 

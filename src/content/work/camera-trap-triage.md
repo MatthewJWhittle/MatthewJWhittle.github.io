@@ -5,7 +5,7 @@ date: 2025-06-01
 status: shipped
 tags: [computer-vision, ecology]
 featured: false
-draft: false
+draft: true
 figureId: triage
 ---
 

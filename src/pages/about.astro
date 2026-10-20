@@ -5,41 +5,25 @@ import { site } from '../data/site';
 
 <BaseLayout
   title="About"
-  description="Background, interests and contact for Matthew Whittle."
+  description="Background and contact for Matthew Whittle."
 >
   <section class="section wrap about">
     <p class="section__label">About</p>
     <h1 class="section__title">{site.name}</h1>
     <div class="prose">
       <p>
-        I'm a hands-on data scientist and technical lead based in {site.location}. I started in
-        ecological survey and assessment, then moved into applied geospatial machine learning and
-        software — at Jacobs, contributing to modelling, routing and a coding community; at SLR,
-        building habitat-mapping and API products while coaching geospatial developers toward
-        collaborative cloud engineering.
+        I started in ecological survey and assessment, moved into applied geospatial machine
+        learning and software, and now lead SLR's Data Warehouse &amp; Analytics function on an
+        interim basis — still hands-on. Based in {site.location}.
       </p>
       <p>
-        Since early 2026 I have led SLR's internal Data Warehouse &amp; Analytics function on an
-        <strong>interim</strong> basis — Fabric foundations, reporting and forecasting experiments —
-        while staying technically involved. This site is a working notebook of selected public work
-        and short notes, not a consultancy brochure.
+        Previously geospatial data science at SLR and data science / ecology roles at Jacobs.
       </p>
       <h2>Contact</h2>
       <ul>
         <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
         <li><a href={site.linkedin}>LinkedIn</a></li>
         <li><a href={site.github}>GitHub</a></li>
-      </ul>
-      <h2>Open source (selected)</h2>
-      <ul>
-        <li>
-          <a href="https://github.com/MatthewJWhittle/tilearray">tilearray</a> — Python library for
-          remote map tiles into Dask/xarray workflows
-        </li>
-        <li>
-          <a href="https://github.com/MatthewJWhittle/getarc">getarc</a> — R wrapper for ArcGIS Online
-          REST
-        </li>
       </ul>
     </div>
   </section>
