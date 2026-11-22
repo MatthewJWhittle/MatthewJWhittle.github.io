@@ -10,7 +10,7 @@ export const site = {
   location: 'West Yorkshire, UK',
   headline: 'I like building things.',
   about:
-    "I'm based in West Yorkshire and started my career as an ecologist. These days I work across data, software and machine learning, and I lead SLR's Data Warehouse & Analytics function on an interim basis. I enjoy figuring out how things work and building things that solve interesting problems. This is where I share some of that work and what I learn along the way.",
+    "I started out as an ecologist and gradually found myself writing more code. These days I work across data, software and machine learning, and lead an analytics team at SLR. I still enjoy getting into the technical detail. I'm based in West Yorkshire, and this is where I share projects I've built and things I've learnt along the way.",
   /**
    * Full role chronology from Notion Master CV (career chronology).
    * startLabel = when the role began (no end dates in the UI).
@@ -23,9 +23,9 @@ export const site = {
       startLabel: 'Jan 2026',
       startYear: 2026,
       summary:
-        'Lead the internal data warehouse and analytics function; still hands-on with engineering and reporting.',
+        "Lead SLR's internal data and analytics team, covering engineering, reporting and governance.",
       detail:
-        "I lead SLR's internal data warehouse and analytics function on an interim basis. That covers engineering, reporting and governance across finance, operations and growth. I am still hands-on with the data engineering, report development and architecture.",
+        "I lead a team working across data engineering, BI and analytics. A lot of my role is deciding what to build, setting technical direction and helping the team deliver reliable data and reporting across the business. I still get involved in the architecture and implementation.",
     },
     {
       org: 'SLR Consulting',
@@ -33,9 +33,9 @@ export const site = {
       startLabel: 'Sep 2023',
       startYear: 2023,
       summary:
-        'Led geospatial data science for Europe, including habitat mapping and camera-trap machine learning.',
+        "Led geospatial data science in Europe, including habitat mapping and camera-trap machine learning.",
       detail:
-        "I led data science for SLR's geospatial work in Europe. I built machine learning for habitat mapping and camera-trap review, and I coached the GIS developers beside me into version control, testing and deployment.",
+        "I led geospatial data science work in Europe, including machine learning for habitat mapping and camera-trap review. I also helped the GIS development team adopt version control, testing and more reliable ways of releasing software.",
     },
     {
       org: 'Jacobs',
@@ -43,9 +43,9 @@ export const site = {
       startLabel: 'Jul 2022',
       startYear: 2022,
       summary:
-        'Data science on ecology and infrastructure projects; grew the coding community across Jacobs.',
+        "Built data science tools for ecology and infrastructure projects, and helped grow a coding community.",
       detail:
-        'I worked as a data scientist on ecology and infrastructure projects, building the models and the software around them. I also grew the coding community I had started the year before, and took it out to the wider Jacobs organisation.',
+        "I worked on models and software for ecology and infrastructure projects. Alongside the project work, I helped grow a coding community that had started within ecology into the wider Jacobs organisation.",
     },
     {
       org: 'Jacobs',
@@ -53,9 +53,9 @@ export const site = {
       startLabel: 'Sep 2021',
       startYear: 2021,
       summary:
-        'Project ecology plus data pipelines for bat habitat modelling and Biodiversity Net Gain tools.',
+        "Deputy habitats lead on a large water infrastructure programme, with R and Python survey tools.",
       detail:
-        'I was still a project ecologist, and the data work was becoming mine. I designed the surveys and data pipelines for bat habitat modelling on a large water pipeline, led a Biodiversity Net Gain tools project, and started the coding community.',
+        "I was deputy habitats lead on Anglian Water's Strategic Pipeline Alliance, helping coordinate habitat specialists across a programme of about 500 km. I also wrote R and Python tools for survey records and Biodiversity Net Gain calculations.",
     },
     {
       org: 'Jacobs',
@@ -73,25 +73,25 @@ export const site = {
       startLabel: 'Aug 2017',
       startYear: 2017,
       summary:
-        'Protected-species surveys and assessment on roads, rail and utilities; early analysis tooling.',
+        "Ecological surveys and assessments for roads, rail and utilities, with growing involvement in data analysis.",
       detail:
-        'I surveyed and assessed roads, rail and utilities, and took on more of the analysis as I went. On HS2 I deputised for ecology and analysed the bat data, and I started writing tools to check and report it.',
+        "I worked on field surveys and environmental assessments. On HS2, I helped with ecology coordination and bat data analysis, and began writing tools to check and report survey data.",
     },
     {
       org: 'Jacobs',
       role: 'Seasonal Ecologist',
       startLabel: 'Apr 2017',
       startYear: 2017,
-      summary: 'Protected-species survey season; led into the graduate role.',
-      detail: 'I spent the summer on protected-species surveys. That work led to the graduate role.',
+      summary: "A season of protected-species surveys at Jacobs.",
+      detail: "This seasonal role followed my first ecology job and led into the graduate position at Jacobs later that year.",
     },
     {
       org: 'Total Ecology',
       role: 'Assistant Ecologist',
       startLabel: 'May 2016',
       startYear: 2016,
-      summary: 'First ecology job: field surveys and protected-species work.',
-      detail: 'My first ecology job. I did field surveys and protected-species work.',
+      summary: "My first job in ecology, at Total Ecology.",
+      detail: "I worked on field surveys and protected-species assessments.",
     },
   ],
 } as const;

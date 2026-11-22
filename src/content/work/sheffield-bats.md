@@ -10,39 +10,37 @@ repositoryUrl: https://github.com/MatthewJWhittle/shefflied-bats
 demoUrl: https://matthewjwhittle.shinyapps.io/sybg-hsm/
 ---
 
-## The problem
+## Why I worked on it
 
-South Yorkshire Bat Group holds a large records database. Turning those records into maps that are useful for conservation planning and impact assessment is hard: the records vary in quality, the landscape layers come from several public sources, and a one-off notebook does not survive the next data refresh.
+I worked with South Yorkshire Bat Group on a familiar problem in ecology: lots of species records, but no straightforward way to explore what they might tell us about habitat across a wider area. Records show where bats have been observed. They don't tell the whole story about where suitable habitat might be.
 
-The work needed a repeatable modelling path, and a way for people to look at the predicted suitability without installing the toolchain.
+We wanted a repeatable way to produce habitat suitability maps, and something people could use to explore the results without running the modelling code themselves.
 
-## What was built
+## What I built
 
-There are two public pieces.
+There are two parts to the public project.
 
-The modelling side lives in [`shefflied-bats`](https://github.com/MatthewJWhittle/shefflied-bats) (the repository name keeps an early spelling). It is a habitat suitability modelling pipeline driven by an `sdm` command-line interface: build environmental layers from public sources, train MaxEnt-style models with [`elapid`](https://earth-chris.github.io/elapid/), produce prediction rasters, and package the results so another tool can read them. The Sheffield bats study is the reference run; the same path is meant to work for other species and areas.
+The [modelling pipeline](https://github.com/MatthewJWhittle/shefflied-bats) is written in Python. It prepares environmental data, fits habitat suitability models and exports prediction rasters. It started as a South Yorkshire study and has since developed into a more reusable command-line tool.
 
-The visualisation side is a Python Shiny dashboard in [`sybg-hsm-app`](https://github.com/MatthewJWhittle/sybg-hsm-app). It was built with South Yorkshire Bat Group so people can explore predicted roosting and in-flight suitability across the county. A hosted copy is on [shinyapps.io](https://matthewjwhittle.shinyapps.io/sybg-hsm/). That host can change; the source for the app is the durable reference.
+The [map application](https://github.com/MatthewJWhittle/sybg-hsm-app) is built with Python Shiny. It lets people choose a bat species and explore predicted suitability across South Yorkshire, including different activity types where available. There's also a [hosted version](https://matthewjwhittle.shinyapps.io/sybg-hsm/), although its availability depends on the third-party host.
 
-## Approach
+## A few technical choices
 
-Records from the bat group were filtered to those with a grid-reference accuracy of 100 m or better. Environmental layers drew on WorldClim climate data, Environment Agency LiDAR, OS VectorMap District, and CEH land cover, among other public inputs documented in the toolchain. Models were fitted with a Maximum Entropy approach via `elapid`, close to the familiar MaxEnt package.
+The modelling uses a Maximum Entropy approach through [elapid](https://earth-chris.github.io/elapid/), combining records with environmental layers such as climate, terrain and land cover. I filtered out records that were too imprecise for the modelling, rather than treating every point as equally informative.
 
-The pipeline grew from a study-specific path into a versioned CLI: separate steps for data rebuild, training, prediction and export, plus optional tracking of runs. Cross-validation methods and background-point sampling are configurable rather than hard-coded for one notebook.
+Keeping the modelling pipeline separate from the map app was important. It means the analysis can be worked on independently, while the results are available to explore without running Python or downloading the underlying datasets.
 
-The app shows relative suitability for nine of the ten bat species present in South Yorkshire, with roosting and in-flight surfaces where the modelling supported that split. The public about text is clear that the maps are model predictions, not a substitute for surveys or a formal records search.
+## What the maps can and can't tell you
 
-## What worked
+These are predictions of **relative habitat suitability**, not evidence that bats are present or absent. Recording effort varies, and some records aren't precise enough to use in training. The maps are useful for exploring patterns and asking better questions, but they don't replace a survey or a formal records search.
 
-Having one contract between the modelling package and the visualiser made it possible to refresh layers and models without rewriting the map UI. Publishing the toolchain and the app separately kept the heavy data work offline while still giving the bat group something people could click through.
+## What I took from it
 
-## Limits
-
-The maps predict relative suitability. They do not confirm presence or absence. Areas of low suitability can still hold bats; high suitability is not a guarantee of occupancy. Many database records were too coarse or not species-specific enough to use in training, so gaps in the maps can reflect gaps in recording as much as habitat. The hosted app depends on a third-party Shiny host, so availability is not something I can promise from this site alone.
+For me, the interesting part was connecting the modelling work to something people could actually use. Producing a raster is one thing; making it understandable and accessible through a map is another.
 
 ## Links
 
-- Modelling toolchain: [github.com/MatthewJWhittle/shefflied-bats](https://github.com/MatthewJWhittle/shefflied-bats)
-- Map app source: [github.com/MatthewJWhittle/sybg-hsm-app](https://github.com/MatthewJWhittle/sybg-hsm-app)
-- Hosted map (when available): [matthewjwhittle.shinyapps.io/sybg-hsm](https://matthewjwhittle.shinyapps.io/sybg-hsm/)
-- South Yorkshire Bat Group: [sybatgroup.org.uk](https://www.sybatgroup.org.uk/)
+- [Explore the hosted map](https://matthewjwhittle.shinyapps.io/sybg-hsm/) (when available)
+- [Modelling pipeline source](https://github.com/MatthewJWhittle/shefflied-bats)
+- [Map application source](https://github.com/MatthewJWhittle/sybg-hsm-app)
+- [South Yorkshire Bat Group](https://www.sybatgroup.org.uk/)

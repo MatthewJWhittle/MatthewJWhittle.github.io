@@ -15,36 +15,24 @@ figureId: tilearray
 
 I kept finding myself writing code to download map tiles and turn them into arrays. Eventually, I decided to make a library for it.
 
-A lot of the computer-vision work I have done starts with high-resolution imagery on a tile server, usually WMTS. The model gets the attention. The part that took the time was getting the pictures: talking to the service, staying inside rate limits, retrying failed tiles, and assembling one array. That glue kept ending up in the middle of otherwise unrelated projects.
+In several computer-vision projects, getting the imagery into a usable form took more work than I expected. I had to work out how each tile service behaved, keep requests within rate limits, retry failures and assemble a mosaic. Other clients helped with parts of the job, but I kept writing the same glue code.
 
-I had already tried the clients people usually reach for, including OWSLib. They will talk to the service. Planning a large area, keeping the requests polite, retrying the tiles that failed, and handing back one array was still my code. What I wanted was smaller than that: describe the service, and get an xarray.
+## What it does
 
-## What it is
+[tilearray](https://github.com/MatthewJWhittle/tilearray) is a small, open-source Python library for that workflow. You describe a WCS, WMS, WMTS or XYZ service, choose a bounding box and call `create_array`. It returns a lazy, Dask-backed xarray, so you can define the area before fetching the imagery.
 
-[tilearray](https://github.com/MatthewJWhittle/tilearray) is that library. It is open source under Apache 2.0, published in alpha, and documented against version 0.3.3. You describe a WCS, WMS, WMTS or XYZ endpoint, pass a bounding box, and call `create_array`. The result is a Dask-backed xarray. Pixels stay on the server until you compute them.
+The [documentation](https://matthewjwhittle.github.io/tilearray/) has a quick-start example and a more detailed explanation of [how it works](https://matthewjwhittle.github.io/tilearray/how-it-works.html).
 
-The [documentation](https://matthewjwhittle.github.io/tilearray/) is the best way in. There is a short OpenStreetMap example, and a page on [how the pipeline fits together](https://matthewjwhittle.github.io/tilearray/how-it-works.html).
+## Decisions that mattered
 
-## How it works
+The basic flow is to plan the requests, fetch tiles, decode the imagery and assemble an array. Requests have concurrency limits and retries, which matter when a job needs thousands of tiles from a service you don't control. If a tile still fails, the library raises an error rather than quietly leaving a gap in the image.
 
-WCS, WMS, WMTS and XYZ share one path: plan the tiles, fetch them, decode them, and assemble a mosaic.
-
-Planning turns the bounding box into an ordered list of requests. Fetching goes out over HTTP behind a concurrency ceiling, so the job does not stampede the host. Requests retry, and pressure from rate limits, server errors or timeouts gets a second pass before the run gives up. If a tile still fails, the mosaic stops. I did not want a missing tile to turn up later as a quiet hole in the imagery.
-
-Decode reads PNG, JPEG and GeoTIFF into a common array. The pieces are placed north-up into one DataArray, with coordinates and a transform. `compute_mosaic` is the call that runs the fetch, with the workers lined up to that ceiling. An optional cache keeps tiles you already have, so a rerun does not have to ask the server again.
-
-## Choices that mattered
-
-The mosaic stays in the tile grid's own coordinate system. tilearray does not quietly reproject on the way in. If a later step needs a different CRS, that step should be visible.
-
-The array is lazy. Planning is cheap, and you only pay for the pixels you compute. Known public hosts have fetch presets, so the polite defaults are not rewritten for every caller.
+I also chose not to reproject the data automatically. The result stays in the tile grid's coordinate system; if I need a different CRS, I can do that explicitly afterwards with tools such as rioxarray. An optional cache makes repeat runs less painful.
 
 ## Where it stands
 
-This is alpha software. The API can still change. Today the four protocols above share `create_array`. The library gets tiles into xarray. It is not a GIS, and it does not build a STAC catalogue or a Cloud Optimised GeoTIFF cube.
-
-Installation is `pip install tilearray` or `uv add tilearray`, on Python 3.9 or newer. The source, tests and docs are public.
+It's alpha software, so the API may change. It supports WCS, WMS, WMTS and XYZ, and is available under the Apache 2.0 licence. You can install it with `pip install tilearray` or `uv add tilearray`.
 
 ## What I learnt
 
-The useful move was to give the job a contract. A service config goes in, and an xarray comes out, and a failed tile is allowed to fail the run. Once that was the shape, the awkward service behaviour had a home that was not the middle of a vision codebase.
+The most useful decision was narrowing the job. You describe a service and an area; you get an array back. Retries, caching and the quirks of individual servers can live in one library instead of being rewritten inside every project.
