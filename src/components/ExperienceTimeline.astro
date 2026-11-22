@@ -1,0 +1,33 @@
+---
+import { site } from '../data/site';
+import '../styles/experience-timeline.css';
+
+const entries = site.timeline;
+---
+
+<ol class="xtl" aria-label="Experience timeline">
+  <li class="xtl__now">
+    <span class="xtl__marker" aria-hidden="true"></span>
+    <span class="xtl__now-label">Now</span>
+  </li>
+  {
+    entries.map((item, index) => (
+      <li class={`xtl__item${index === 0 ? ' is-current' : ''}`}>
+        <details class="xtl__details">
+          <summary class="xtl__summary">
+            <span class="xtl__marker" aria-hidden="true"></span>
+            <span class="xtl__head">
+              <span class="xtl__start">{item.startLabel}</span>
+              <span class="xtl__org">{item.org}</span>
+              <span class="xtl__role">{item.role}</span>
+              <span class="xtl__blurb">{item.summary}</span>
+            </span>
+          </summary>
+          <div class="xtl__detail">
+            <p>{item.detail}</p>
+          </div>
+        </details>
+      </li>
+    ))
+  }
+</ol>

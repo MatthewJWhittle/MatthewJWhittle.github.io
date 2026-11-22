@@ -1,19 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionNav from '../components/SectionNav';
-import ExperienceTimeline from '../components/ExperienceTimeline';
+import ExperienceTimeline from '../components/ExperienceTimeline.astro';
 import WorkTeaser from '../components/WorkTeaser.astro';
-import NoteTeaser from '../components/NoteTeaser.astro';
 import { site } from '../data/site';
-import { getPublishedNotes, getPublishedWork } from '../lib/content';
+import { getPublishedWork } from '../lib/content';
 
-const TEASER_CAP = 3;
+const TEASER_CAP = 6;
 const allWork = await getPublishedWork();
-const allNotes = await getPublishedNotes();
 const workTeasers = allWork.slice(0, TEASER_CAP);
-const noteTeasers = allNotes.slice(0, TEASER_CAP);
 const showAllWork = allWork.length > TEASER_CAP;
-const showAllNotes = allNotes.length > TEASER_CAP;
 ---
 
 <BaseLayout>
@@ -55,54 +51,37 @@ const showAllNotes = allNotes.length > TEASER_CAP;
         </ul>
       </section>
 
-      <section id="experience" class="block block--experience" aria-labelledby="experience-heading">
-        <header class="block--experience__head">
-          <h2 id="experience-heading" class="block__title">Experience</h2>
-        </header>
-        <div class="block--experience__body">
-          <ExperienceTimeline client:load />
-        </div>
-      </section>
-
       <section id="projects" class="block" aria-labelledby="projects-heading">
         <h2 id="projects-heading" class="block__title">Projects</h2>
+        <p class="block__lede">
+          Case studies and shorter notes on things I have built. More will land here over time.
+        </p>
         {
-          workTeasers.length === 0 && noteTeasers.length === 0 ? (
-            <>
-              <p class="block__lede">Coming soon.</p>
-              <p class="muted">Projects and notes will link out from here when ready.</p>
-            </>
+          workTeasers.length === 0 ? (
+            <p class="muted">Nothing published yet.</p>
           ) : (
-            <>
-              {
-                workTeasers.length > 0 && (
-                  <div class="teaser-list">
-                    {workTeasers.map((project) => (
-                      <WorkTeaser project={project} />
-                    ))}
-                  </div>
-                )
-              }
-              {
-                noteTeasers.length > 0 && (
-                  <div class="teaser-list">
-                    {noteTeasers.map((note) => (
-                      <NoteTeaser note={note} />
-                    ))}
-                  </div>
-                )
-              }
-            </>
+            <div class="teaser-list">
+              {workTeasers.map((project) => (
+                <WorkTeaser project={project} />
+              ))}
+            </div>
           )
         }
         {
-          (showAllWork || showAllNotes) && (
+          showAllWork && (
             <p class="section-more">
-              {showAllWork && <a href="/work/">All work →</a>}
-              {showAllNotes && <a href="/notes/">All notes →</a>}
+              <a href="/work/">All projects →</a>
             </p>
           )
         }
+      </section>
+
+      <section id="experience" class="block" aria-labelledby="experience-heading">
+        <h2 id="experience-heading" class="block__title">Experience</h2>
+        <p class="block__lede">
+          A short career timeline. Open a role for a bit more detail.
+        </p>
+        <ExperienceTimeline />
       </section>
 
       <section id="contact" class="block" aria-labelledby="contact-heading">
@@ -230,19 +209,6 @@ const showAllNotes = allNotes.length > TEASER_CAP;
     color: var(--colour-muted);
     font-family: var(--font-mono);
     font-size: 0.75rem;
-  }
-
-  .block--experience__head {
-    flex: 0 0 auto;
-  }
-
-  .block--experience__head .block__title {
-    margin-bottom: var(--space-3);
-  }
-
-  .block--experience__body {
-    display: flex;
-    flex-direction: column;
   }
 
   @media (min-width: 860px) {

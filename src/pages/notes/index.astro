@@ -7,7 +7,7 @@ const notes = await getPublishedNotes();
 ---
 
 <BaseLayout title="Notes" description="Short notes.">
-  <section class="section wrap">
+  <main id="main" class="section wrap" tabindex="-1">
     <p class="section__label">Notes</p>
     <h1 class="section__title">Notes</h1>
     {
@@ -24,7 +24,7 @@ const notes = await getPublishedNotes();
     <p class="back">
       <a href="/#projects">← Back</a>
     </p>
-  </section>
+  </main>
 </BaseLayout>
 
 <style>

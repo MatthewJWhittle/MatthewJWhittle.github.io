@@ -1,0 +1,84 @@
+---
+/** Compact pipeline diagram for tilearray — plan → fetch → decode → mosaic. */
+---
+
+<svg
+  class="tilearray-fig"
+  viewBox="0 0 420 120"
+  role="img"
+  aria-label="tilearray pipeline: plan tiles, fetch over HTTP, decode imagery, assemble a mosaic array"
+>
+  <defs>
+    <marker id="ta-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="currentColor"></path>
+    </marker>
+  </defs>
+
+  <g class="tilearray-fig__stage">
+    <rect x="8" y="28" width="78" height="48" rx="4"></rect>
+    <text x="47" y="56" text-anchor="middle">Plan</text>
+  </g>
+  <line class="tilearray-fig__edge" x1="90" y1="52" x2="118" y2="52" marker-end="url(#ta-arrow)"></line>
+
+  <g class="tilearray-fig__stage">
+    <rect x="122" y="28" width="78" height="48" rx="4"></rect>
+    <text x="161" y="56" text-anchor="middle">Fetch</text>
+  </g>
+  <line class="tilearray-fig__edge" x1="204" y1="52" x2="232" y2="52" marker-end="url(#ta-arrow)"></line>
+
+  <g class="tilearray-fig__stage">
+    <rect x="236" y="28" width="78" height="48" rx="4"></rect>
+    <text x="275" y="56" text-anchor="middle">Decode</text>
+  </g>
+  <line class="tilearray-fig__edge" x1="318" y1="52" x2="346" y2="52" marker-end="url(#ta-arrow)"></line>
+
+  <g class="tilearray-fig__stage tilearray-fig__stage--out">
+    <rect x="350" y="28" width="62" height="48" rx="4"></rect>
+    <text x="381" y="50" text-anchor="middle">xarray</text>
+    <text x="381" y="66" text-anchor="middle" class="tilearray-fig__sub">mosaic</text>
+  </g>
+
+  <text class="tilearray-fig__caption" x="8" y="106">WCS · WMS · WMTS · XYZ → one create_array call</text>
+</svg>
+
+<style>
+  .tilearray-fig {
+    width: 100%;
+    max-width: 26rem;
+    height: auto;
+    color: var(--colour-ink);
+  }
+
+  .tilearray-fig__stage rect {
+    fill: color-mix(in srgb, var(--colour-moss) 10%, var(--colour-paper));
+    stroke: var(--colour-moss);
+    stroke-width: 1.25;
+  }
+
+  .tilearray-fig__stage--out rect {
+    fill: color-mix(in srgb, var(--colour-blue) 12%, var(--colour-paper));
+    stroke: var(--colour-blue);
+  }
+
+  .tilearray-fig text {
+    fill: currentColor;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+
+  .tilearray-fig__sub {
+    font-size: 9px;
+    fill: var(--colour-muted);
+  }
+
+  .tilearray-fig__edge {
+    stroke: currentColor;
+    stroke-width: 1.25;
+  }
+
+  .tilearray-fig__caption {
+    fill: var(--colour-muted);
+    font-size: 10px;
+  }
+</style>

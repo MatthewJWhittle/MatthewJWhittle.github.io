@@ -11,7 +11,7 @@ const { title, description, meta } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="article wrap">
+  <article id="main" class="article wrap" tabindex="-1">
     <header class="article__header">
       {meta && <p class="article__meta">{meta}</p>}
       <h1 class="article__title">{title}</h1>
