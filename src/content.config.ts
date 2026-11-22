@@ -15,6 +15,7 @@ const work = defineCollection({
     cover: z.string().optional(),
     coverAlt: z.string().optional(),
     repositoryUrl: z.string().url().optional(),
+    docsUrl: z.string().url().optional(),
     demoUrl: z.string().url().optional(),
     figureId: z.string().optional(),
   }),

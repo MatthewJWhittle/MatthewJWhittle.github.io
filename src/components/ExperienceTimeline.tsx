@@ -1,152 +1,178 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { site, type TimelineEntry } from '../data/site';
 import '../styles/experience-timeline.css';
 
 const entries = site.timeline as readonly TimelineEntry[];
 
-/** How many roles show full detail in the viewport at once. */
-const FULL_SLOTS = 3;
+type Spacing = 'even' | 'time';
+
+const MONTH_INDEX: Record<string, number> = {
+  jan: 0,
+  feb: 1,
+  mar: 2,
+  apr: 3,
+  may: 4,
+  jun: 5,
+  jul: 6,
+  aug: 7,
+  sep: 8,
+  oct: 9,
+  nov: 10,
+  dec: 11,
+};
 
 function hasNote(entry: TimelineEntry): entry is TimelineEntry & { note: string } {
   return 'note' in entry && typeof entry.note === 'string' && entry.note.length > 0;
 }
 
-export default function ExperienceTimeline() {
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
-  const focusRef = useRef(0);
-  const pendingAnchor = useRef<{ index: number; offset: number } | null>(null);
-  const [focusIndex, setFocusIndex] = useState(0);
-  /** Extra bottom space so the last roles can scroll into the focus band. */
-  const [endPad, setEndPad] = useState(120);
+/** Months since year 0, so gaps can follow the calendar. */
+function startMonthIndex(entry: TimelineEntry): number {
+  const match = /^([A-Za-z]+)\s+(\d{4})$/.exec(entry.startLabel);
+  if (!match) return entry.startYear * 12;
+  const month = MONTH_INDEX[match[1].slice(0, 3).toLowerCase()];
+  const year = Number(match[2]);
+  if (month === undefined || Number.isNaN(year)) return entry.startYear * 12;
+  return year * 12 + month;
+}
 
-  const fullEnd = Math.min(focusIndex + FULL_SLOTS, entries.length);
-
-  const refreshEndPad = () => {
-    const root = viewportRef.current;
-    if (!root) return;
-    // Keep wheel scroll available inside a near-full-viewport timeline.
-    setEndPad(Math.max(200, Math.round(root.clientHeight * 0.9)));
-  };
-
-  useLayoutEffect(() => {
-    refreshEndPad();
-  }, []);
-
-  useEffect(() => {
-    const root = viewportRef.current;
-    if (!root) return;
-
-    let frame = 0;
-
-    const readFocus = () => {
-      const focusY = root.scrollTop + root.clientHeight * 0.22;
-      let next = 0;
-      for (let i = 0; i < entries.length; i++) {
-        const el = itemRefs.current[i];
-        if (!el) continue;
-        const mid = el.offsetTop + el.offsetHeight * 0.35;
-        if (mid <= focusY) next = i;
-        else break;
-      }
-
-      const prev = focusRef.current;
-      if (next === prev) return;
-
-      // Mild hysteresis near boundaries
-      const prevEl = itemRefs.current[prev];
-      const nextEl = itemRefs.current[next];
-      if (prevEl && nextEl && Math.abs(next - prev) === 1) {
-        const boundary = next > prev ? nextEl.offsetTop : prevEl.offsetTop;
-        if (Math.abs(focusY - boundary) < 20) return;
-      }
-
-      const anchor = itemRefs.current[next];
-      if (anchor) {
-        pendingAnchor.current = {
-          index: next,
-          offset: anchor.offsetTop - root.scrollTop,
-        };
-      }
-
-      focusRef.current = next;
-      setFocusIndex(next);
-    };
-
-    const onScroll = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(readFocus);
-    };
-
-    root.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', refreshEndPad, { passive: true });
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(refreshEndPad) : null;
-    ro?.observe(root);
-    readFocus();
-    refreshEndPad();
-
-    return () => {
-      cancelAnimationFrame(frame);
-      root.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', refreshEndPad);
-      ro?.disconnect();
-    };
-  }, []);
-
-  useLayoutEffect(() => {
-    const root = viewportRef.current;
-    const pending = pendingAnchor.current;
-    if (!root || !pending) return;
-    const el = itemRefs.current[pending.index];
-    if (!el) return;
-    const nextTop = el.offsetTop - pending.offset;
-    // Only compensate when it actually moves; avoid pinning scrollTop to 0.
-    if (Math.abs(root.scrollTop - nextTop) > 1) {
-      root.scrollTop = nextTop;
+function gapWeights(mode: Spacing): number[] {
+  const gaps = entries.length - 1;
+  if (gaps <= 0) return [];
+  switch (mode) {
+    case 'even':
+      return Array.from({ length: gaps }, () => 1);
+    case 'time': {
+      const stamps = entries.map(startMonthIndex);
+      return stamps.slice(0, -1).map((stamp, index) => {
+        const delta = stamp - stamps[index + 1];
+        return delta > 0 ? delta : 1;
+      });
     }
-    pendingAnchor.current = null;
-  }, [focusIndex]);
+    default: {
+      const unreachable: never = mode;
+      return unreachable;
+    }
+  }
+}
+
+function SpacingIcon({ mode }: { mode: Spacing }) {
+  const marks = mode === 'even' ? [2.6, 8, 13.4] : [2.6, 5, 13.4];
+  return (
+    <svg className="xtl__spacing-icon" viewBox="0 0 10 16" aria-hidden="true">
+      <line x1="5" y1="1.2" x2="5" y2="14.8" />
+      {marks.map((y) => (
+        <circle key={y} cx="5" cy={y} r="1.7" />
+      ))}
+    </svg>
+  );
+}
+
+function gapPixels(mode: Spacing): number[] {
+  const weights = gapWeights(mode);
+  const base = 22;
+  if (!weights.length) return [];
+  switch (mode) {
+    case 'even':
+      return weights.map(() => base);
+    case 'time': {
+      const average = weights.reduce((sum, weight) => sum + weight, 0) / weights.length;
+      return weights.map((weight) => Math.max(8, Math.round(base * (weight / average))));
+    }
+    default: {
+      const unreachable: never = mode;
+      return unreachable;
+    }
+  }
+}
+
+export default function ExperienceTimeline() {
+  const listRef = useRef<HTMLOListElement>(null);
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [spacing, setSpacing] = useState<Spacing>('even');
+
+  useLayoutEffect(() => {
+    const items = itemRefs.current.filter((el): el is HTMLLIElement => Boolean(el));
+    const gaps = gapPixels(spacing);
+    items.forEach((el, index) => {
+      el.style.marginBottom = index < gaps.length ? `${gaps[index]}px` : '0px';
+    });
+  }, [spacing, openIndex]);
+
+  const openRole = (index: number) => {
+    setOpenIndex((current) => (current === index ? null : index));
+  };
 
   return (
     <div className="xtl">
-      <div
-        className="xtl__viewport"
-        ref={viewportRef}
-        tabIndex={0}
-        aria-label="Experience timeline"
-      >
-        <ol className="xtl__list">
+      <div className="xtl__toolbar">
+        <div className="xtl__spacing" role="group" aria-label="Timeline spacing">
+          <button
+            type="button"
+            className="xtl__icon-button"
+            aria-pressed={spacing === 'even'}
+            aria-label="Consistent spacing"
+            title="Consistent spacing"
+            onClick={() => setSpacing('even')}
+          >
+            <SpacingIcon mode="even" />
+          </button>
+          <button
+            type="button"
+            className="xtl__icon-button"
+            aria-pressed={spacing === 'time'}
+            aria-label="Time spacing"
+            title="Time spacing"
+            onClick={() => setSpacing('time')}
+          >
+            <SpacingIcon mode="time" />
+          </button>
+        </div>
+      </div>
+      <div className="xtl__viewport">
+        <ol className="xtl__list" ref={listRef} aria-label="Experience timeline">
+          <li className="xtl__now">
+            <span className="xtl__marker" aria-hidden="true" />
+            <span className="xtl__now-label">Now</span>
+          </li>
           {entries.map((item, index) => {
-            const isFull = index >= focusIndex && index < fullEnd;
+            const isOpen = openIndex === index;
             const isCurrent = index === 0;
             return (
               <li
                 key={`${item.org}-${item.startYear}-${item.role}`}
-                className={`xtl__item ${isFull ? 'is-full' : 'is-compact'}${isCurrent ? ' is-current' : ''}`}
+                className={`xtl__item ${isOpen ? 'is-full is-open' : 'is-compact'}${isCurrent ? ' is-current' : ''}`}
                 data-index={index}
                 ref={(el) => {
                   itemRefs.current[index] = el;
                 }}
               >
-                <div className="xtl__marker" aria-hidden="true" />
-                <div className="xtl__body">
-                  <div className="xtl__full" aria-hidden={!isFull}>
-                    <p className="xtl__start">{item.startLabel}</p>
-                    <p className="xtl__role">{item.role}</p>
-                    <p className="xtl__org">{item.org}</p>
-                    {hasNote(item) ? <p className="xtl__note">{item.note}</p> : null}
+                <button
+                  type="button"
+                  className="xtl__hit"
+                  aria-expanded={isOpen}
+                  onClick={() => openRole(index)}
+                >
+                  <div className="xtl__marker" aria-hidden="true" />
+                  <div className="xtl__body">
+                    <div className="xtl__full" aria-hidden={!isOpen}>
+                      <p className="xtl__start">{item.startLabel}</p>
+                      <p className="xtl__role">{item.role}</p>
+                      <p className="xtl__org">{item.org}</p>
+                      {hasNote(item) ? <p className="xtl__note">{item.note}</p> : null}
+                    </div>
+                    <div className="xtl__compact" aria-hidden={isOpen}>
+                      <p className="xtl__compact-line">
+                        <span className="xtl__compact-role">{item.role}</span>
+                        <span className="xtl__compact-meta">{item.startYear}</span>
+                      </p>
+                    </div>
                   </div>
-                  <div className="xtl__compact" aria-hidden={isFull}>
-                    <p className="xtl__compact-line">
-                      {item.role} ({item.startYear})
-                    </p>
-                  </div>
-                </div>
+                </button>
               </li>
             );
           })}
         </ol>
-        <div className="xtl__end-pad" style={{ height: endPad }} aria-hidden="true" />
       </div>
     </div>
   );

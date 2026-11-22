@@ -6,6 +6,9 @@ status: experiment
 tags: [template]
 featured: false
 draft: true
+# repositoryUrl: https://github.com/MatthewJWhittle/example
+# docsUrl: https://example.com/docs/
+# demoUrl: https://example.com/demo/
 ---
 
 ## What was the problem or curiosity?

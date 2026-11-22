@@ -17,3 +17,13 @@ export function formatDate(date: Date): string {
     day: 'numeric',
   });
 }
+
+const statusLabels = {
+  shipped: 'Shipped',
+  experiment: 'Experiment',
+  'in-progress': 'In progress',
+} as const;
+
+export function formatStatus(status: keyof typeof statusLabels): string {
+  return statusLabels[status];
+}
