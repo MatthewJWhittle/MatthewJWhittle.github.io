@@ -53,9 +53,9 @@ export const site = {
       startLabel: 'Sep 2021',
       startYear: 2021,
       summary:
-        "Deputy habitats lead on a large water infrastructure programme, with R and Python survey tools.",
+        "Ecological consultancy alongside bat habitat modelling, data pipelines and Biodiversity Net Gain tools.",
       detail:
-        "I was deputy habitats lead on Anglian Water's Strategic Pipeline Alliance, helping coordinate habitat specialists across a programme of about 500 km. I also wrote R and Python tools for survey records and Biodiversity Net Gain calculations.",
+        "I designed surveys and data pipelines for bat habitat modelling on a large water pipeline, led work on Biodiversity Net Gain tools and started a coding community to help colleagues make better use of code.",
     },
     {
       org: 'Jacobs',

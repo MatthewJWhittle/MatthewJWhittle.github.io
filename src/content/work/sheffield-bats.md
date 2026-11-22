@@ -1,7 +1,7 @@
 ---
 title: Sheffield Bats
 summary: An interactive map of predicted bat habitat suitability in South Yorkshire, backed by a reusable modelling pipeline.
-date: 2024-04-28
+startedYear: 2023
 status: in-progress
 tags: [ecology, geospatial, open-source]
 featured: true

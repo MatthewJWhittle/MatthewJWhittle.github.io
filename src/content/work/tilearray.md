@@ -1,7 +1,7 @@
 ---
 title: tilearray
 summary: A Python library that turns map tile services into Dask-backed xarray arrays.
-date: 2025-10-25
+startedYear: 2025
 status: in-progress
 tags: [geospatial, python, open-source]
 featured: true

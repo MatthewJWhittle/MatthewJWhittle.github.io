@@ -118,14 +118,14 @@ Prefer **Astro content collections** for projects and notes. Use Markdown or MDX
 
 ### Project fields (required unless marked optional)
 
-- `title`, `summary`, `date`, `status` (`shipped`, `experiment`, `in-progress`)
+- `title`, `summary`, `startedYear`, `status` (`shipped`, `experiment`, `in-progress`)
 - `tags` (small, curated list)
 - `featured` (boolean)
 - `draft` (boolean)
 - `cover` (optional path), `coverAlt` (required when cover is present)
 - `repositoryUrl`, `demoUrl` (optional; only if real and publicly accessible)
 
-The `date` field must have an explicit meaning: a post publication date is not automatically the date a project started. Do not use a historical project milestone as an article publication date. If publication dates are unknown, flag them for approval rather than inventing precision.
+Work entries use `startedYear` for verified project history rather than presenting a project milestone as an article publication date. A separate article publication date can be added later when known.
 
 ### Project detail template
 

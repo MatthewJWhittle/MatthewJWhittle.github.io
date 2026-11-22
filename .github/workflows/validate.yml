@@ -1,0 +1,33 @@
+name: Validate pull request
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.22'
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Verify public project pages
+        run: |
+          test -f dist/index.html
+          test -f dist/work/tilearray/index.html
+          test -f dist/work/sheffield-bats/index.html
+          test ! -e dist/work/habitat-mapping/index.html
+          test ! -e dist/work/camera-trap-triage/index.html
+          test ! -e dist/work/book-chain-eudr/index.html

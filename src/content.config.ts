@@ -7,7 +7,7 @@ const work = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    date: z.coerce.date(),
+    startedYear: z.number().int().min(1900).max(2100),
     status: z.enum(['shipped', 'experiment', 'in-progress']),
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),

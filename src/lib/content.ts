@@ -2,7 +2,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getPublishedWork(): Promise<CollectionEntry<'work'>[]> {
   const entries = await getCollection('work', ({ data }) => data.draft !== true);
-  return entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return entries.sort((a, b) => b.data.startedYear - a.data.startedYear);
 }
 
 export async function getPublishedNotes(): Promise<CollectionEntry<'notes'>[]> {
