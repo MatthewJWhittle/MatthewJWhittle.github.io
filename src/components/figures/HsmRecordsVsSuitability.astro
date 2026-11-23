@@ -51,12 +51,9 @@ import HsmMapLegend from './HsmMapLegend.astro';
   }
 
   .hsm-figure--wide {
-    width: min(100vw - 2 * var(--gutter), 56rem);
+    width: 100%;
     max-width: none;
-    margin-left: max(
-      calc(-1 * (min(100vw - 2 * var(--gutter), 56rem) - 100%) / 2),
-      calc(-1 * var(--gutter))
-    );
+    margin-left: 0;
   }
 
   .hsm-figure__chrome {
@@ -139,11 +136,6 @@ import HsmMapLegend from './HsmMapLegend.astro';
   }
 
   @media (max-width: 720px) {
-    .hsm-figure--wide {
-      width: 100%;
-      margin-left: 0;
-    }
-
     .hsm-compare {
       grid-template-columns: 1fr;
     }
