@@ -1,0 +1,185 @@
+---
+import HsmMapLegend from './HsmMapLegend.astro';
+// Background sampling source: surface=all_bat, contrast floor 0.025, sigma=6.5 cells.
+// Keep configuration details here rather than in reader-facing captions.
+---
+
+<figure class="hsm-figure">
+  <div class="hsm-figure__chrome">
+    <p class="hsm-figure__eyebrow">FIG. 02</p>
+    <p class="hsm-figure__title">Accounting for uneven recording</p>
+    <p class="hsm-figure__lede">
+      We draw comparison locations more often from places that are likely to have been surveyed, rather than choosing them uniformly across the region.
+    </p>
+  </div>
+  <div class="hsm-figure__frame hsm-bias">
+    <div class="hsm-bias__step">
+      <p class="hsm-bias__num">1</p>
+      <p class="hsm-bias__label">Where bats were recorded</p>
+      <p class="hsm-bias__meta">A closer look at South Yorkshire</p>
+      <img
+        src="/images/hsm/panel-bias-obs.png"
+        alt="Cropped map showing clustered bat recording intensity around towns and accessible sites."
+        width="800"
+        height="700"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="hsm-bias__step">
+      <p class="hsm-bias__num">2</p>
+      <p class="hsm-bias__label">Estimated recording effort</p>
+      <p class="hsm-bias__meta">Based on records of all bat species</p>
+      <img
+        src="/images/hsm/panel-bias-effort.png"
+        alt="Cropped map of a smoothed survey-effort surface derived from all bat records."
+        width="800"
+        height="700"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="hsm-bias__step">
+      <p class="hsm-bias__num">3</p>
+      <p class="hsm-bias__label">Comparison locations</p>
+      <p class="hsm-bias__meta">Example locations, not bat sightings</p>
+      <img
+        src="/images/hsm/panel-bias-background.png"
+        alt="Cropped effort surface with a subsample of background sample points denser where recording effort is higher."
+        width="800"
+        height="700"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+  <div class="hsm-bias__legend-row">
+    <HsmMapLegend kind="intensity" label="Recording intensity" />
+    <p class="hsm-bias__swatch"><span class="hsm-bias__dot"></span> Background locations (not bat records)</p>
+  </div>
+  <figcaption class="hsm-figure__caption">
+    We use the distribution of bat records to estimate where recording effort is concentrated and guide the choice of comparison locations.
+    The points in the final panel are an example, not recorded bats. This helps account for uneven coverage, but doesn't remove the bias entirely.
+  </figcaption>
+</figure>
+
+<style>
+  .hsm-figure {
+    margin: 2rem 0;
+  }
+
+  .hsm-figure__chrome {
+    margin-bottom: 0.85rem;
+  }
+
+  .hsm-figure__eyebrow {
+    margin: 0 0 0.2rem;
+    color: var(--colour-rust);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .hsm-figure__title {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .hsm-figure__lede {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.92rem;
+    max-width: 40rem;
+  }
+
+  .hsm-figure__frame {
+    border: 1px solid var(--colour-rule);
+    background: #f7f4ec;
+    padding: 0.75rem;
+  }
+
+  .hsm-bias {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .hsm-bias__step {
+    min-width: 0;
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .hsm-bias__num {
+    margin: 0;
+    color: var(--colour-moss);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+
+  .hsm-bias__label {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .hsm-bias__meta {
+    margin: 0 0 0.2rem;
+    color: var(--colour-muted);
+    font-size: 0.72rem;
+  }
+
+  .hsm-bias__step img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--colour-rule);
+  }
+
+  .hsm-bias__legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 1rem 1.5rem;
+    margin-top: 0.55rem;
+  }
+
+  .hsm-bias__swatch {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .hsm-bias__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--colour-rust);
+    flex: 0 0 auto;
+  }
+
+  .hsm-figure__caption {
+    margin-top: 0.65rem;
+    color: var(--colour-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .hsm-figure__caption code {
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+  }
+
+  @media (max-width: 720px) {
+    .hsm-bias {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -5,8 +5,10 @@ You are building and maintaining a personal portfolio for an independent data sc
 ## Read first
 
 Before proposing or implementing changes, read:
-1. `docs/design-spec.md` — source of truth for design, content and technical decisions.
-2. `docs/implementation-plan.md` — implementation phases, quality gates and definition of done.
+1. `docs/editorial-direction.md` — **current approved purpose, voice, publishing boundaries and content QA**. This takes precedence over older site plans where they conflict.
+2. `docs/design-spec.md` — visual direction, typography, palette and technical patterns (some original page-map suggestions are historical).
+3. `docs/data-viz-style-guide.md` — maps, diagrams and data figures inside articles (palette roles, atlas conventions, privacy/provenance, checklist).
+4. `docs/implementation-plan.md` — historical build plan and useful technical quality gates, not a mandate to redesign the current site.
 
 If an existing repository conflicts with the specification, inspect it and explain the conflict before making destructive changes. Follow established working patterns where possible.
 
@@ -16,6 +18,7 @@ If an existing repository conflicts with the specification, inspect it and expla
 - Prioritise working software, legibility and genuine technical content over superficial polish.
 - Use a restrained scientific visual language: figures, captions, annotations, maps and project artefacts where relevant. Do not turn the site into a faux vintage notebook.
 - Never invent projects, job claims, employers, metrics, testimonials, GitHub URLs or demo links. Any sample content must be clearly marked and excluded from production.
+- A `draft: true` flag hides content from the built site but **does not make the Markdown private** in a public Git repository. Public source requires separate publication approval.
 - Prefer small, comprehensible solutions. Avoid frameworks, heavy dependencies and complex animations unless justified by a real need.
 - Make it accessible, responsive, fast and keyboard navigable. Respect reduced-motion preferences.
 - Do not overwrite user-written content or unrelated files. Do not push, publish, or configure live external services without explicit approval.

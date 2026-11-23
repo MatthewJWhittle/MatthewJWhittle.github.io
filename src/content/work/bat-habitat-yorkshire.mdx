@@ -1,0 +1,75 @@
+---
+title: Modelling bat habitat suitability across Yorkshire
+summary: Making more of the bat records collected across Yorkshire by using them to understand where suitable habitat might be.
+startedYear: 2023
+tags: [ecology, geospatial, machine-learning]
+featured: true
+draft: false
+repositoryUrl: https://github.com/MatthewJWhittle/shefflied-bats
+demoUrl: https://hsm-dashboard-dev.web.app/
+demoLabel: Development dashboard
+---
+
+import HsmRecordsVsSuitability from '../../components/figures/HsmRecordsVsSuitability.astro';
+import HsmRecordingBias from '../../components/figures/HsmRecordingBias.astro';
+import HsmYorkshireAtlas from '../../components/figures/HsmYorkshireAtlas.astro';
+
+## Making more of ecological records
+
+When I worked as an ecologist, I often felt we weren't getting enough out of the species records in desk studies. You'd see a bat recorded in a field five years ago, or a roost found in a building nearby. Those observations matter, especially when protected roosts are involved. But what could they tell us about the wider landscape? What about places nobody had surveyed?
+
+Bat groups and records centres have spent decades collecting observations, much of it through volunteer effort. We use those records to establish what's been found nearby, but often stop at putting the points on a map.
+
+It's a problem I've kept coming back to for years. Taken together, the records should tell us something about the environments bats use and where similar habitat might exist. The difficulty is separating that ecological signal from the uneven way the data was collected.
+
+I'd like this kind of analysis to become a more routine part of ecological work. This project, developed with Greg Slack and regional bat groups, is one attempt to explore how that might work for bats.
+
+<HsmRecordsVsSuitability />
+
+## Starting in South Yorkshire
+
+Rob Bell and South Yorkshire Bat Group had already developed habitat suitability models for Sheffield in 2020, using dedicated survey data.
+
+In 2023, Greg Slack and I wanted to see what we could do with the bat group's existing records, without having to organise a new survey programme. Greg reviewed the records and distinguished roosting from in-flight observations. We chose environmental variables and reviewed the predictions together, while I built the modelling workflow in Python.
+
+By 2024 we had predictions for nine bat species across South Yorkshire, with separate roosting and in-flight models where there were enough records. I also built a web map so the bat group and local ecologists could explore the results. The [original South Yorkshire application](https://matthewjwhittle.shinyapps.io/sybg-hsm/) shows that earlier phase of the work.
+
+## The problem with uneven records
+
+Bat observations aren't collected through a consistent survey of the whole landscape. Some places have been visited repeatedly; others have barely been surveyed. That creates a risk: a model could learn where people tend to look rather than where bats find suitable habitat.
+
+We use a method called [MaxEnt](https://earth-chris.github.io/elapid/) to compare the environments around known bat observations with a sample of other locations. It doesn't require reliable records of where bats are absent, which we generally don't have. But choosing those comparison locations matters.
+
+I developed an approach that uses records of all bat species as a rough indication of where people have been looking. We then draw comparison locations more often from areas that appear better surveyed. It doesn't remove recording bias, but it helps avoid treating every unrecorded place as equally well surveyed.
+
+<HsmRecordingBias />
+
+## Expanding across Yorkshire
+
+Towards the end of 2024, we started working with neighbouring bat groups and records centres. During 2025, the project brought together records from South, West, North and East Yorkshire Bat Groups and the North and East Yorkshire Ecological Data Centre.
+
+Combining independently maintained datasets took a fair amount of checking: locations, species identifications, the type of observation and whether the record was precise enough to use. We also brought together environmental data on land cover, water, buildings, vegetation, climate and terrain.
+
+I developed the modelling pipeline further so we could test different environmental variables and model settings more systematically. But automated modelling only gets us so far. A model can perform well statistically while producing a prediction that doesn't make much ecological sense.
+
+Greg and I have spent a lot of time looking at the maps and how individual environmental variables affect them, questioning patterns that seem unlikely. That ecological review is as important as the modelling itself.
+
+## What the models show
+
+We now have Yorkshire-wide predictions of relative habitat suitability for different bat species, including separate models for roosting and in-flight observations where the records support them.
+
+<HsmYorkshireAtlas />
+
+The blank rectangular area on some maps is where an environmental dataset has missing coverage. The models can't make a prediction there, so we've left it blank rather than guessing.
+
+The maps could help put development sites into a wider ecological context, identify potentially important habitats or guide further survey work. They aren't evidence that a species is present or absent at a particular location, and they don't replace fieldwork or a formal records search.
+
+Greg and I presented the Yorkshire work at the **North of England Bat Conference in March 2026** in a talk called *From bat records to predictive maps*. We've continued reviewing and developing the models since then.
+
+## Making the results easier to explore
+
+I've also been developing a [new dashboard for the Yorkshire models](https://hsm-dashboard-dev.web.app/). It's still a development version, so the interface and predictions may change.
+
+I want people to be able to do more than look at a suitability map. Ideally, they should be able to explore which environmental conditions influence the predictions and where the evidence is less reliable.
+
+There's still work to do on reviewing individual models, making their predictions easier to explain and combining results across species without overstating what they tell us.

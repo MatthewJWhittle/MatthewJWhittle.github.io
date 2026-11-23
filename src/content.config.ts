@@ -7,15 +7,16 @@ const work = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    date: z.coerce.date(),
-    status: z.enum(['shipped', 'experiment', 'in-progress']),
+    startedYear: z.number().int().min(1900).max(2100),
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
     cover: z.string().optional(),
     coverAlt: z.string().optional(),
     repositoryUrl: z.string().url().optional(),
+    docsUrl: z.string().url().optional(),
     demoUrl: z.string().url().optional(),
+    demoLabel: z.string().optional(),
     figureId: z.string().optional(),
   }),
 });

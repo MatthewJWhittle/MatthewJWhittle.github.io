@@ -20,7 +20,9 @@ npm run preview
 
 ## Content
 
-The live site is a single long-scroll page (`src/pages/index.astro`). Work and notes case studies can be authored under `src/content/` (keep `draft: true` until ready). Detail routes under `/work/[slug]/` and `/notes/[slug]/` remain for when content is published.
+The live site is a single long-scroll page (`src/pages/index.astro`). Work and notes can be authored under `src/content/` once approved for public release. **Do not commit private drafts to this repository**: `draft: true` hides a page from the built site, not from the public Git repository or commit history. Keep unapproved material in a private workspace instead.
+
+Work entries use `startedYear` (project history verified against public repositories), not an invented article publication date. Detail routes under `/work/[slug]/` and `/notes/[slug]/` remain available.
 
 ## Deploy
 

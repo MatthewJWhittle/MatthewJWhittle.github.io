@@ -8,15 +8,13 @@ interface Props {
 
 const { project, featured = false } = Astro.props;
 const href = `/work/${project.id}/`;
-const year = project.data.date.getFullYear();
+const year = project.data.startedYear;
 ---
 
 <article class:list={['preview', featured && 'preview--featured']}>
   <div class="preview__copy">
     <p class="preview__meta">
-      <span>{year}</span>
-      <span aria-hidden="true">·</span>
-      <span>{project.data.status}</span>
+      <span>Started {year}</span>
       {
         project.data.tags.slice(0, 3).map((tag) => (
           <>

@@ -1,0 +1,186 @@
+---
+import HsmAtlasSwitcher from './HsmAtlasSwitcher';
+import HsmMapLegend from './HsmMapLegend.astro';
+// Raster provenance: final3-2026-11-02, modelling git b32fd77.
+// Keep model version details in source, not displayed as UI debug metadata.
+---
+
+<figure class="hsm-figure hsm-figure--wide">
+  <div class="hsm-figure__chrome">
+    <p class="hsm-figure__eyebrow">FIG. 03</p>
+    <p class="hsm-figure__title">Predicted habitat suitability across Yorkshire</p>
+    <p class="hsm-figure__lede">
+      Switch between three examples from the November 2026 models. Darker green means higher predicted suitability within each map, not a greater chance of finding a bat.
+    </p>
+  </div>
+  <div class="hsm-figure__frame">
+    <HsmAtlasSwitcher client:load />
+    <div class="hsm-atlas__footer">
+      <HsmMapLegend kind="suitability" />
+      <p class="hsm-atlas__prov">
+        November 2026 models · no bat records shown
+      </p>
+    </div>
+  </div>
+  <figcaption class="hsm-figure__caption">
+    These maps show modelled suitability, not recorded sightings. Scores are relative to each model and shouldn't be compared directly between species.
+  </figcaption>
+</figure>
+
+<style>
+  .hsm-figure {
+    margin: 2rem 0;
+  }
+
+  .hsm-figure--wide {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .hsm-figure__chrome {
+    margin-bottom: 0.85rem;
+  }
+
+  .hsm-figure__eyebrow {
+    margin: 0 0 0.2rem;
+    color: var(--colour-rust);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .hsm-figure__title {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .hsm-figure__lede {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.92rem;
+    max-width: 44rem;
+  }
+
+  .hsm-figure__frame {
+    border: 1px solid var(--colour-rule);
+    background: #f7f4ec;
+    padding: 0.85rem;
+  }
+
+  .hsm-atlas__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.65rem;
+  }
+
+  .hsm-atlas__prov {
+    margin: 0;
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .hsm-figure__caption {
+    margin-top: 0.65rem;
+    color: var(--colour-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+</style>
+
+<style is:global>
+  .hsm-atlas__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hsm-atlas__tab {
+    appearance: none;
+    border: 1px solid var(--colour-rule);
+    background: var(--colour-paper);
+    color: var(--colour-ink);
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    transition: border-color 120ms var(--ease), background 120ms var(--ease);
+  }
+
+  .hsm-atlas__tab:hover,
+  .hsm-atlas__tab:focus-visible {
+    border-color: var(--colour-moss);
+    outline: none;
+  }
+
+  .hsm-atlas__tab:focus-visible {
+    box-shadow: var(--focus);
+  }
+
+  .hsm-atlas__tab.is-active {
+    border-color: var(--colour-moss);
+    background: color-mix(in srgb, var(--colour-moss) 12%, var(--colour-paper));
+  }
+
+  .hsm-atlas__tab-name {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .hsm-atlas__tab-meta {
+    display: block;
+    color: var(--colour-muted);
+    font-size: 0.72rem;
+  }
+
+  .hsm-atlas__stage-label {
+    margin: 0 0 0.15rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .hsm-atlas__stage-label span {
+    color: var(--colour-muted);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .hsm-atlas__stage-note {
+    margin: 0 0 0.55rem;
+    color: var(--colour-muted);
+    font-size: 0.8rem;
+  }
+
+  .hsm-atlas__stage img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--colour-rule);
+    background: #f7f4ec;
+  }
+
+  .hsm-atlas__fallback {
+    margin: 0.75rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--colour-muted);
+    font-size: 0.8rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hsm-atlas__tab {
+      transition: none;
+    }
+  }
+</style>

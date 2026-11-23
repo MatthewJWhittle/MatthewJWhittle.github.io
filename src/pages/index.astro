@@ -1,18 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionNav from '../components/SectionNav';
+import ExperienceTimeline from '../components/ExperienceTimeline.astro';
 import WorkTeaser from '../components/WorkTeaser.astro';
-import NoteTeaser from '../components/NoteTeaser.astro';
 import { site } from '../data/site';
-import { getPublishedNotes, getPublishedWork } from '../lib/content';
+import { getPublishedWork } from '../lib/content';
 
-const TEASER_CAP = 3;
+const TEASER_CAP = 6;
 const allWork = await getPublishedWork();
-const allNotes = await getPublishedNotes();
 const workTeasers = allWork.slice(0, TEASER_CAP);
-const noteTeasers = allNotes.slice(0, TEASER_CAP);
 const showAllWork = allWork.length > TEASER_CAP;
-const showAllNotes = allNotes.length > TEASER_CAP;
 ---
 
 <BaseLayout>
@@ -23,51 +20,44 @@ const showAllNotes = allNotes.length > TEASER_CAP;
 
     <main id="main" class="shell__main">
       <section id="about" class="block" aria-labelledby="about-heading">
-        <p class="section__label">About</p>
         <h1 id="about-heading" class="block__title">{site.name}</h1>
-        <p class="block__lede">{site.headline}</p>
         <div class="prose">
           <p>{site.about}</p>
         </div>
-      </section>
-
-      <section id="experience" class="block" aria-labelledby="experience-heading">
-        <p class="section__label">Experience</p>
-        <h2 id="experience-heading" class="block__title">Selected roles</h2>
-        <ol class="timeline">
-          {
-            site.timeline.map((item) => (
-              <li class="timeline__item">
-                <p class="timeline__period">{item.period}</p>
-                <p class="timeline__role">{item.role}</p>
-                <p class="timeline__org">{item.org}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </section>
-
-      <section id="contact" class="block" aria-labelledby="contact-heading">
-        <p class="section__label">Contact</p>
-        <h2 id="contact-heading" class="block__title">Get in touch</h2>
-        <ul class="contact-list">
-          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-          <li><a href={site.linkedin}>LinkedIn</a></li>
-          <li><a href={site.github}>GitHub</a></li>
+        <ul class="about-links">
+          <li>
+            <a class="about-links__mail" href={`mailto:${site.email}`} aria-label="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="1.5"></rect>
+                <path d="M4 7l8 6 8-6"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href={site.linkedin} aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4.7 3.4a2.1 2.1 0 1 0 0 4.2 2.1 2.1 0 0 0 0-4.2zM3.1 9.1h3.2V21H3.1V9.1zm5.8 0h3.1v1.6h.1c.4-.8 1.5-1.7 3.1-1.7 3.3 0 3.9 2.2 3.9 5V21h-3.2v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21H8.9V9.1z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href={site.github} aria-label="GitHub">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"></path>
+              </svg>
+            </a>
+          </li>
         </ul>
       </section>
 
-      <section id="work" class="block" aria-labelledby="work-heading">
-        <p class="section__label">Work</p>
-        <h2 id="work-heading" class="block__title">Projects</h2>
+      <section id="projects" class="block" aria-labelledby="projects-heading">
+        <h2 id="projects-heading" class="block__title">Projects</h2>
+        <p class="block__lede">
+          Things I've built, worked on or learnt something from.
+        </p>
         {
           workTeasers.length === 0 ? (
-            <>
-              <p class="block__lede">Coming soon.</p>
-              <p class="muted">
-                Short project teasers will link out from here when ready.
-              </p>
-            </>
+            <p class="muted">Nothing published yet.</p>
           ) : (
             <div class="teaser-list">
               {workTeasers.map((project) => (
@@ -79,36 +69,24 @@ const showAllNotes = allNotes.length > TEASER_CAP;
         {
           showAllWork && (
             <p class="section-more">
-              <a href="/work/">All work →</a>
+              <a href="/work/">All projects →</a>
             </p>
           )
         }
       </section>
 
-      <section id="notes" class="block" aria-labelledby="notes-heading">
-        <p class="section__label">Notes</p>
-        <h2 id="notes-heading" class="block__title">Notes</h2>
-        {
-          noteTeasers.length === 0 ? (
-            <>
-              <p class="block__lede">Coming soon.</p>
-              <p class="muted">Short notes will link out from here later.</p>
-            </>
-          ) : (
-            <div class="teaser-list">
-              {noteTeasers.map((note) => (
-                <NoteTeaser note={note} />
-              ))}
-            </div>
-          )
-        }
-        {
-          showAllNotes && (
-            <p class="section-more">
-              <a href="/notes/">All notes →</a>
-            </p>
-          )
-        }
+      <section id="experience" class="block" aria-labelledby="experience-heading">
+        <h2 id="experience-heading" class="block__title">Experience</h2>
+        <ExperienceTimeline />
+      </section>
+
+      <section id="contact" class="block" aria-labelledby="contact-heading">
+        <h2 id="contact-heading" class="block__title">Get in touch</h2>
+        <ul class="contact-list">
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href={site.linkedin}>LinkedIn</a></li>
+          <li><a href={site.github}>GitHub</a></li>
+        </ul>
         <p class="footer-meta">© {new Date().getFullYear()} {site.name}</p>
       </section>
     </main>
@@ -165,40 +143,49 @@ const showAllNotes = allNotes.length > TEASER_CAP;
     color: var(--colour-muted);
   }
 
-  .timeline {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: var(--space-5);
-    max-width: var(--measure);
-  }
-
-  .timeline__period {
-    margin: 0 0 var(--space-1);
-    color: var(--colour-muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .timeline__role {
-    margin: 0 0 var(--space-1);
-    font-weight: 500;
-    line-height: 1.35;
-  }
-
-  .timeline__org {
-    margin: 0;
-    color: var(--colour-muted);
-  }
-
   .teaser-list {
     margin-top: var(--space-2);
   }
 
+  .about-links {
+    display: flex;
+    gap: 0.35rem;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .about-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    color: var(--colour-muted);
+  }
+
+  .about-links a:hover {
+    color: var(--colour-ink);
+  }
+
+  .about-links svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: currentColor;
+    stroke: none;
+  }
+
+  .about-links__mail svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
   .section-more {
+    display: flex;
+    gap: 1rem;
     margin: var(--space-4) 0 0;
     font-weight: 500;
   }

@@ -2,7 +2,7 @@
 import { render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import ProjectFigure from '../../components/ProjectFigure.astro';
-import { formatDate, getPublishedWork } from '../../lib/content';
+import { getPublishedWork } from '../../lib/content';
 
 export async function getStaticPaths() {
   const work = await getPublishedWork();
@@ -14,10 +14,32 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const meta = `${formatDate(entry.data.date)} · ${entry.data.status} · ${entry.data.tags.join(' · ')}`;
+const meta = `Started ${entry.data.startedYear}${entry.data.tags.length ? ` · ${entry.data.tags.join(' · ')}` : ""}`;
+const hasLinks = Boolean(entry.data.repositoryUrl || entry.data.docsUrl || entry.data.demoUrl);
 ---
 
 <ArticleLayout title={entry.data.title} description={entry.data.summary} meta={meta}>
+  {
+    hasLinks && (
+      <p class="case-links case-links--top">
+        {entry.data.repositoryUrl && (
+          <a href={entry.data.repositoryUrl} target="_blank" rel="noopener noreferrer">
+            Source repository
+          </a>
+        )}
+        {entry.data.docsUrl && (
+          <a href={entry.data.docsUrl} target="_blank" rel="noopener noreferrer">
+            Documentation
+          </a>
+        )}
+        {entry.data.demoUrl && (
+          <a href={entry.data.demoUrl} target="_blank" rel="noopener noreferrer">
+            {entry.data.demoLabel ?? "Live demo"}
+          </a>
+        )}
+      </p>
+    )
+  }
   {
     entry.data.figureId && (
       <div class="case-figure">
@@ -26,37 +48,26 @@ const meta = `${formatDate(entry.data.date)} · ${entry.data.status} · ${entry.
     )
   }
   <Content />
-  {
-    (entry.data.repositoryUrl || entry.data.demoUrl) && (
-      <p class="case-links">
-        {entry.data.repositoryUrl && (
-          <a href={entry.data.repositoryUrl} target="_blank" rel="noopener noreferrer">
-            Source repository
-          </a>
-        )}
-        {entry.data.demoUrl && (
-          <a href={entry.data.demoUrl} target="_blank" rel="noopener noreferrer">
-            Live demo
-          </a>
-        )}
-      </p>
-    )
-  }
-  <p class="case-back"><a href="/work/">← All work</a></p>
+  <p class="case-back"><a href="/work/">← All projects</a></p>
 </ArticleLayout>
 
 <style>
   .case-figure {
     margin-bottom: 2rem;
-    max-width: 40rem;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
   }
 
   .case-links {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 2rem;
     font-weight: 500;
+  }
+
+  .case-links--top {
+    margin: 0 0 1.75rem;
   }
 
   .case-back {

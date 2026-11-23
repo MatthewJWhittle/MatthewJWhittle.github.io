@@ -11,7 +11,8 @@ const { title, description, meta } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="article wrap">
+  <article id="main" class="article wrap" tabindex="-1">
+    <p class="article__home"><a href="/">← Home</a></p>
     <header class="article__header">
       {meta && <p class="article__meta">{meta}</p>}
       <h1 class="article__title">{title}</h1>
@@ -25,7 +26,21 @@ const { title, description, meta } = Astro.props;
 
 <style>
   .article {
-    padding-block: var(--space-7) var(--space-8);
+    padding-block: var(--space-6) var(--space-8);
+  }
+
+  .article__home {
+    margin: 0 0 var(--space-5);
+    font-weight: 500;
+  }
+
+  .article__home a {
+    color: var(--colour-ink);
+    text-decoration: none;
+  }
+
+  .article__home a:hover {
+    color: var(--colour-moss);
   }
 
   .article__header {
@@ -56,5 +71,20 @@ const { title, description, meta } = Astro.props;
     margin: 0;
     color: var(--colour-muted);
     font-size: 1.125rem;
+  }
+
+  /* Text stays on the reading measure. Figures use the full article width,
+     which is already inset by the page gutter. */
+  .article__body {
+    max-width: none;
+  }
+
+  .article__body > :global(p),
+  .article__body > :global(h2),
+  .article__body > :global(h3),
+  .article__body > :global(ul),
+  .article__body > :global(ol),
+  .article__body > :global(blockquote) {
+    max-width: var(--measure);
   }
 </style>

@@ -7,14 +7,12 @@ interface Props {
 
 const { project } = Astro.props;
 const href = `/work/${project.id}/`;
-const year = project.data.date.getFullYear();
+const year = project.data.startedYear;
 ---
 
 <article class="teaser">
   <p class="teaser__meta">
-    <span>{year}</span>
-    <span aria-hidden="true">·</span>
-    <span>{project.data.status}</span>
+    <span>Started {year}</span>
   </p>
   <h3 class="teaser__title">
     <a href={href}>{project.data.title}</a>

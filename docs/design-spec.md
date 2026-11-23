@@ -9,7 +9,7 @@
 
 A personal portfolio for a data scientist / software engineer with experience in ecology, geospatial analysis, analytics and ML. The site should feel like the home of someone who **builds interesting things and explains how they work**, not the landing page of an analytics consultancy.
 
-Primary audience: hiring managers and technical peers considering senior IC, lead or small-team roles in data science, ML, data engineering and software. Secondary audience: fellow builders who may read notes, inspect source code or try tools.
+Audience: curious technical peers, potential collaborators, people who may want to try the projects, and prospective employers. Career opportunities matter, but the site is not primarily a CV or a recruitment landing page.
 
 ### Reader outcomes
 
@@ -93,60 +93,39 @@ Use when meaningful:
 - Respect `prefers-reduced-motion`.
 - Interactive visualisations are welcome inside real projects when they demonstrate technical work; avoid adding one merely to decorate the homepage.
 
-## 4. Homepage: approved concept
+## 4. Current approved homepage (November 2026)
 
-**Base layout:** "The Field Notebook" (concept 01), with the efficient project catalogue of "The Research Index" (concept 02), and selective scientific/cartographic figures from "The Cartographic Desk" (concept 03).
+The homepage is a restrained, semi-personal, semi-professional home for the things Matthew builds and learns. The shared thread is curiosity about useful technology, with roots in ecology and science and experience across data, software, machine learning and leadership. Do not turn it into a specialist SDM site or a job-seeking brochure.
 
-### Primary navigation
+**Order and navigation:** About/introduction → Projects → Experience → Contact. Experience should be easy to find, with a concise timeline and accessible progressive disclosure. Projects come first.
 
-Minimal header: personal wordmark/name on left; **Work**, **Notes**, **About**, and **GitHub** on right (mobile: accessible compact navigation). Do not add a full-screen menu if simple links fit.
+**Current public project selection:** tilearray and Sheffield Bats. Publish other projects, case studies, notes or personal interests only after explicit approval and verification of what is public. Older libraries should not be revived merely to fill space. Project writing may include case studies and shorter notes; no compulsory blog cadence.
 
-### Content order
-
-1. **Introduction / hero** — short kicker, distinctive single-sentence headline, 1–2-sentence introduction and a clear link to selected work.
-2. **Featured project** — one strong visual artefact with project title, plain-language problem, contribution/tech label and clear route to case study or code.
-3. **Selected work** — 2–4 additional, compact projects or experiments; avoid identical oversized marketing cards.
-4. **Field notes** — 2–4 recent short notes on things learnt, built or investigated.
-5. **About/contact footer** — short background and GitHub/contact links (only verifiable links).
-
-### Provisional copy direction
-
-Optional headline example: **"Building tools to make sense of complex data."**
-
-Optional intro direction: **"I'm Matt, a data scientist and engineer with roots in ecology and geospatial work. I build useful software, machine learning systems and small experiments."**
-
-These are *copy proposals*, not final approved biography. Keep copy in an editable content/config file and do not fabricate details to fill gaps. Prioritise precise verbs and plain English; avoid "passionate about", "leverage", "cutting-edge", "transformative" and generic skill clouds.
-
-### Project presentation
-
-Use real screenshots, maps, architecture diagrams, terminal output, model results or actual artefacts wherever possible. Captions explain what the image proves. Images are not generic mood pieces. Simple, truthful diagrams can be built as SVG.
-
-If no project content is available, use clearly labelled **development-only mock fixtures** for visual review. Exclude them from published site and do not present them as real projects.
+Keep the existing palette, fonts, legible article layouts and real project diagrams. Do not add decorative or stock photography. The tone, line-editing examples and approval checks are maintained in [editorial-direction.md](editorial-direction.md), which takes precedence over earlier draft copy examples.
 
 ## 5. Page map and content model
 
-Required routes:
+Current routes and content:
 
-- `/` — home;
-- `/work/` — browsable project index;
-- `/work/[slug]/` — individual project case study;
-- `/notes/` — chronological short articles;
-- `/notes/[slug]/` — note detail;
-- `/about/` — concise biography, interests and contact;
-- `/404.html` — helpful missing-page fallback (subject to hosting conventions).
+- `/` — homepage with About, Projects, Experience and Contact sections;
+- `/work/` and `/work/[slug]/` — public project index and case studies;
+- `/notes/` and `/notes/[slug]/` — optional note infrastructure; do not advertise empty or unapproved content;
+- `/404.html` — helpful fallback.
+
+A separate About page is not needed in the current iteration. Do not add routes merely to match an older specification.
 
 Prefer **Astro content collections** for projects and notes. Use Markdown or MDX only where interactive components are genuinely required.
 
 ### Project fields (required unless marked optional)
 
-- `title`, `summary`, `date`, `status` (`shipped`, `experiment`, `in-progress`)
+- `title`, `summary`, `startedYear`
 - `tags` (small, curated list)
 - `featured` (boolean)
 - `draft` (boolean)
 - `cover` (optional path), `coverAlt` (required when cover is present)
 - `repositoryUrl`, `demoUrl` (optional; only if real and publicly accessible)
 
-`date` should be relevant and true (e.g., publish date), not fabricated. Avoid fake precision around project timelines.
+Work entries use `startedYear` for verified project history rather than presenting a project milestone as an article publication date. A separate article publication date can be added later when known.
 
 ### Project detail template
 

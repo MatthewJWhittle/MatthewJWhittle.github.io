@@ -1,5 +1,7 @@
 # Field Notebook Portfolio — Cursor Implementation Plan
 
+> **Historical implementation plan.** The homepage has since been built and the owner has approved a revised information architecture and editorial direction. Read `docs/editorial-direction.md` first; use this plan for technical quality checks rather than repeating earlier homepage phases.
+
 Use `AGENTS.md` and `docs/design-spec.md` as the governing instructions. Work phase-by-phase. **Do not publish a live site without the owner's explicit approval.**
 
 ## Phase 0 — Repository audit and technical plan

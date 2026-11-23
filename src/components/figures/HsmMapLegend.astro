@@ -1,0 +1,55 @@
+---
+interface Props {
+  kind: 'suitability' | 'intensity';
+  label?: string;
+}
+
+const { kind, label } = Astro.props;
+const text = label ?? (kind === 'suitability' ? 'Relative suitability' : 'Recording intensity');
+const rampClass = kind === 'suitability' ? 'hsm-legend__ramp--suit' : 'hsm-legend__ramp--dens';
+---
+
+<div class="hsm-legend" aria-hidden="true">
+  <span class="hsm-legend__label">{text}</span>
+  <div class:list={['hsm-legend__ramp', rampClass]}></div>
+  <div class="hsm-legend__ends">
+    <span>Low</span>
+    <span>High</span>
+  </div>
+</div>
+
+<style>
+  .hsm-legend {
+    display: grid;
+    gap: 0.25rem;
+    min-width: 6.5rem;
+  }
+
+  .hsm-legend__label {
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.03em;
+  }
+
+  .hsm-legend__ramp {
+    height: 0.45rem;
+    border-radius: 2px;
+    border: 1px solid var(--colour-rule);
+  }
+
+  .hsm-legend__ramp--suit {
+    background: linear-gradient(90deg, #e8e4d9, #7fa08a, #2a3f34);
+  }
+
+  .hsm-legend__ramp--dens {
+    background: linear-gradient(90deg, #f0ebe0, #c08a4f, #3a2a1c);
+  }
+
+  .hsm-legend__ends {
+    display: flex;
+    justify-content: space-between;
+    color: var(--colour-muted);
+    font-size: 0.65rem;
+  }
+</style>

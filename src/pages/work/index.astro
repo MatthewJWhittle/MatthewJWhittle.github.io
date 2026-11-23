@@ -6,9 +6,9 @@ import { getPublishedWork } from '../../lib/content';
 const work = await getPublishedWork();
 ---
 
-<BaseLayout title="Work" description="Selected projects.">
-  <section class="section wrap">
-    <p class="section__label">Work</p>
+<BaseLayout title="Projects" description="Selected projects and notes on things I have built.">
+  <main id="main" class="section wrap" tabindex="-1">
+    <p class="section__label">Projects</p>
     <h1 class="section__title">Projects</h1>
     {
       work.length === 0 ? (
@@ -22,9 +22,9 @@ const work = await getPublishedWork();
       )
     }
     <p class="back">
-      <a href="/#work">← Back</a>
+      <a href="/#projects">← Back</a>
     </p>
-  </section>
+  </main>
 </BaseLayout>
 
 <style>
