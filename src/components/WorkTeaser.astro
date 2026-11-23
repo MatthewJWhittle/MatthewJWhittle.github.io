@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatStatus } from '../lib/content';
 
 interface Props {
   project: CollectionEntry<'work'>;
@@ -14,8 +13,6 @@ const year = project.data.startedYear;
 <article class="teaser">
   <p class="teaser__meta">
     <span>Started {year}</span>
-    <span aria-hidden="true">·</span>
-    <span>{formatStatus(project.data.status)}</span>
   </p>
   <h3 class="teaser__title">
     <a href={href}>{project.data.title}</a>

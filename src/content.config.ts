@@ -8,7 +8,6 @@ const work = defineCollection({
     title: z.string(),
     summary: z.string(),
     startedYear: z.number().int().min(1900).max(2100),
-    status: z.enum(['shipped', 'experiment', 'in-progress']),
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),

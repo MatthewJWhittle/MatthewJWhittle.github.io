@@ -15,8 +15,6 @@ const year = project.data.startedYear;
   <div class="preview__copy">
     <p class="preview__meta">
       <span>Started {year}</span>
-      <span aria-hidden="true">·</span>
-      <span>{project.data.status}</span>
       {
         project.data.tags.slice(0, 3).map((tag) => (
           <>

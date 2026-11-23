@@ -2,7 +2,6 @@
 title: Example project template
 summary: Blank authoring template — keep draft true until content is approved. Not a published project.
 startedYear: 2026
-status: experiment
 tags: [template]
 featured: false
 draft: true

@@ -118,7 +118,7 @@ Prefer **Astro content collections** for projects and notes. Use Markdown or MDX
 
 ### Project fields (required unless marked optional)
 
-- `title`, `summary`, `startedYear`, `status` (`shipped`, `experiment`, `in-progress`)
+- `title`, `summary`, `startedYear`
 - `tags` (small, curated list)
 - `featured` (boolean)
 - `draft` (boolean)
