@@ -7,7 +7,8 @@ You are building and maintaining a personal portfolio for an independent data sc
 Before proposing or implementing changes, read:
 1. `docs/editorial-direction.md` — **current approved purpose, voice, publishing boundaries and content QA**. This takes precedence over older site plans where they conflict.
 2. `docs/design-spec.md` — visual direction, typography, palette and technical patterns (some original page-map suggestions are historical).
-3. `docs/implementation-plan.md` — historical build plan and useful technical quality gates, not a mandate to redesign the current site.
+3. `docs/data-viz-style-guide.md` — maps, diagrams and data figures inside articles (palette roles, atlas conventions, privacy/provenance, checklist).
+4. `docs/implementation-plan.md` — historical build plan and useful technical quality gates, not a mandate to redesign the current site.
 
 If an existing repository conflicts with the specification, inspect it and explain the conflict before making destructive changes. Follow established working patterns where possible.
 
