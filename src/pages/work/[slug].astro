@@ -34,7 +34,7 @@ const hasLinks = Boolean(entry.data.repositoryUrl || entry.data.docsUrl || entry
         )}
         {entry.data.demoUrl && (
           <a href={entry.data.demoUrl} target="_blank" rel="noopener noreferrer">
-            Live demo
+            {entry.data.demoLabel ?? "Live demo"}
           </a>
         )}
       </p>

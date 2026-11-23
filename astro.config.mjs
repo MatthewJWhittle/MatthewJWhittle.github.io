@@ -11,5 +11,6 @@ export default defineConfig({
   output: 'static',
   redirects: {
     '/about/': '/#about',
+    '/work/sheffield-bats/': '/work/bat-habitat-yorkshire/',
   },
 });

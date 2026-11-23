@@ -16,6 +16,7 @@ const work = defineCollection({
     repositoryUrl: z.string().url().optional(),
     docsUrl: z.string().url().optional(),
     demoUrl: z.string().url().optional(),
+    demoLabel: z.string().optional(),
     figureId: z.string().optional(),
   }),
 });
