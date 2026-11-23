@@ -14,13 +14,9 @@ Aim for **contemporary scientific atlas + data-journalism quality**: calm, preci
 
 ### Exemplars
 
-Stage 1 Yorkshire bat atlas concepts (review drafts, not finals):
+Yorkshire bat HSM figures in the live article (`bat-habitat-yorkshire`) assemble **HTML/CSS chrome + clean map panels** (`public/images/hsm/panel-*.png`). Stage 1 presentation composites remain under [`assets/bat-atlas-visuals-stage1/`](../assets/bat-atlas-visuals-stage1/) as design references only.
 
-- [`assets/bat-atlas-visuals-stage1/fig01-records-vs-suitability.png`](../assets/bat-atlas-visuals-stage1/fig01-records-vs-suitability.png) — paired maps, distinct treatments for density vs suitability
-- [`assets/bat-atlas-visuals-stage1/fig02-recording-bias.png`](../assets/bat-atlas-visuals-stage1/fig02-recording-bias.png) — three-stage method diagram grounded in real methodology
-- [`assets/bat-atlas-visuals-stage1/fig03-yorkshire-atlas-showcase.png`](../assets/bat-atlas-visuals-stage1/fig03-yorkshire-atlas-showcase.png) — shared canvas / extent / palette for a species switcher
-
-Use these as visual references for hierarchy, colour roles and captioning — not as frozen layout templates.
+Prefer modular construction: titles, legends and captions in the page; continuous rasters without baked-in typography.
 
 ---
 
@@ -99,7 +95,7 @@ Web-sized exports: titles ~14–16 px equivalent at final display width; panel l
 | Continuous suitability | Smooth ramp; bilinear display OK; power/gamma stretch allowed if documented in working notes |
 | Density / effort | Visually distinct ramp; aggregation cells or wash — not raw occurrence dots |
 | Binary / threshold | Two clear states + explicit “no prediction” void |
-| Missing prediction / EV nodata | Mask cleanly; label “no prediction” rather than leaving a raw white rectangle |
+| Missing prediction / EV nodata | Do not inpaint or treat as low suitability. Prefer leaving the gap visible and explaining it in the caption/article, or (when designed) a neutral “no prediction” mask — never silent fill |
 
 ### Basemaps
 

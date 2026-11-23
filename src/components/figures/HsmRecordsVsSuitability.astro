@@ -1,0 +1,152 @@
+---
+import Figure from '../Figure.astro';
+import HsmMapLegend from './HsmMapLegend.astro';
+---
+
+<figure class="hsm-figure hsm-figure--wide">
+  <div class="hsm-figure__chrome">
+    <p class="hsm-figure__eyebrow">FIG. 01</p>
+    <p class="hsm-figure__title">Records are not habitat</p>
+    <p class="hsm-figure__lede">
+      Where recording activity is concentrated (all bat species) versus relative suitability for Daubenton’s bat in flight.
+    </p>
+  </div>
+  <div class="hsm-figure__frame hsm-compare">
+    <div class="hsm-compare__panel">
+      <p class="hsm-compare__label">Recording intensity</p>
+      <p class="hsm-compare__meta">1&nbsp;km aggregation · all species · effort proxy</p>
+      <img
+        src="/images/hsm/panel-recording-intensity.png"
+        alt="Yorkshire map of aggregated bat recording intensity, with higher values concentrated in the south and west."
+        width="960"
+        height="840"
+        loading="lazy"
+        decoding="async"
+      />
+      <HsmMapLegend kind="intensity" />
+    </div>
+    <div class="hsm-compare__panel">
+      <p class="hsm-compare__label">Predicted suitability</p>
+      <p class="hsm-compare__meta">Daubenton’s bat · in flight · relative score</p>
+      <img
+        src="/images/hsm/panel-daubenton-if.png"
+        alt="Yorkshire map of predicted Daubenton’s bat in-flight suitability, with higher values along waterways and valleys."
+        width="960"
+        height="840"
+        loading="lazy"
+        decoding="async"
+      />
+      <HsmMapLegend kind="suitability" />
+    </div>
+  </div>
+  <figcaption class="hsm-figure__caption">
+    Shared Yorkshire extent. The left panel is an effort proxy from all-species records, not Daubenton’s observations alone.
+    The right panel is a relative model score from the November 2026 export (<code>final3-2026-11-02</code>), not confirmed presence.
+    A rectangular gap in the prediction is missing environmental source coverage — left unfilled on purpose.
+  </figcaption>
+</figure>
+
+<style>
+  .hsm-figure {
+    margin: 2rem 0;
+  }
+
+  .hsm-figure--wide {
+    width: min(100vw - 2 * var(--gutter), 56rem);
+    max-width: none;
+    margin-left: max(
+      calc(-1 * (min(100vw - 2 * var(--gutter), 56rem) - 100%) / 2),
+      calc(-1 * var(--gutter))
+    );
+  }
+
+  .hsm-figure__chrome {
+    margin-bottom: 0.85rem;
+  }
+
+  .hsm-figure__eyebrow {
+    margin: 0 0 0.2rem;
+    color: var(--colour-rust);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .hsm-figure__title {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .hsm-figure__lede {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.92rem;
+    max-width: 42rem;
+  }
+
+  .hsm-figure__frame {
+    border: 1px solid var(--colour-rule);
+    background: #f7f4ec;
+    padding: 0.85rem;
+  }
+
+  .hsm-compare {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .hsm-compare__panel {
+    min-width: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .hsm-compare__label {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .hsm-compare__meta {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.78rem;
+  }
+
+  .hsm-compare__panel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--colour-rule);
+    background: #f7f4ec;
+  }
+
+  .hsm-figure__caption {
+    margin-top: 0.65rem;
+    color: var(--colour-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    max-width: 48rem;
+  }
+
+  .hsm-figure__caption code {
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+  }
+
+  @media (max-width: 720px) {
+    .hsm-figure--wide {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .hsm-compare {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

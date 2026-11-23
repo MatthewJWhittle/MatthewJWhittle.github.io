@@ -52,9 +52,22 @@ const hasLinks = Boolean(entry.data.repositoryUrl || entry.data.docsUrl || entry
 </ArticleLayout>
 
 <style>
+  /* Break out of the prose measure so diagrams can use article width. */
   .case-figure {
     margin-bottom: 2rem;
-    max-width: 48rem;
+    width: min(100vw - 2 * var(--gutter), 48rem);
+    max-width: none;
+    margin-left: max(
+      calc(-1 * (min(100vw - 2 * var(--gutter), 48rem) - 100%) / 2),
+      calc(-1 * var(--gutter))
+    );
+  }
+
+  @media (max-width: 720px) {
+    .case-figure {
+      width: 100%;
+      margin-left: 0;
+    }
   }
 
   .case-links {

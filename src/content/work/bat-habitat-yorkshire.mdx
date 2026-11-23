@@ -10,6 +10,10 @@ demoUrl: https://hsm-dashboard-dev.web.app/
 demoLabel: Development dashboard
 ---
 
+import HsmRecordsVsSuitability from '../../components/figures/HsmRecordsVsSuitability.astro';
+import HsmRecordingBias from '../../components/figures/HsmRecordingBias.astro';
+import HsmYorkshireAtlas from '../../components/figures/HsmYorkshireAtlas.astro';
+
 ## Beyond dots on a map
 
 When I worked as an ecologist, I'd often read desk studies containing lists and maps of species records: a bat recorded in a field five years ago, or a roost found in a building nearby. Those observations matter, particularly when a protected roost is involved. But I kept wondering what they actually told us about the wider landscape. Why should a record from five years ago make one place more important than another? And what could we say about somewhere nobody had looked?
@@ -19,6 +23,8 @@ Bat groups and records centres have spent decades building up these datasets, mu
 I've been interested for years in how to get more meaningful insight out of this kind of data. Individually, records can be difficult to interpret. Collectively, they ought to contain information about the environments species use and where similar habitat might exist elsewhere. Extracting that signal takes environmental data, modelling skills and a careful understanding of how the records were collected.
 
 **I think this should become a more routine part of ecological consultancy**, rather than something reserved for occasional specialist studies. This project is one attempt to explore what that could look like, starting with bats.
+
+<HsmRecordsVsSuitability />
 
 ## Starting in South Yorkshire
 
@@ -40,6 +46,8 @@ We use Maximum Entropy (MaxEnt) modelling, implemented in Python with [elapid](h
 
 But the choice of background locations matters. I developed an approach that uses the distribution of bat records across species as an approximate measure of recording effort, so the model's comparisons better reflect where people are likely to have looked. It's not a complete solution to survey bias, and it doesn't tell us where a species is absent. It does help us ask a more useful question about the relationship between the records and the habitat.
 
+<HsmRecordingBias />
+
 ## Extending the modelling across Yorkshire
 
 Towards the end of 2024, we started working with neighbouring bat groups and records centres. The 2025 expansion brought together records from South, West, North and East Yorkshire Bat Groups and the North and East Yorkshire Ecological Data Centre.
@@ -54,21 +62,11 @@ The automated part only gets us so far. A model can score well while learning a 
 
 The models produce maps of **relative habitat suitability** for individual species and, where the data supports it, for roosting and in-flight activity separately.
 
-These two examples come from the model set exported on 2 November 2026. They illustrate the different spatial patterns the models identify; they're not maps of observed bats. Suitability scores are specific to each model, so values shouldn't be compared directly between species.
+The atlas below uses the model set exported on 2 November 2026 (`final3-2026-11-02`). It is meant to show how spatial patterns differ between models. These are not maps of observed bats, and suitability scores should not be compared as absolute values across species.
 
-<figure class="hsm-map">
-  <a href="/images/hsm/yorkshire-daubentons-in-flight-2026.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Daubenton's bat suitability map">
-    <img src="/images/hsm/yorkshire-daubentons-in-flight-2026.png" alt="Continuous predicted suitability for Daubenton's bats in flight across Yorkshire, with higher values concentrated along waterways and some valley corridors." loading="lazy" decoding="async" width="960" height="835" />
-  </a>
-  <figcaption>Daubenton's bat, in flight. A dated prediction from the November 2026 model set; no individual occurrence locations are shown.</figcaption>
-</figure>
+<HsmYorkshireAtlas />
 
-<figure class="hsm-map">
-  <a href="/images/hsm/yorkshire-noctule-roost-2026.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size noctule roost suitability map">
-    <img src="/images/hsm/yorkshire-noctule-roost-2026.png" alt="Continuous predicted noctule roost habitat suitability across Yorkshire, showing a different and more widespread pattern of higher suitability." loading="lazy" decoding="async" width="960" height="835" />
-  </a>
-  <figcaption>Noctule, roosting suitability. The same dated model export, showing a different pattern across the region. The maps are illustrative model outputs, not confirmation of bat presence.</figcaption>
-</figure>
+You may notice a sharp rectangular gap in parts of the prediction maps. That is **missing coverage in one of the environmental predictor layers** used by the models (an Environment Agency / object-model input), not a cartographic flip or a zone of low suitability. I have left the gap visible rather than filling or cropping it away; where the predictors are incomplete, there is simply no honest prediction to show.
 
 The work could provide wider landscape context for ecological assessments, help explore potentially important habitats and suggest where additional survey effort might be useful. It's not a substitute for field surveys, ecological judgement or a formal records search. The results depend on the records and environmental datasets we have, and some species have too few reliable observations for confident interpretation.
 
