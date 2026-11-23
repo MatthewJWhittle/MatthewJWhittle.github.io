@@ -8,9 +8,8 @@ export const site = {
   github: 'https://github.com/MatthewJWhittle',
   linkedin: 'https://www.linkedin.com/in/matthewjwhittle/',
   location: 'West Yorkshire, UK',
-  headline: 'I like building things.',
   about:
-    "I started out as an ecologist and gradually found myself writing more code. These days I work across data, software and machine learning, and lead an analytics team at SLR. I still enjoy getting into the technical detail. I'm based in West Yorkshire, and this is where I share projects I've built and things I've learnt along the way.",
+    "These days I work across data, software and machine learning, and lead an analytics team at SLR. I'm particularly drawn to projects that help make sense of the natural world, or turn an interesting technical problem into something people can actually use. This is where I share some of those projects and what I've learnt along the way.",
   /**
    * Full role chronology from Notion Master CV (career chronology).
    * startLabel = when the role began (no end dates in the UI).
