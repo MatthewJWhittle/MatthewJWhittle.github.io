@@ -1,14 +1,16 @@
 ---
 import HsmAtlasSwitcher from './HsmAtlasSwitcher';
 import HsmMapLegend from './HsmMapLegend.astro';
+// Raster provenance: final3-2026-11-02, modelling git b32fd77.
+// Keep model version details in source, not displayed as UI debug metadata.
 ---
 
 <figure class="hsm-figure hsm-figure--wide">
   <div class="hsm-figure__chrome">
     <p class="hsm-figure__eyebrow">FIG. 03</p>
-    <p class="hsm-figure__title">Yorkshire habitat atlas</p>
+    <p class="hsm-figure__title">Predicted habitat suitability across Yorkshire</p>
     <p class="hsm-figure__lede">
-      Relative suitability for three models on one canvas. Scores are relative within each model — not calibrated probabilities, and not comparable across species.
+      Switch between three examples from the November 2026 models. Darker green means higher predicted suitability within each map, not a greater chance of finding a bat.
     </p>
   </div>
   <div class="hsm-figure__frame">
@@ -16,14 +18,12 @@ import HsmMapLegend from './HsmMapLegend.astro';
     <div class="hsm-atlas__footer">
       <HsmMapLegend kind="suitability" />
       <p class="hsm-atlas__prov">
-        Model export <code>final3-2026-11-02</code> · git <code>b32fd77</code> · no occurrence points
+        November 2026 models · no bat records shown
       </p>
     </div>
   </div>
   <figcaption class="hsm-figure__caption">
-    Default view without JavaScript still shows Daubenton’s in flight; use the tabs when available to switch species.
-    For interactive interrogation beyond this article, see the
-    <a href="https://hsm-dashboard-dev.web.app/" target="_blank" rel="noopener noreferrer">development dashboard</a>.
+    These maps show modelled suitability, not recorded sightings. Scores are relative to each model and shouldn't be compared directly between species.
   </figcaption>
 </figure>
 

@@ -7,13 +7,13 @@ import HsmMapLegend from './HsmMapLegend.astro';
     <p class="hsm-figure__eyebrow">FIG. 01</p>
     <p class="hsm-figure__title">Records are not habitat</p>
     <p class="hsm-figure__lede">
-      Where recording activity is concentrated (all bat species) versus relative suitability for Daubenton’s bat in flight.
+      Bat records cluster where people have looked. A suitability model gives us a different picture of the landscape.
     </p>
   </div>
   <div class="hsm-figure__frame hsm-compare">
     <div class="hsm-compare__panel">
       <p class="hsm-compare__label">Recording intensity</p>
-      <p class="hsm-compare__meta">1&nbsp;km aggregation · all species · effort proxy</p>
+      <p class="hsm-compare__meta">All bat species · grouped into 1 km squares</p>
       <img
         src="/images/hsm/panel-recording-intensity.png"
         alt="Yorkshire map of aggregated bat recording intensity, with higher values concentrated in the south and west."
@@ -26,7 +26,7 @@ import HsmMapLegend from './HsmMapLegend.astro';
     </div>
     <div class="hsm-compare__panel">
       <p class="hsm-compare__label">Predicted suitability</p>
-      <p class="hsm-compare__meta">Daubenton’s bat · in flight · relative score</p>
+      <p class="hsm-compare__meta">Daubenton’s bat · in flight</p>
       <img
         src="/images/hsm/panel-daubenton-if.png"
         alt="Yorkshire map of predicted Daubenton’s bat in-flight suitability, with higher values along waterways and valleys."
@@ -39,9 +39,8 @@ import HsmMapLegend from './HsmMapLegend.astro';
     </div>
   </div>
   <figcaption class="hsm-figure__caption">
-    Shared Yorkshire extent. The left panel is an effort proxy from all-species records, not Daubenton’s observations alone.
-    The right panel is a relative model score from the November 2026 export (<code>final3-2026-11-02</code>), not confirmed presence.
-    A rectangular gap in the prediction is missing environmental source coverage — left unfilled on purpose.
+    Left: recording intensity across all bat species, used as a rough indication of survey effort.
+    Right: predicted habitat suitability for Daubenton’s bat in flight. Neither map shows where this species is definitely present or absent.
   </figcaption>
 </figure>
 

@@ -29,7 +29,7 @@ Examples of more natural editing:
 ## Current content boundaries
 
 - Homepage sections: **About → Projects → Experience → Contact**. Projects before experience, but career history must be easy to find.
-- Featured public projects: **tilearray** and **Sheffield Bats**. Do not invent, publish or link unpublished research or client work. Don't revive unmaintained libraries to fill a quota.
+- Featured public projects: **tilearray** and **Modelling bat habitat suitability across Yorkshire**. Do not invent, publish or link unpublished research or client work. Don't revive unmaintained libraries to fill a quota.
 - Experience timeline: show role, employer and a clear date label without opening it. Expansion should add substantive detail, not repeat the summary. Use verified career information and distinguish leadership, technical contributions and involvement in colleagues' work.
 - Project articles can be substantial case studies or informal notes. Their shape should follow the material, not a rigid template. Useful sequence: practical problem → personal contribution → what exists → important trade-off → limits/learning → links.
 - Only use assets and claims approved for public release. A public code repository is evidence that code is visible, not automatic permission to publish related client data or confidential outcomes.

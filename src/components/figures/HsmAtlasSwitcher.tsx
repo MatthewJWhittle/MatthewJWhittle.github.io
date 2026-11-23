@@ -9,21 +9,21 @@ const SPECIES: Record<
   daubenton: {
     label: "Daubenton's bat",
     activity: 'In flight',
-    note: 'Waterways and valley corridors',
+    note: 'Higher suitability along many waterways',
     src: '/images/hsm/panel-daubenton-if.png',
     alt: "Predicted relative suitability for Daubenton's bat in flight across Yorkshire.",
   },
   pip: {
     label: 'Common pipistrelle',
     activity: 'Roost',
-    note: 'Built fabric and edge habitats',
+    note: 'A more scattered pattern of suitable areas',
     src: '/images/hsm/panel-pip-roost.png',
     alt: 'Predicted relative roost suitability for common pipistrelle across Yorkshire.',
   },
   noctule: {
     label: 'Noctule',
     activity: 'Roost',
-    note: 'A wider, more diffuse pattern',
+    note: 'Broader areas of predicted suitability',
     src: '/images/hsm/panel-noctule-roost.png',
     alt: 'Predicted relative roost suitability for noctule across Yorkshire.',
   },
@@ -37,7 +37,7 @@ export default function HsmAtlasSwitcher() {
 
   return (
     <div className="hsm-atlas">
-      <div className="hsm-atlas__controls" role="tablist" aria-label="Species and activity">
+      <div className="hsm-atlas__controls" role="group" aria-label="Choose a species and activity">
         {ORDER.map((key) => {
           const item = SPECIES[key];
           const selected = key === active;
@@ -45,8 +45,7 @@ export default function HsmAtlasSwitcher() {
             <button
               key={key}
               type="button"
-              role="tab"
-              aria-selected={selected}
+              aria-pressed={selected}
               className={selected ? 'hsm-atlas__tab is-active' : 'hsm-atlas__tab'}
               onClick={() => setActive(key)}
             >
@@ -57,7 +56,7 @@ export default function HsmAtlasSwitcher() {
         })}
       </div>
 
-      <div className="hsm-atlas__stage" role="tabpanel">
+      <div className="hsm-atlas__stage">
         <p className="hsm-atlas__stage-label">
           {current.label}
           <span> · {current.activity}</span>

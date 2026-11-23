@@ -1,20 +1,22 @@
 ---
 import HsmMapLegend from './HsmMapLegend.astro';
+// Background sampling source: surface=all_bat, contrast floor 0.025, sigma=6.5 cells.
+// Keep configuration details here rather than in reader-facing captions.
 ---
 
 <figure class="hsm-figure">
   <div class="hsm-figure__chrome">
     <p class="hsm-figure__eyebrow">FIG. 02</p>
-    <p class="hsm-figure__title">Why recording bias matters</p>
+    <p class="hsm-figure__title">Accounting for uneven recording</p>
     <p class="hsm-figure__lede">
-      Background locations follow where bats have been recorded at all, so the model compares habitat where people are likely to have looked.
+      We draw comparison locations more often from places that are likely to have been surveyed, rather than choosing them uniformly across the region.
     </p>
   </div>
   <div class="hsm-figure__frame hsm-bias">
     <div class="hsm-bias__step">
       <p class="hsm-bias__num">1</p>
-      <p class="hsm-bias__label">Uneven recording</p>
-      <p class="hsm-bias__meta">South Yorkshire crop · aggregated intensity</p>
+      <p class="hsm-bias__label">Where bats were recorded</p>
+      <p class="hsm-bias__meta">A closer look at South Yorkshire</p>
       <img
         src="/images/hsm/panel-bias-obs.png"
         alt="Cropped map showing clustered bat recording intensity around towns and accessible sites."
@@ -26,8 +28,8 @@ import HsmMapLegend from './HsmMapLegend.astro';
     </div>
     <div class="hsm-bias__step">
       <p class="hsm-bias__num">2</p>
-      <p class="hsm-bias__label">Effort proxy</p>
-      <p class="hsm-bias__meta">All-species presence · σ = 6.5 cells</p>
+      <p class="hsm-bias__label">Estimated recording effort</p>
+      <p class="hsm-bias__meta">Based on records of all bat species</p>
       <img
         src="/images/hsm/panel-bias-effort.png"
         alt="Cropped map of a smoothed survey-effort surface derived from all bat records."
@@ -39,8 +41,8 @@ import HsmMapLegend from './HsmMapLegend.astro';
     </div>
     <div class="hsm-bias__step">
       <p class="hsm-bias__num">3</p>
-      <p class="hsm-bias__label">Background sample</p>
-      <p class="hsm-bias__meta">Illustrative subsample · contrast floor 0.025</p>
+      <p class="hsm-bias__label">Comparison locations</p>
+      <p class="hsm-bias__meta">Example locations, not bat sightings</p>
       <img
         src="/images/hsm/panel-bias-background.png"
         alt="Cropped effort surface with a subsample of background sample points denser where recording effort is higher."
@@ -52,13 +54,12 @@ import HsmMapLegend from './HsmMapLegend.astro';
     </div>
   </div>
   <div class="hsm-bias__legend-row">
-    <HsmMapLegend kind="intensity" label="Effort / intensity" />
-    <p class="hsm-bias__swatch"><span class="hsm-bias__dot"></span> Background points (not bat observations)</p>
+    <HsmMapLegend kind="intensity" label="Recording intensity" />
+    <p class="hsm-bias__swatch"><span class="hsm-bias__dot"></span> Background locations (not bat records)</p>
   </div>
   <figcaption class="hsm-figure__caption">
-    Methodology matches the live training defaults (<code>surface=all_bat</code>, contrast floor 0.025, σ = 6.5).
-    Panel 3 shows a random subsample of background locations for illustration — not presence records, and not the full training draw.
-    This does not remove survey bias; it asks a more useful question given uneven effort.
+    We use the distribution of bat records to estimate where recording effort is concentrated and guide the choice of comparison locations.
+    The points in the final panel are an example, not recorded bats. This helps account for uneven coverage, but doesn't remove the bias entirely.
   </figcaption>
 </figure>
 
