@@ -1,84 +1,244 @@
 ---
-/** Compact pipeline diagram for tilearray — plan → fetch → decode → mosaic. */
+/**
+ * Two-part explanation: the remote-service plumbing versus tilearray's
+ * source + area -> xarray workflow. HTML/CSS keeps labels readable on phones.
+ */
 ---
 
-<svg
-  class="tilearray-fig"
-  viewBox="0 0 420 120"
-  role="img"
-  aria-label="tilearray pipeline: plan tiles, fetch over HTTP, decode imagery, assemble a mosaic array"
->
-  <defs>
-    <marker id="ta-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="currentColor"></path>
-    </marker>
-  </defs>
+<div class="ta">
+  <section class="ta__panel ta__panel--complex" aria-labelledby="ta-complex-heading">
+    <div class="ta__heading">
+      <span class="ta__eyebrow">The problem</span>
+      <h3 id="ta-complex-heading">A lot happens between a map service and a Python array</h3>
+    </div>
+    <div class="ta__path ta__path--complex">
+      <div class="ta__endpoint">
+        <strong>Remote services</strong>
+        <span>WMS · WMTS</span>
+        <span>WCS · XYZ</span>
+      </div>
+      <span class="ta__arrow" aria-hidden="true">→</span>
+      <div class="ta__details">
+        <p>Things you have to work out</p>
+        <div class="ta__detail-grid">
+          <span>Capabilities &amp; configuration</span>
+          <span>Layers &amp; tile matrices</span>
+          <span>CRS, extent &amp; resolution</span>
+          <span>Service-specific behaviour</span>
+          <span>Rate limits, retries &amp; caching</span>
+          <span>Fetching, decoding &amp; mosaics</span>
+        </div>
+      </div>
+      <span class="ta__arrow" aria-hidden="true">→</span>
+      <div class="ta__endpoint ta__endpoint--out">
+        <strong>Usable data</strong>
+        <span>Python array</span>
+      </div>
+    </div>
+  </section>
 
-  <g class="tilearray-fig__stage">
-    <rect x="8" y="28" width="78" height="48" rx="4"></rect>
-    <text x="47" y="56" text-anchor="middle">Plan</text>
-  </g>
-  <line class="tilearray-fig__edge" x1="90" y1="52" x2="118" y2="52" marker-end="url(#ta-arrow)"></line>
-
-  <g class="tilearray-fig__stage">
-    <rect x="122" y="28" width="78" height="48" rx="4"></rect>
-    <text x="161" y="56" text-anchor="middle">Fetch</text>
-  </g>
-  <line class="tilearray-fig__edge" x1="204" y1="52" x2="232" y2="52" marker-end="url(#ta-arrow)"></line>
-
-  <g class="tilearray-fig__stage">
-    <rect x="236" y="28" width="78" height="48" rx="4"></rect>
-    <text x="275" y="56" text-anchor="middle">Decode</text>
-  </g>
-  <line class="tilearray-fig__edge" x1="318" y1="52" x2="346" y2="52" marker-end="url(#ta-arrow)"></line>
-
-  <g class="tilearray-fig__stage tilearray-fig__stage--out">
-    <rect x="350" y="28" width="62" height="48" rx="4"></rect>
-    <text x="381" y="50" text-anchor="middle">xarray</text>
-    <text x="381" y="66" text-anchor="middle" class="tilearray-fig__sub">mosaic</text>
-  </g>
-
-  <text class="tilearray-fig__caption" x="8" y="106">WCS · WMS · WMTS · XYZ → one create_array call</text>
-</svg>
+  <section class="ta__panel ta__panel--simple" aria-labelledby="ta-simple-heading">
+    <div class="ta__heading">
+      <span class="ta__eyebrow">With tilearray</span>
+      <h3 id="ta-simple-heading">Describe what you need. Work with the result.</h3>
+    </div>
+    <div class="ta__path ta__path--simple">
+      <div class="ta__step">
+        <strong>You specify</strong>
+        <span>Source configuration</span>
+        <span>Layer &amp; area</span>
+      </div>
+      <span class="ta__arrow" aria-hidden="true">→</span>
+      <div class="ta__step ta__step--library">
+        <strong>tilearray</strong>
+        <span>Handles the service details, requests and assembly</span>
+      </div>
+      <span class="ta__arrow" aria-hidden="true">→</span>
+      <div class="ta__step">
+        <strong>You get</strong>
+        <span>Dask-backed xarray</span>
+        <span>Analyse · plot · model</span>
+      </div>
+    </div>
+  </section>
+</div>
 
 <style>
-  .tilearray-fig {
-    width: 100%;
-    max-width: 26rem;
-    height: auto;
+  .ta {
+    display: grid;
+    gap: 0.7rem;
+    padding: 0.8rem;
     color: var(--colour-ink);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    line-height: 1.4;
   }
 
-  .tilearray-fig__stage rect {
-    fill: color-mix(in srgb, var(--colour-moss) 10%, var(--colour-paper));
-    stroke: var(--colour-moss);
-    stroke-width: 1.25;
+  .ta__panel {
+    min-width: 0;
+    border: 1px solid var(--colour-rule);
+    padding: 1rem;
+    background: var(--colour-paper);
   }
 
-  .tilearray-fig__stage--out rect {
-    fill: color-mix(in srgb, var(--colour-blue) 12%, var(--colour-paper));
-    stroke: var(--colour-blue);
+  .ta__panel--simple {
+    background: color-mix(in srgb, var(--colour-moss) 7%, var(--colour-paper));
+    border-color: color-mix(in srgb, var(--colour-moss) 43%, var(--colour-paper));
   }
 
-  .tilearray-fig text {
-    fill: currentColor;
+  .ta__heading {
+    margin-bottom: 0.8rem;
+  }
+
+  .ta__eyebrow {
+    display: block;
+    color: var(--colour-moss);
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.02em;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
   }
 
-  .tilearray-fig__sub {
-    font-size: 9px;
-    fill: var(--colour-muted);
+  .ta__heading h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    margin: 0;
   }
 
-  .tilearray-fig__edge {
-    stroke: currentColor;
-    stroke-width: 1.25;
+  .ta__path {
+    display: flex;
+    align-items: stretch;
+    gap: 0.45rem;
+    min-width: 0;
   }
 
-  .tilearray-fig__caption {
-    fill: var(--colour-muted);
-    font-size: 10px;
+  .ta__arrow {
+    align-self: center;
+    flex: 0 0 auto;
+    color: var(--colour-moss);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .ta__endpoint,
+  .ta__step {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+    border: 1px solid var(--colour-rule);
+    padding: 0.7rem;
+    background: var(--colour-paper);
+  }
+
+  .ta__endpoint {
+    flex: 0 0 7rem;
+  }
+
+  .ta__endpoint--out {
+    flex-basis: 6.5rem;
+  }
+
+  .ta__endpoint strong,
+  .ta__step strong {
+    font-weight: 600;
+    font-size: 0.87rem;
+  }
+
+  .ta__endpoint span,
+  .ta__step span {
+    color: var(--colour-muted);
+    font-size: 0.75rem;
+  }
+
+  .ta__details {
+    min-width: 0;
+    flex: 1;
+    border: 1px dashed var(--colour-moss);
+    padding: 0.55rem;
+    background: color-mix(in srgb, var(--colour-moss) 4%, var(--colour-paper));
+  }
+
+  .ta__details p {
+    color: var(--colour-muted);
+    font-size: 0.7rem;
+    margin: 0 0 0.45rem;
+  }
+
+  .ta__detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .ta__detail-grid span {
+    display: flex;
+    align-items: center;
+    min-height: 2.4rem;
+    padding: 0.3rem 0.4rem;
+    background: var(--colour-paper);
+    border: 1px solid var(--colour-rule);
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .ta__step {
+    flex: 1 1 0;
+    min-height: 5.6rem;
+  }
+
+  .ta__step--library {
+    flex: 1.2 1 0;
+    border-color: var(--colour-moss);
+    background: color-mix(in srgb, var(--colour-moss) 16%, var(--colour-paper));
+  }
+
+  .ta__step--library strong {
+    color: var(--colour-moss);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: -0.025em;
+  }
+
+  @media (max-width: 640px) {
+    .ta {
+      padding: 0.5rem;
+    }
+
+    .ta__panel {
+      padding: 0.75rem;
+    }
+
+    .ta__path {
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .ta__arrow {
+      transform: rotate(90deg);
+      margin: 0.12rem 0;
+    }
+
+    .ta__endpoint,
+    .ta__endpoint--out,
+    .ta__step {
+      flex: none;
+      min-height: auto;
+      padding: 0.6rem 0.75rem;
+    }
+
+    .ta__details {
+      width: 100%;
+    }
+
+    .ta__detail-grid span {
+      min-height: 2.2rem;
+    }
   }
 </style>
