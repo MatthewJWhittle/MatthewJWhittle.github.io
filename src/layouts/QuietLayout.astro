@@ -1,0 +1,112 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+/**
+ * Shared chrome for secondary pages (CV, project index, articles, notes).
+ * Quiet ← Home — no site contents rail. Homepage keeps SectionNav + shell.
+ */
+interface Props {
+  title: string;
+  description: string;
+  /** Visible H1; defaults to `title`. */
+  heading?: string;
+  /** Optional mono line above the heading (e.g. article dates). */
+  meta?: string;
+  /** Supporting line under the heading. Omit for title-only pages. */
+  lede?: string;
+  /** Landmark element. Articles use `article`; indexes use `main`. */
+  as?: 'main' | 'article';
+}
+
+const {
+  title,
+  description,
+  heading = title,
+  meta,
+  lede,
+  as = 'main',
+} = Astro.props;
+
+const Root = as;
+---
+
+<BaseLayout title={title} description={description}>
+  <Root id="main" class:list={['quiet', 'wrap']} tabindex="-1">
+    <p class="quiet__home"><a href="/">← Home</a></p>
+
+    <header class="quiet__header">
+      {meta && <p class="quiet__meta">{meta}</p>}
+      <h1 class="quiet__title">{heading}</h1>
+      {lede && <p class="quiet__lede">{lede}</p>}
+    </header>
+
+    <div class="quiet__body">
+      <slot />
+    </div>
+
+    <slot name="after" />
+  </Root>
+</BaseLayout>
+
+<style>
+  .quiet {
+    padding-block: var(--space-6) var(--space-8);
+  }
+
+  .quiet__home {
+    margin: 0 0 var(--space-5);
+    font-weight: 500;
+  }
+
+  .quiet__home a {
+    color: var(--colour-ink);
+    text-decoration: none;
+  }
+
+  .quiet__home a:hover {
+    color: var(--colour-moss);
+  }
+
+  .quiet__header {
+    max-width: var(--measure);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--colour-rule);
+  }
+
+  .quiet__meta {
+    margin: 0 0 var(--space-3);
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .quiet__title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+
+  .quiet__header:not(:has(.quiet__lede)) .quiet__title {
+    margin-bottom: 0;
+  }
+
+  .quiet__lede {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 1.125rem;
+  }
+
+  .quiet__body {
+    max-width: none;
+  }
+
+  :global(.quiet__related) {
+    margin: var(--space-7) 0 0;
+    font-weight: 500;
+  }
+</style>

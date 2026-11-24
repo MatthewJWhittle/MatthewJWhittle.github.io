@@ -1,94 +1,39 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import QuietLayout from '../../layouts/QuietLayout.astro';
 import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
 import { site } from '../../data/site';
 ---
 
-<BaseLayout
+<QuietLayout
   title="CV"
   description={`Professional experience for ${site.name}. Role history with employer, title and start dates.`}
+  lede="Professional experience. Expand a role for more detail."
 >
-  <main id="main" class="cv wrap" tabindex="-1">
-    <p class="cv__home"><a href="/">← Home</a></p>
+  <section
+    id="experience"
+    class="cv-experience"
+    aria-labelledby="experience-heading"
+  >
+    <h2 id="experience-heading" class="cv-experience__title">Experience</h2>
+    <ExperienceTimeline />
+  </section>
 
-    <header class="cv__header">
-      <h1 class="cv__title">CV</h1>
-      <p class="cv__lede">
-        Professional experience. Expand a role for more detail.
-      </p>
-    </header>
-
-    <section
-      id="experience"
-      class="cv__experience"
-      aria-labelledby="experience-heading"
-    >
-      <h2 id="experience-heading" class="cv__section-title">Experience</h2>
-      <ExperienceTimeline />
-    </section>
-
-    <p class="cv__related">
-      <a href="/work/">Projects →</a>
-    </p>
-  </main>
-</BaseLayout>
+  <p class="quiet__related" slot="after">
+    <a href="/work/">Projects →</a>
+  </p>
+</QuietLayout>
 
 <style>
-  .cv {
-    padding-block: var(--space-6) var(--space-8);
-  }
-
-  .cv__home {
-    margin: 0 0 var(--space-5);
-    font-weight: 500;
-  }
-
-  .cv__home a {
-    color: var(--colour-ink);
-    text-decoration: none;
-  }
-
-  .cv__home a:hover {
-    color: var(--colour-moss);
-  }
-
-  .cv__header {
+  .cv-experience {
     max-width: var(--measure);
-    margin-bottom: var(--space-6);
-    padding-bottom: var(--space-5);
-    border-bottom: 1px solid var(--colour-rule);
   }
 
-  .cv__title {
-    margin: 0 0 var(--space-3);
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    font-weight: 500;
-    letter-spacing: -0.025em;
-    line-height: 1.15;
-  }
-
-  .cv__lede {
-    margin: 0;
-    color: var(--colour-muted);
-    font-size: 1.125rem;
-  }
-
-  .cv__section-title {
+  .cv-experience__title {
     margin: 0 0 var(--space-4);
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 1.85rem);
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.2;
-  }
-
-  .cv__experience {
-    max-width: var(--measure);
-  }
-
-  .cv__related {
-    margin: var(--space-7) 0 0;
-    font-weight: 500;
   }
 </style>

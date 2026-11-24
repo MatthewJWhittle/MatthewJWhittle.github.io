@@ -1,4 +1,4 @@
-/* Shared sticky/fixed shell used on the homepage and /work/ index. */
+/* Sticky/fixed shell for the homepage long-scroll only. */
 
 .shell {
   min-height: 100vh;

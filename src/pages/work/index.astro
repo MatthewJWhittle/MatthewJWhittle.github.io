@@ -1,44 +1,31 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteNav from '../../components/SiteNav.astro';
+import QuietLayout from '../../layouts/QuietLayout.astro';
 import WorkTeaser from '../../components/WorkTeaser.astro';
 import { getPublishedWork } from '../../lib/content';
-import '../../styles/shell.css';
 
 const work = await getPublishedWork();
 ---
 
-<BaseLayout title="Projects" description="Selected projects and notes on things I have built.">
-  <div class="shell">
-    <aside class="shell__nav" aria-label="Site navigation">
-      <SiteNav />
-    </aside>
+<QuietLayout
+  title="Projects"
+  description="Selected projects and notes on things I have built."
+>
+  {
+    work.length === 0 ? (
+      <p class="muted">Coming soon.</p>
+    ) : (
+      <div class="teaser-list">
+        {work.map((project) => (
+          <WorkTeaser project={project} />
+        ))}
+      </div>
+    )
+  }
 
-    <main id="main" class="shell__main">
-      <section class="block" aria-labelledby="projects-heading">
-        <h1 id="projects-heading" class="block__title">Projects</h1>
-        {
-          work.length === 0 ? (
-            <p class="muted">Coming soon.</p>
-          ) : (
-            <div class="teaser-list">
-              {work.map((project) => (
-                <WorkTeaser project={project} />
-              ))}
-            </div>
-          )
-        }
-      </section>
-
-      <nav class="block work-links" aria-label="Related pages">
-        <ul>
-          <li><a href="/">← Home</a></li>
-          <li><a href="/cv/">CV →</a></li>
-        </ul>
-      </nav>
-    </main>
-  </div>
-</BaseLayout>
+  <p class="quiet__related" slot="after">
+    <a href="/cv/">CV →</a>
+  </p>
+</QuietLayout>
 
 <style>
   .muted {
@@ -48,15 +35,5 @@ const work = await getPublishedWork();
 
   .teaser-list {
     margin-top: 0;
-  }
-
-  .work-links ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem 1.5rem;
-    font-weight: 500;
   }
 </style>

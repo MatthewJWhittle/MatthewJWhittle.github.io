@@ -1,35 +1,28 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import QuietLayout from '../../layouts/QuietLayout.astro';
 import NoteTeaser from '../../components/NoteTeaser.astro';
 import { getPublishedNotes } from '../../lib/content';
 
 const notes = await getPublishedNotes();
 ---
 
-<BaseLayout title="Notes" description="Short notes.">
-  <main id="main" class="section wrap" tabindex="-1">
-    <p class="section__label">Notes</p>
-    <h1 class="section__title">Notes</h1>
-    {
-      notes.length === 0 ? (
-        <p class="section__lede">Coming soon.</p>
-      ) : (
-        <div>
-          {notes.map((note) => (
-            <NoteTeaser note={note} />
-          ))}
-        </div>
-      )
-    }
-    <p class="back">
-      <a href="/">← Home</a>
-    </p>
-  </main>
-</BaseLayout>
+<QuietLayout title="Notes" description="Short notes.">
+  {
+    notes.length === 0 ? (
+      <p class="muted">Coming soon.</p>
+    ) : (
+      <div>
+        {notes.map((note) => (
+          <NoteTeaser note={note} />
+        ))}
+      </div>
+    )
+  }
+</QuietLayout>
 
 <style>
-  .back {
-    margin-top: var(--space-6);
-    font-weight: 500;
+  .muted {
+    margin: 0;
+    color: var(--colour-muted);
   }
 </style>
