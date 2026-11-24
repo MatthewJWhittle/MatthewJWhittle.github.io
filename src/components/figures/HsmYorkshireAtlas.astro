@@ -1,5 +1,5 @@
 ---
-import HsmAtlasSwitcher from './HsmAtlasSwitcher';
+import HsmAtlasSwitcher from './HsmAtlasSwitcher.astro';
 import HsmMapLegend from './HsmMapLegend.astro';
 // Raster provenance: final3-2026-11-02, modelling git b32fd77.
 // Keep model version details in source, not displayed as UI debug metadata.
@@ -14,7 +14,7 @@ import HsmMapLegend from './HsmMapLegend.astro';
     </p>
   </div>
   <div class="hsm-figure__frame">
-    <HsmAtlasSwitcher client:load />
+    <HsmAtlasSwitcher />
     <div class="hsm-atlas__footer">
       <HsmMapLegend kind="suitability" />
       <p class="hsm-atlas__prov">

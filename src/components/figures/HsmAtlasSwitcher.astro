@@ -1,0 +1,130 @@
+---
+type SpeciesKey = 'daubenton' | 'pip' | 'noctule';
+
+const SPECIES: Record<
+  SpeciesKey,
+  { label: string; activity: string; note: string; src: string; alt: string; width: number; height: number }
+> = {
+  daubenton: {
+    label: "Daubenton's bat",
+    activity: 'In flight',
+    note: 'Higher suitability along many waterways',
+    src: '/images/hsm/panel-daubenton-if.webp',
+    alt: "Predicted relative suitability for Daubenton's bat in flight across Yorkshire.",
+    width: 781,
+    height: 629,
+  },
+  pip: {
+    label: 'Common pipistrelle',
+    activity: 'Roost',
+    note: 'A more scattered pattern of suitable areas',
+    src: '/images/hsm/panel-pip-roost.webp',
+    alt: 'Predicted relative roost suitability for common pipistrelle across Yorkshire.',
+    width: 781,
+    height: 629,
+  },
+  noctule: {
+    label: 'Noctule',
+    activity: 'Roost',
+    note: 'Broader areas of predicted suitability',
+    src: '/images/hsm/panel-noctule-roost.webp',
+    alt: 'Predicted relative roost suitability for noctule across Yorkshire.',
+    width: 781,
+    height: 629,
+  },
+};
+
+const ORDER: SpeciesKey[] = ['daubenton', 'pip', 'noctule'];
+---
+
+<div class="hsm-atlas" data-hsm-atlas>
+  <div class="hsm-atlas__controls" role="group" aria-label="Choose a species and activity">
+    {
+      ORDER.map((key, index) => {
+        const item = SPECIES[key];
+        return (
+          <button
+            type="button"
+            data-hsm-tab={key}
+            aria-pressed={index === 0 ? 'true' : 'false'}
+            class:list={['hsm-atlas__tab', index === 0 && 'is-active']}
+          >
+            <span class="hsm-atlas__tab-name">{item.label}</span>
+            <span class="hsm-atlas__tab-meta">{item.activity}</span>
+          </button>
+        );
+      })
+    }
+  </div>
+
+  {
+    ORDER.map((key, index) => {
+      const item = SPECIES[key];
+      return (
+        <div
+          class="hsm-atlas__stage"
+          data-hsm-stage={key}
+          hidden={index !== 0}
+        >
+          <p class="hsm-atlas__stage-label">
+            {item.label}
+            <span> · {item.activity}</span>
+          </p>
+          <p class="hsm-atlas__stage-note">{item.note}</p>
+          <img
+            src={item.src}
+            alt={item.alt}
+            width={item.width}
+            height={item.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      );
+    })
+  }
+
+  <noscript>
+    <ul class="hsm-atlas__fallback">
+      {
+        ORDER.map((key) => (
+          <li>
+            <a href={SPECIES[key].src}>
+              {SPECIES[key].label} ({SPECIES[key].activity})
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </noscript>
+</div>
+
+<script>
+  function initAtlas(root: Element) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-hsm-tab]'));
+    const stages = Array.from(root.querySelectorAll<HTMLElement>('[data-hsm-stage]'));
+    if (!tabs.length || !stages.length) return;
+
+    const show = (key: string) => {
+      for (const tab of tabs) {
+        const active = tab.dataset.hsmTab === key;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-pressed', active ? 'true' : 'false');
+      }
+      for (const stage of stages) {
+        stage.hidden = stage.dataset.hsmStage !== key;
+      }
+    };
+
+    for (const tab of tabs) {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.hsmTab;
+        if (key) show(key);
+      });
+    }
+  }
+
+  for (const root of document.querySelectorAll('[data-hsm-atlas]')) {
+    initAtlas(root);
+  }
+</script>
