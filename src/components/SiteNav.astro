@@ -3,8 +3,9 @@ import { site } from '../data/site';
 import '../styles/section-nav.css';
 
 /**
- * Cross-page site chrome for routes that are not the homepage long-scroll.
+ * Site chrome for the projects index (/work/).
  * Homepage keeps SectionNav (About / Projects / Contact hash targets).
+ * /cv/ and project articles stay quiet (← Home), per owner preference.
  */
 const normalised = Astro.url.pathname.replace(/\/+$/, '') || '/';
 
