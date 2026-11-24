@@ -97,7 +97,7 @@ Use when meaningful:
 
 The homepage is a restrained, semi-personal, semi-professional home for the things Matthew builds and learns. The shared thread is curiosity about useful technology, with roots in ecology and science and experience across data, software, machine learning and leadership. Do not turn it into a specialist SDM site or a job-seeking brochure.
 
-**Order and navigation:** About/introduction → Projects → Contact on the homepage. Sticky section nav tracks those on-page sections and links to a separate **`/cv/`** route for the experience timeline. Projects come first on the home scroll; career history remains one click away.
+**Order and navigation:** About/introduction → Projects → Contact on the homepage. Sticky section nav tracks those on-page sections only (About, Projects, Contact). Career history lives on a separate **`/cv/`** route, linked from the About introduction — not from the homepage sticky nav. Projects come first on the home scroll; career history remains one click away.
 
 **Current public project selection:** tilearray and Sheffield Bats. Publish other projects, case studies, notes or personal interests only after explicit approval and verification of what is public. Older libraries should not be revived merely to fill space. Project writing may include case studies and shorter notes; no compulsory blog cadence.
 

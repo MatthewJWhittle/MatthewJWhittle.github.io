@@ -2,22 +2,9 @@
 import { sections, site } from '../data/site';
 import '../styles/section-nav.css';
 
-/** On-page sections only — CV is a separate route, not a hash target. */
+/** Homepage sticky nav: on-page sections only (About, Projects, Contact).
+ *  CV is reached from the About intro link → /cv/, not this list. */
 const sectionIds = sections.map((section) => section.id);
-
-/** Nav rows: homepage hash sections with a CV route after Projects. */
-const navItems = sections.flatMap((section) => {
-  const item = {
-    kind: 'section' as const,
-    id: section.id,
-    label: section.label,
-    href: `#${section.id}`,
-  };
-  if (section.id === 'projects') {
-    return [item, { kind: 'route' as const, id: 'cv', label: 'CV', href: '/cv/' }];
-  }
-  return [item];
-});
 ---
 
 <nav class="section-nav" aria-label="On this page" data-section-nav>
@@ -26,19 +13,13 @@ const navItems = sections.flatMap((section) => {
   </p>
   <ul class="section-nav__list">
     {
-      navItems.map((item) =>
-        item.kind === 'section' ? (
-          <li>
-            <a href={item.href} data-section-link={item.id}>
-              {item.label}
-            </a>
-          </li>
-        ) : (
-          <li>
-            <a href={item.href}>{item.label}</a>
-          </li>
-        ),
-      )
+      sections.map((section) => (
+        <li>
+          <a href={`#${section.id}`} data-section-link={section.id}>
+            {section.label}
+          </a>
+        </li>
+      ))
     }
   </ul>
 </nav>
