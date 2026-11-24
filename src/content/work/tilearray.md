@@ -1,6 +1,6 @@
 ---
 title: tilearray
-summary: A Python library for getting imagery and raster data from remote OGC and tile services into arrays you can work with.
+summary: TileArray is a Python library I'm building to make raster data from online mapping services easier to work with. You choose a source and an area; it handles the fetching and assembly, so you can get on with analysing the data instead of building a tile acquisition pipeline.
 startedYear: 2025
 tags: [geospatial, python, open-source]
 featured: true
