@@ -8,8 +8,8 @@ const panels = [
     src: '/images/tilearray/panel-naip-sacramento.webp',
     width: 1000,
     height: 1000,
-    label: 'Computer vision imagery',
-    meta: 'USGS NAIP · Sacramento fields',
+    label: 'Aerial imagery',
+    meta: 'USGS NAIP · Sacramento, California',
     alt: 'NAIP aerial photograph of farmland, river and suburban edge near Sacramento, California.',
   },
   {
@@ -24,7 +24,7 @@ const panels = [
     src: '/images/tilearray/panel-wms-ea-vom.webp',
     width: 1000,
     height: 1000,
-    label: 'Environmental map layer',
+    label: 'Vegetation map layer',
     meta: 'EA Vegetation Object Model · WMS',
     alt: 'Rendered Environment Agency Vegetation Object Model layer showing canopy objects as green features on a grey base.',
   },
@@ -34,10 +34,10 @@ const panels = [
 <figure class="ta-gal ta-gal--wide">
   <div class="ta-gal__chrome">
     <p class="ta-gal__eyebrow">FIG. 02</p>
-    <p class="ta-gal__title">Different jobs, same idea</p>
+    <p class="ta-gal__title">Different kinds of raster data</p>
     <p class="ta-gal__lede">
-      Aerial patches for models, numeric elevation for terrain work, and a rendered environmental layer —
-      each fetched as a georeferenced array from a public service.
+      Aerial imagery, elevation data and a vegetation map layer — three examples retrieved
+      from public services using TileArray.
     </p>
   </div>
   <div class="ta-gal__grid">
@@ -59,9 +59,9 @@ const panels = [
     }
   </div>
   <figcaption class="ta-gal__caption">
-    Left: USGS / USDA NAIP NaturalColor (public domain) — imagery pixels for computer vision.
-    Middle: Environment Agency Lidar Composite DTM 1&nbsp;m (OGL v3.0); hillshade is a derived view of the numeric array (~422–950&nbsp;m OD over Helvellyn / Striding Edge).
-    Right: Environment Agency Vegetation Object Model 2022 via WMS (OGL v3.0) — rendered map imagery, not scientific measurements.
+    Aerial imagery: USGS / USDA NAIP NaturalColor (public domain).
+    Elevation: Environment Agency Lidar Composite DTM 1&nbsp;m (OGL v3.0), shown as a hillshade derived from numerical heights.
+    Vegetation: Environment Agency Vegetation Object Model 2022 via WMS (OGL v3.0), a rendered map layer rather than numerical measurements.
   </figcaption>
 </figure>
 
