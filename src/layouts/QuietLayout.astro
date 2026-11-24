@@ -5,6 +5,9 @@ import BaseLayout from './BaseLayout.astro';
  * Shared chrome for secondary pages (CV, project index, articles, notes).
  * One back link to the page’s parent — no sibling cross-links, no contents rail.
  * Homepage keeps SectionNav + shell.
+ *
+ * Root tags are static (`main` / `article`), not a dynamic component — Astro
+ * scoped styles do not reliably attach to dynamic tags.
  */
 interface Props {
   title: string;
@@ -34,23 +37,41 @@ const {
   backLabel = '← Home',
 } = Astro.props;
 
-const Root = as;
+const isArticle = as === 'article';
 ---
 
 <BaseLayout title={title} description={description}>
-  <Root id="main" class:list={['quiet', 'wrap']} tabindex="-1">
-    <p class="quiet__back"><a href={backHref}>{backLabel}</a></p>
-
-    <header class="quiet__header">
-      {meta && <p class="quiet__meta">{meta}</p>}
-      <h1 class="quiet__title">{heading}</h1>
-      {lede && <p class="quiet__lede">{lede}</p>}
-    </header>
-
-    <div class="quiet__body">
-      <slot />
-    </div>
-  </Root>
+  {
+    isArticle ? (
+      <article id="main" class="quiet wrap" tabindex="-1">
+        <p class="quiet__back">
+          <a href={backHref}>{backLabel}</a>
+        </p>
+        <header class="quiet__header">
+          {meta && <p class="quiet__meta">{meta}</p>}
+          <h1 class="quiet__title">{heading}</h1>
+          {lede && <p class="quiet__lede">{lede}</p>}
+        </header>
+        <div class="quiet__body">
+          <slot />
+        </div>
+      </article>
+    ) : (
+      <main id="main" class="quiet wrap" tabindex="-1">
+        <p class="quiet__back">
+          <a href={backHref}>{backLabel}</a>
+        </p>
+        <header class="quiet__header">
+          {meta && <p class="quiet__meta">{meta}</p>}
+          <h1 class="quiet__title">{heading}</h1>
+          {lede && <p class="quiet__lede">{lede}</p>}
+        </header>
+        <div class="quiet__body">
+          <slot />
+        </div>
+      </main>
+    )
+  }
 </BaseLayout>
 
 <style>
