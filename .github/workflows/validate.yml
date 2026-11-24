@@ -29,8 +29,12 @@ jobs:
           test -f dist/work/tilearray/index.html
           test -f dist/work/bat-habitat-yorkshire/index.html
           test -f dist/work/sheffield-bats/index.html
-          test -f dist/images/hsm/yorkshire-daubentons-in-flight-2026.png
-          test -f dist/images/hsm/yorkshire-noctule-roost-2026.png
+          test -f dist/images/hsm/panel-daubenton-if.webp
+          test -f dist/images/hsm/panel-recording-intensity.webp
+          test ! -e dist/images/hsm/yorkshire-daubentons-in-flight-2026.png
+          test ! -e dist/images/hsm/yorkshire-noctule-roost-2026.png
+          ! grep -q 'fonts.googleapis.com\|fonts.gstatic.com' dist/work/tilearray/index.html
+          ! grep -q 'fonts.googleapis.com\|fonts.gstatic.com' dist/work/bat-habitat-yorkshire/index.html
           test ! -e dist/work/habitat-mapping/index.html
           test ! -e dist/work/camera-trap-triage/index.html
           test ! -e dist/work/book-chain-eudr/index.html
