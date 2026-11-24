@@ -7,9 +7,12 @@ featured: true
 draft: false
 repositoryUrl: https://github.com/MatthewJWhittle/tilearray
 docsUrl: https://matthewjwhittle.github.io/tilearray/
-figureId: tilearray
 ---
 
+import TilearrayHero from '../../components/figures/TilearrayHero.astro';
+import TilearrayGallery from '../../components/figures/TilearrayGallery.astro';
+import TilearrayFigure from '../../components/figures/TilearrayFigure.astro';
+import Figure from '../../components/Figure.astro';
 
 ## I just wanted the imagery
 
@@ -31,15 +34,19 @@ You need to know which layer to ask for, where the tiles sit in space, what area
 
 What I kept wanting was much simpler: **point at a data source, choose an area and get an array back**.
 
+<TilearrayHero />
+
 ## What TileArray lets you do
 
 [TileArray](https://github.com/MatthewJWhittle/tilearray) is a Python library I'm building to take care of that common work. You describe the source and the area you need, and it gives you a georeferenced **xarray** object to use with other Python tools.
 
-A straightforward example uses OpenStreetMap tiles: choose an area around London and assemble the map tiles into an array with spatial coordinates. That's a rendered map, not the aerial photography that prompted the project, but the problem of retrieving a particular area is much the same.
+A straightforward public example uses USGS NAIP aerial imagery: choose an area around San Francisco Bay and assemble the orthophoto tiles into an array. The same pattern works for other hosts — OpenStreetMap XYZ tiles are a convenient map-service demo when you want a rendered basemap rather than aerial photography.
 
-Other services provide different kinds of raster data. The Environment Agency's WCS service can provide numerical elevation values for terrain analysis. A Kartverket WMTS service provides topographic map imagery, while the Environment Agency's WMS service can provide a rendered vegetation layer.
+Other services provide different kinds of raster data. The Environment Agency's WCS service can provide numerical elevation values for terrain analysis — Helvellyn in the Lake District is a clear example. Their WMS service can provide a rendered vegetation layer as an array as well.
 
-That distinction matters. A WCS elevation array contains values you can measure and analyse. A rendered map layer is imagery — useful for display or image-based work, but it doesn't necessarily preserve the underlying measurements.
+<TilearrayGallery />
+
+That distinction matters. A WCS elevation array contains values you can measure and analyse. A rendered map or imagery layer is useful for display or image-based work, but it doesn't necessarily preserve underlying scientific measurements.
 
 Once I've got the result in Python, I can use the usual tools to inspect, plot and process it, or pass it into a machine-learning workflow. The point is to spend less time on data acquisition and more time on the work that needed the data in the first place.
 
@@ -48,6 +55,10 @@ The [documentation](https://matthewjwhittle.github.io/tilearray/) includes [work
 ## How it works
 
 TileArray handles several different service types through a common interface. For a tiled source, it works out which requests cover the area and how their results fit together. It then provides a lazy, Dask-backed array; the actual pixel data is fetched and assembled when you compute it.
+
+<Figure id="FIG. 03" caption="The same goal, with and without a shared way to handle the service-specific work.">
+  <TilearrayFigure />
+</Figure>
 
 There are a few decisions behind that workflow that I think are particularly important.
 

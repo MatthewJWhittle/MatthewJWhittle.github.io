@@ -107,10 +107,10 @@ def dashed_rect(draw: ImageDraw.ImageDraw, box: list[int], colour=MUTED, dash: i
 
 
 def choose_display_aoi(panel_w: int, panel_h: int) -> tuple[int, int, int, int]:
-    """AOI in left-panel local pixels — fully inside, recognisable Greenwich crop."""
-    aw = int(panel_w * 0.42)
-    ah = int(panel_h * 0.46)
-    ax0 = int(panel_w * 0.29)
+    """AOI in left-panel local pixels — Golden Gate bridge span on NAIP SF."""
+    aw = int(panel_w * 0.38)
+    ah = int(panel_h * 0.42)
+    ax0 = int(panel_w * 0.31)
     ay0 = int(panel_h * 0.28)
     return ax0, ay0, ax0 + aw, ay0 + ah
 
@@ -218,7 +218,7 @@ def compose_hero(osm: Image.Image, width: int, height: int, stacked: bool) -> Im
             "y1": int(round((ay1 + top) / scale)),
         }
         GEOM["aoi_display_desktop"] = {"panel": [left_w, panel_h], "local": [ax0, ay0, ax1, ay1]}
-        extract.convert("RGB").save(PANELS / "panel-xyz-osm-london-aoi.png", optimize=True)
+        extract.convert("RGB").save(PANELS / "panel-naip-sf-aoi.png", optimize=True)
 
         rx0 = margin + left_w + gap
         paste_extract(extract, (rx0, margin, rx0 + right_w, margin + panel_h), box)
@@ -459,20 +459,17 @@ def main() -> None:
     EXPORTS.mkdir(parents=True, exist_ok=True)
     REVIEW.mkdir(parents=True, exist_ok=True)
 
-    kart_raw = Path("/tmp/ta-raw/kartverket-oslo.png")
-    if kart_raw.exists():
-        Image.open(kart_raw).convert("RGB").save(PANELS / "panel-wmts-kartverket-oslo.png", optimize=True)
-
-    osm = Image.open(PANELS / "panel-xyz-osm-london.png")
-    elev = Image.open(PANELS / "panel-wcs-ea-lidar-hillshade.png")
-    kart = Image.open(PANELS / "panel-wmts-kartverket-oslo.png")
+    # Locked editorial picks (PR #25): Hero A NAIP SF; Gallery = NAIP CV · Helvellyn · VOM
+    hero_src = Image.open(PANELS / "panel-naip-sf.png")
+    cv = Image.open(PANELS / "panel-naip-sacramento.png")
+    elev = Image.open(PANELS / "panel-wcs-ea-helvellyn-hillshade.png")
     vom = Image.open(PANELS / "panel-wms-ea-vom.png")
-    print("kart", kart.size, "elev", elev.size)
+    print("hero", hero_src.size, "cv", cv.size, "elev", elev.size, "vom", vom.size)
 
-    hero_d = compose_hero(osm, 1400, 720, stacked=False)
-    hero_m = compose_hero(osm, 780, 1280, stacked=True)
-    gal_d = compose_gallery(elev, kart, vom, 1400, 560, stacked=False)
-    gal_m = compose_gallery(elev, kart, vom, 780, 1500, stacked=True)
+    hero_d = compose_hero(hero_src, 1400, 720, stacked=False)
+    hero_m = compose_hero(hero_src, 780, 1280, stacked=True)
+    gal_d = compose_gallery(cv, elev, vom, 1400, 560, stacked=False)
+    gal_m = compose_gallery(cv, elev, vom, 780, 1500, stacked=True)
     pipe_d = compose_pipeline(1400, 440, stacked=False)
     pipe_m = compose_pipeline(780, 1400, stacked=True)
 

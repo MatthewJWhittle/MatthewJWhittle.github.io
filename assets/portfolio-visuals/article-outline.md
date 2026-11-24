@@ -31,8 +31,8 @@ Tangible examples — elevation you can analyse, map or imagery mosaics, rendere
 
 **Place fig02 (gallery) here.** Panel captions outside the image, e.g.:
 
-- Elevation for terrain analysis (WCS; hillshade is a derived view)
-- Topo mosaic assembled from WMTS tiles
+- CV imagery (NAIP Sacramento)
+- Elevation for terrain analysis (EA Helvellyn DTM; hillshade is a derived view)
 - Vegetation layer from WMS as an array (rendered imagery)
 
 One short note that WMS/XYZ pixels are usually rendered map/image values, not preserved scientific measurements.
