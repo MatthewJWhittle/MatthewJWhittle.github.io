@@ -28,3 +28,4 @@ pnpm-debug.log*
 .Rhistory
 .RData
 .Ruserdata
+.playwright-mcp/

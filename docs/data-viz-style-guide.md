@@ -14,7 +14,7 @@ Aim for **contemporary scientific atlas + data-journalism quality**: calm, preci
 
 ### Exemplars
 
-Yorkshire bat HSM figures in the live article (`bat-habitat-yorkshire`) assemble **HTML/CSS chrome + clean map panels** (`public/images/hsm/panel-*.png`). Stage 1 presentation composites remain under [`assets/bat-atlas-visuals-stage1/`](../assets/bat-atlas-visuals-stage1/) as design references only.
+Yorkshire bat HSM figures in the live article (`bat-habitat-yorkshire`) assemble **HTML/CSS chrome + clean map panels** served as WebP (`public/images/hsm/panel-*.webp`). PNG masters live under [`assets/bat-atlas-visuals-stage1/panels/`](../assets/bat-atlas-visuals-stage1/panels/). Stage 1 presentation composites remain under [`assets/bat-atlas-visuals-stage1/`](../assets/bat-atlas-visuals-stage1/) as design references only.
 
 Prefer modular construction: titles, legends and captions in the page; continuous rasters without baked-in typography.
 

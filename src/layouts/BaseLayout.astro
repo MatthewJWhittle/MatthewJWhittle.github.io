@@ -1,4 +1,12 @@
 ---
+import '@fontsource/source-sans-3/latin-400.css';
+import '@fontsource/source-sans-3/latin-500.css';
+import '@fontsource/source-sans-3/latin-600.css';
+import '@fontsource/newsreader/latin-500.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
+import sourceSans400 from '@fontsource/source-sans-3/files/source-sans-3-latin-400-normal.woff2?url';
+import newsreader500 from '@fontsource/newsreader/files/newsreader-latin-500-normal.woff2?url';
 import '../styles/global.css';
 import { site } from '../data/site';
 
@@ -30,11 +38,19 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Source+Sans+3:wght@400;500;600&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href={sourceSans400}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={newsreader500}
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <title>{pageTitle}</title>
   </head>
