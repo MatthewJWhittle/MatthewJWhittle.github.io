@@ -1,0 +1,49 @@
+---
+import { site } from '../data/site';
+import '../styles/section-nav.css';
+
+/**
+ * Cross-page site chrome for routes that are not the homepage long-scroll.
+ * Homepage keeps SectionNav (About / Projects / Contact hash targets).
+ */
+const normalised = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const items = [
+  {
+    href: '/',
+    label: 'Home',
+    current: normalised === '/',
+  },
+  {
+    href: '/cv/',
+    label: 'CV',
+    current: normalised === '/cv',
+  },
+  {
+    href: '/work/',
+    label: 'Projects',
+    current: normalised === '/work' || normalised.startsWith('/work/'),
+  },
+] as const;
+---
+
+<nav class="section-nav" aria-label="Site">
+  <p class="section-nav__name">
+    <a href="/">{site.name}</a>
+  </p>
+  <ul class="section-nav__list">
+    {
+      items.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={item.current ? 'page' : undefined}
+            class:list={{ 'is-active': item.current }}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

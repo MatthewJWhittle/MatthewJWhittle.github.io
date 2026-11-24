@@ -107,9 +107,9 @@ Keep the existing palette, fonts, legible article layouts and real project diagr
 
 Current routes and content:
 
-- `/` — homepage with About, Projects and Contact sections; About links to the CV;
-- `/cv/` — shareable CV page with the experience timeline (progressive disclosure); room later for profile, education and skills without inventing content now;
-- `/work/` and `/work/[slug]/` — public project index and case studies;
+- `/` — homepage with About, Projects and Contact sections; sticky section nav tracks those on-page anchors; About links to the CV;
+- `/cv/` — shareable CV page with the experience timeline (progressive disclosure); room later for profile, education and skills without inventing content now; uses the shared site chrome (Home / CV / Projects);
+- `/work/` and `/work/[slug]/` — public project index and case studies; the index uses the same site chrome as `/cv/`; article pages keep a simple back-to-home link for now;
 - `/notes/` and `/notes/[slug]/` — optional note infrastructure; do not advertise empty or unapproved content;
 - `/404.html` — helpful fallback.
 

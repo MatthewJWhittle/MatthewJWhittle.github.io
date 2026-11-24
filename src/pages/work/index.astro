@@ -1,35 +1,62 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteNav from '../../components/SiteNav.astro';
 import WorkTeaser from '../../components/WorkTeaser.astro';
 import { getPublishedWork } from '../../lib/content';
+import '../../styles/shell.css';
 
 const work = await getPublishedWork();
 ---
 
 <BaseLayout title="Projects" description="Selected projects and notes on things I have built.">
-  <main id="main" class="section wrap" tabindex="-1">
-    <p class="section__label">Projects</p>
-    <h1 class="section__title">Projects</h1>
-    {
-      work.length === 0 ? (
-        <p class="section__lede">Coming soon.</p>
-      ) : (
-        <div>
-          {work.map((project) => (
-            <WorkTeaser project={project} />
-          ))}
-        </div>
-      )
-    }
-    <p class="back">
-      <a href="/#projects">← Back</a>
-    </p>
-  </main>
+  <div class="shell">
+    <aside class="shell__nav" aria-label="Site navigation">
+      <SiteNav />
+    </aside>
+
+    <main id="main" class="shell__main">
+      <section class="block" aria-labelledby="projects-heading">
+        <h1 id="projects-heading" class="block__title">Projects</h1>
+        {
+          work.length === 0 ? (
+            <p class="muted">Coming soon.</p>
+          ) : (
+            <div class="teaser-list">
+              {work.map((project) => (
+                <WorkTeaser project={project} />
+              ))}
+            </div>
+          )
+        }
+      </section>
+
+      <nav class="block work-links" aria-label="Related pages">
+        <ul>
+          <li><a href="/#projects">← Home</a></li>
+          <li><a href="/cv/">CV →</a></li>
+        </ul>
+      </nav>
+    </main>
+  </div>
 </BaseLayout>
 
 <style>
-  .back {
-    margin-top: var(--space-6);
+  .muted {
+    margin: 0;
+    color: var(--colour-muted);
+  }
+
+  .teaser-list {
+    margin-top: 0;
+  }
+
+  .work-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
     font-weight: 500;
   }
 </style>
