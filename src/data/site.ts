@@ -97,10 +97,9 @@ export const site = {
 
 export type TimelineEntry = (typeof site.timeline)[number];
 
-/** Nav order matches page section order. */
+/** Homepage on-page sections (hash targets). CV is a separate /cv/ route. */
 export const sections = [
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
-  { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' },
 ] as const;

@@ -1,0 +1,155 @@
+---
+import { sections, site } from '../data/site';
+import '../styles/section-nav.css';
+
+/** On-page sections only — CV is a separate route, not a hash target. */
+const sectionIds = sections.map((section) => section.id);
+
+/** Nav rows: homepage hash sections with a CV route after Projects. */
+const navItems = sections.flatMap((section) => {
+  const item = {
+    kind: 'section' as const,
+    id: section.id,
+    label: section.label,
+    href: `#${section.id}`,
+  };
+  if (section.id === 'projects') {
+    return [item, { kind: 'route' as const, id: 'cv', label: 'CV', href: '/cv/' }];
+  }
+  return [item];
+});
+---
+
+<nav class="section-nav" aria-label="On this page" data-section-nav>
+  <p class="section-nav__name">
+    <a href="#about">{site.name}</a>
+  </p>
+  <ul class="section-nav__list">
+    {
+      navItems.map((item) =>
+        item.kind === 'section' ? (
+          <li>
+            <a href={item.href} data-section-link={item.id}>
+              {item.label}
+            </a>
+          </li>
+        ) : (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ),
+      )
+    }
+  </ul>
+</nav>
+
+<script define:vars={{ sectionIds }}>
+  /**
+   * Scroll-spy for homepage section nav.
+   *
+   * The previous React IntersectionObserver only updated when a callback entry
+   * was intersecting. When none of the changed entries intersected (common when
+   * scrolling between sections or into a tall block), the active underline stayed
+   * stale — especially noticeable on mobile for Experience. Resolve from scroll
+   * position on every frame instead so one section is always current.
+   */
+  function initSectionNav() {
+    const root = document.querySelector('[data-section-nav]');
+    if (!(root instanceof HTMLElement) || root.dataset.navReady === 'true') return;
+    root.dataset.navReady = 'true';
+
+    const links = Array.from(
+      root.querySelectorAll('[data-section-link]'),
+    ).filter((node) => node instanceof HTMLAnchorElement);
+
+    if (!links.length) return;
+
+    const ids = sectionIds;
+
+    function setActive(id) {
+      for (const link of links) {
+        const linkId = link.getAttribute('data-section-link');
+        const isCurrent = linkId === id;
+        link.classList.toggle('is-active', isCurrent);
+        if (isCurrent) {
+          link.setAttribute('aria-current', 'location');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      }
+    }
+
+    function resolveActive() {
+      // Pick the section with the largest visible area below the sticky nav.
+      // A fixed probe line under the nav stays inside an earlier tall section
+      // while the user is already reading a shorter later one (Contact, and
+      // previously Experience) — that was the unreliable mobile underline.
+      const nav = document.querySelector('.shell__nav');
+      let viewTop = 0;
+      if (nav instanceof HTMLElement) {
+        const navRect = nav.getBoundingClientRect();
+        // Mobile sticky bar only — the desktop rail is full viewport height and
+        // must not collapse the visible band to zero.
+        if (navRect.height < window.innerHeight * 0.5) {
+          viewTop = navRect.bottom;
+        }
+      }
+      const viewBottom = window.innerHeight;
+
+      let active = ids[0] ?? 'about';
+      let bestVisible = -1;
+
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        const visible =
+          Math.min(rect.bottom, viewBottom) - Math.max(rect.top, viewTop);
+        if (visible > bestVisible) {
+          bestVisible = visible;
+          active = id;
+        }
+      }
+
+      return active;
+    }
+
+    let ticking = false;
+    function onScrollOrResize() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setActive(resolveActive());
+        ticking = false;
+      });
+    }
+
+    const hashId = window.location.hash.replace(/^#/, '');
+    if (hashId && ids.includes(hashId)) {
+      setActive(hashId);
+    } else {
+      setActive(resolveActive());
+    }
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+    window.addEventListener('hashchange', () => {
+      const id = window.location.hash.replace(/^#/, '');
+      if (id && ids.includes(id)) {
+        setActive(id);
+      } else {
+        setActive(resolveActive());
+      }
+    });
+
+    for (const link of links) {
+      link.addEventListener('click', () => {
+        const id = link.getAttribute('data-section-link');
+        if (id) setActive(id);
+      });
+    }
+  }
+
+  initSectionNav();
+  document.addEventListener('astro:page-load', initSectionNav);
+</script>

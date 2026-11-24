@@ -55,6 +55,14 @@
   text-underline-offset: 0.22em;
 }
 
+/* Keyboard focus is separate from scroll-active underline. */
+.section-nav__list a:focus-visible {
+  color: var(--colour-ink);
+  outline: 2px solid var(--colour-moss);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 @media (min-width: 860px) {
   .section-nav {
     padding: 0;

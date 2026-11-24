@@ -97,7 +97,7 @@ Use when meaningful:
 
 The homepage is a restrained, semi-personal, semi-professional home for the things Matthew builds and learns. The shared thread is curiosity about useful technology, with roots in ecology and science and experience across data, software, machine learning and leadership. Do not turn it into a specialist SDM site or a job-seeking brochure.
 
-**Order and navigation:** About/introduction → Projects → Experience → Contact. Experience should be easy to find, with a concise timeline and accessible progressive disclosure. Projects come first.
+**Order and navigation:** About/introduction → Projects → Contact on the homepage. Sticky section nav tracks those on-page sections and links to a separate **`/cv/`** route for the experience timeline. Projects come first on the home scroll; career history remains one click away.
 
 **Current public project selection:** tilearray and Sheffield Bats. Publish other projects, case studies, notes or personal interests only after explicit approval and verification of what is public. Older libraries should not be revived merely to fill space. Project writing may include case studies and shorter notes; no compulsory blog cadence.
 
@@ -107,12 +107,13 @@ Keep the existing palette, fonts, legible article layouts and real project diagr
 
 Current routes and content:
 
-- `/` — homepage with About, Projects, Experience and Contact sections;
+- `/` — homepage with About, Projects and Contact sections; About links to the CV;
+- `/cv/` — shareable CV page with the experience timeline (progressive disclosure); room later for profile, education and skills without inventing content now;
 - `/work/` and `/work/[slug]/` — public project index and case studies;
 - `/notes/` and `/notes/[slug]/` — optional note infrastructure; do not advertise empty or unapproved content;
 - `/404.html` — helpful fallback.
 
-A separate About page is not needed in the current iteration. Do not add routes merely to match an older specification.
+A separate About page is not needed in the current iteration. Prefer Astro plus minimal client-side JS for simple behaviours such as section scroll-spy; keep React islands for genuinely interactive figures.
 
 Prefer **Astro content collections** for projects and notes. Use Markdown or MDX only where interactive components are genuinely required.
 

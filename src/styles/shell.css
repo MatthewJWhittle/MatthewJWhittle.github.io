@@ -1,0 +1,84 @@
+/* Shared sticky/fixed shell used on the homepage and /cv/. */
+
+.shell {
+  min-height: 100vh;
+}
+
+.shell__nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--colour-paper) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--colour-rule);
+}
+
+.shell__main {
+  padding-inline: var(--gutter);
+  padding-block: var(--space-5) var(--space-8);
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+}
+
+.block {
+  padding-block: var(--space-7);
+  scroll-margin-top: 5.5rem;
+}
+
+.block + .block {
+  border-top: 1px solid var(--colour-rule);
+}
+
+.block__title {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.block__lede {
+  margin: 0 0 var(--space-5);
+  max-width: var(--measure);
+  color: var(--colour-muted);
+  font-size: 1.125rem;
+}
+
+@media (min-width: 860px) {
+  .shell {
+    position: relative;
+    max-width: var(--max-page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .shell__nav {
+    position: fixed;
+    top: 0;
+    left: max(var(--gutter), calc((100vw - var(--max-page)) / 2 + var(--gutter)));
+    width: 11.5rem;
+    height: 100vh;
+    z-index: 30;
+    border-bottom: 0;
+    background: var(--colour-paper);
+    backdrop-filter: none;
+    padding-block: var(--space-7) var(--space-5);
+    overflow-y: auto;
+  }
+
+  .shell__main {
+    margin-left: calc(11.5rem + var(--space-6));
+    padding-inline: 0;
+    padding-block: var(--space-7) var(--space-8);
+    max-width: none;
+  }
+
+  .block {
+    scroll-margin-top: var(--space-6);
+    padding-block: var(--space-8);
+  }
+
+  .block:first-child {
+    padding-top: var(--space-7);
+  }
+}
