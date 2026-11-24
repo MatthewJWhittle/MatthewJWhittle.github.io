@@ -1,0 +1,64 @@
+{
+  "aoi_px": {
+    "x0": 331,
+    "y0": 215,
+    "x1": 691,
+    "y1": 568
+  },
+  "osm_size": [
+    1024,
+    768
+  ],
+  "pipeline_tiles": {
+    "zoom": 15,
+    "grid": [
+      3,
+      2
+    ],
+    "tiles": [
+      {
+        "x": 16383,
+        "y": 10896,
+        "file": "tiles/tile_16383_10896.png"
+      },
+      {
+        "x": 16384,
+        "y": 10896,
+        "file": "tiles/tile_16384_10896.png"
+      },
+      {
+        "x": 16385,
+        "y": 10896,
+        "file": "tiles/tile_16385_10896.png"
+      },
+      {
+        "x": 16383,
+        "y": 10897,
+        "file": "tiles/tile_16383_10897.png"
+      },
+      {
+        "x": 16384,
+        "y": 10897,
+        "file": "tiles/tile_16384_10897.png"
+      },
+      {
+        "x": 16385,
+        "y": 10897,
+        "file": "tiles/tile_16385_10897.png"
+      }
+    ],
+    "attribution": "\u00a9 OpenStreetMap contributors"
+  },
+  "aoi_display_desktop": {
+    "panel": [
+      727,
+      650
+    ],
+    "local": [
+      210,
+      182,
+      515,
+      481
+    ]
+  }
+}

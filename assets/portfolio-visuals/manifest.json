@@ -1,5 +1,5 @@
 {
-  "status": "stage1-first-pass",
+  "status": "stage1-revision-geometry",
   "issue": "https://github.com/MatthewJWhittle/MatthewJWhittle.github.io/issues/16",
   "generated": "2026-11-24",
   "api_notes": {
@@ -24,8 +24,10 @@
         "panels/panel-xyz-osm-london.png",
         "panels/panel-xyz-osm-london-aoi.png"
       ],
-      "intended_placement": "Article section 'What I wanted to do' — immediately after the opening problem statement",
-      "source_ids": ["osm_london"]
+      "intended_placement": "Article section 'What I wanted to do' \u2014 immediately after the opening problem statement",
+      "source_ids": [
+        "osm_london"
+      ]
     },
     {
       "id": "fig02",
@@ -50,7 +52,11 @@
         "rendered vegetation layer as an array (WMS imagery, not measurement values)"
       ],
       "intended_placement": "Article section 'What it lets you work with'",
-      "source_ids": ["ea_lidar", "kartverket_oslo", "ea_vom"]
+      "source_ids": [
+        "ea_lidar",
+        "kartverket_oslo",
+        "ea_vom"
+      ]
     },
     {
       "id": "fig03",
@@ -64,8 +70,10 @@
         "desktop": "review/fig03-desktop-1400.png",
         "mobile": "review/fig03-mobile-390.png"
       },
-      "intended_placement": "Article section 'How it works, for the curious' — candidate to replace TilearrayFigure.astro",
-      "source_ids": ["osm_london"],
+      "intended_placement": "Article section 'How it works, for the curious' \u2014 candidate to replace TilearrayFigure.astro",
+      "source_ids": [
+        "osm_london"
+      ],
       "stages": [
         "plan: AOI over tile grid",
         "fetch: only a few tiles in flight",
@@ -79,18 +87,32 @@
       "service": "XYZ",
       "host": "openstreetmap",
       "endpoint": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-      "attribution": "© OpenStreetMap contributors",
+      "attribution": "\u00a9 OpenStreetMap contributors",
       "licence": "ODbL (OpenStreetMap)",
-      "bbox_query": [-0.015, 51.492, 0.015, 51.508],
+      "bbox_query": [
+        -0.015,
+        51.492,
+        0.015,
+        51.508
+      ],
       "crs_query": "EPSG:4326",
       "crs_mosaic": "EPSG:3857",
       "zoom": 15,
       "expand_palette": true,
       "fetch_policy": "osm_fetch_defaults (max 2 in-flight)",
-      "aoi_pixel_crop": {"x0": 297, "y0": 223, "w": 430, "h": 322},
-      "shape": [768, 1024, 3],
+      "aoi_pixel_crop": {
+        "x0": 331,
+        "y0": 215,
+        "w": 360,
+        "h": 353
+      },
+      "shape": [
+        768,
+        1024,
+        3
+      ],
       "acquired": "2026-11-24",
-      "tooling": "tilearray 0.3.3 create_array → compute_mosaic"
+      "tooling": "tilearray 0.3.3 create_array \u2192 compute_mosaic"
     },
     "kartverket_oslo": {
       "service": "WMTS",
@@ -98,14 +120,23 @@
       "endpoint": "https://cache.kartverket.no/v1/wmts/1.0.0/WMTSCapabilities.xml",
       "layer": "topo",
       "tile_matrix_set": "utm33n",
-      "attribution": "© Kartverket (CC BY 4.0)",
+      "attribution": "\u00a9 Kartverket (CC BY 4.0)",
       "licence": "CC BY 4.0",
-      "bbox_query": [10.6, 59.85, 10.8, 59.95],
+      "bbox_query": [
+        10.6,
+        59.85,
+        10.8,
+        59.95
+      ],
       "crs_query": "EPSG:4326",
       "crs_mosaic": "EPSG:25833",
-      "shape": [1280, 1536, 4],
+      "shape": [
+        1280,
+        1536,
+        4
+      ],
       "acquired": "2026-11-24",
-      "tooling": "tilearray inspect_endpoint → build_config → create_array → compute_mosaic"
+      "tooling": "tilearray inspect_endpoint \u2192 build_config \u2192 create_array \u2192 compute_mosaic"
     },
     "ea_lidar": {
       "service": "WCS",
@@ -114,16 +145,33 @@
       "coverage_id": "13787b9a-26a4-4775-8523-806d13af58fc__Lidar_Composite_Elevation_DTM_1m",
       "attribution": "Contains public sector information licensed under the Open Government Licence v3.0",
       "licence": "OGL v3.0",
-      "bbox": [431900.0, 382700.0, 432156.0, 382956.0],
+      "bbox": [
+        431900.0,
+        382700.0,
+        432156.0,
+        382956.0
+      ],
       "crs": "EPSG:27700",
-      "resolution_m": [1.0, 1.0],
-      "chunk_size": [64, 64],
-      "shape": [256, 256],
-      "elev_range_m": [165.126, 186.885],
-      "display_treatment": "NW hillshade blended with paper→blue-grey→moss elevation wash; derived visualisation, not a claim that colour equals raw elevation",
+      "resolution_m": [
+        1.0,
+        1.0
+      ],
+      "chunk_size": [
+        64,
+        64
+      ],
+      "shape": [
+        256,
+        256
+      ],
+      "elev_range_m": [
+        165.126,
+        186.885
+      ],
+      "display_treatment": "NW hillshade blended with paper\u2192blue-grey\u2192moss elevation wash; derived visualisation, not a claim that colour equals raw elevation",
       "acquired": "2026-11-24",
-      "fetch_policy": "ea_dsp_fetch_defaults with max_concurrent_requests ≤ 8",
-      "tooling": "tilearray WCSConfig.from_url → create_array → compute_mosaic"
+      "fetch_policy": "ea_dsp_fetch_defaults with max_concurrent_requests \u2264 8",
+      "tooling": "tilearray WCSConfig.from_url \u2192 create_array \u2192 compute_mosaic"
     },
     "ea_vom": {
       "service": "WMS",
@@ -132,12 +180,61 @@
       "layers": "Vegetation_Object_Model_2022",
       "attribution": "Contains public sector information licensed under the Open Government Licence v3.0",
       "licence": "OGL v3.0",
-      "bbox": [430000.0, 380000.0, 430512.0, 380512.0],
+      "bbox": [
+        430000.0,
+        380000.0,
+        430512.0,
+        380512.0
+      ],
       "crs": "EPSG:27700",
-      "shape": [1024, 1024, 4],
+      "shape": [
+        1024,
+        1024,
+        4
+      ],
       "note": "Rendered WMS PNG (RGBA composited onto paper). Pixels are map imagery, not scientific measurement values.",
       "acquired": "2026-11-24",
-      "tooling": "tilearray WMSConfig.from_url → create_array → compute_mosaic"
+      "tooling": "tilearray WMSConfig.from_url \u2192 create_array \u2192 compute_mosaic"
+    },
+    "osm_pipeline_tiles": {
+      "zoom": 15,
+      "grid": [
+        3,
+        2
+      ],
+      "tiles": [
+        {
+          "x": 16383,
+          "y": 10896,
+          "file": "tiles/tile_16383_10896.png"
+        },
+        {
+          "x": 16384,
+          "y": 10896,
+          "file": "tiles/tile_16384_10896.png"
+        },
+        {
+          "x": 16385,
+          "y": 10896,
+          "file": "tiles/tile_16385_10896.png"
+        },
+        {
+          "x": 16383,
+          "y": 10897,
+          "file": "tiles/tile_16383_10897.png"
+        },
+        {
+          "x": 16384,
+          "y": 10897,
+          "file": "tiles/tile_16384_10897.png"
+        },
+        {
+          "x": 16385,
+          "y": 10897,
+          "file": "tiles/tile_16385_10897.png"
+        }
+      ],
+      "attribution": "\u00a9 OpenStreetMap contributors"
     }
   },
   "design": {
@@ -154,5 +251,10 @@
       "Do not label OSM/Kartverket/WMS rendered pixels as aerial photography",
       "Do not imply automatic CRS reprojection"
     ]
-  }
+  },
+  "revision_notes": [
+    "fig01: AOI chosen in display pixels; extract is that exact crop; stroke outside extract; frustum links",
+    "fig02: true-aspect Kartverket panel; cover-fill square frames; border drawn outside data; neutral elev hillshade",
+    "fig03: six real adjacent OSM z15 tiles; assembly gif added"
+  ]
 }
