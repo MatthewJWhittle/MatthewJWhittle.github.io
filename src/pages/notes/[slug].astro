@@ -16,13 +16,12 @@ const { Content } = await render(entry);
 const meta = `${formatDate(entry.data.date)}${entry.data.tags.length ? ` · ${entry.data.tags.join(' · ')}` : ''}`;
 ---
 
-<ArticleLayout title={entry.data.title} description={entry.data.description} meta={meta}>
+<ArticleLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  meta={meta}
+  backHref="/notes/"
+  backLabel="← Notes"
+>
   <Content />
-  <p class="note-back"><a href="/notes/">← All notes</a></p>
 </ArticleLayout>
-
-<style>
-  .note-back {
-    margin-top: 2.5rem;
-  }
-</style>

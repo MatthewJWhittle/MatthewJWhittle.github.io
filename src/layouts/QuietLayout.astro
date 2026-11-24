@@ -1,0 +1,133 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+/**
+ * Shared chrome for secondary pages (CV, project index, articles, notes).
+ * One back link to the page’s parent — no sibling cross-links, no contents rail.
+ * Homepage keeps SectionNav + shell.
+ *
+ * Root tags are static (`main` / `article`), not a dynamic component — Astro
+ * scoped styles do not reliably attach to dynamic tags.
+ */
+interface Props {
+  title: string;
+  description: string;
+  /** Visible H1; defaults to `title`. */
+  heading?: string;
+  /** Optional mono line above the heading (e.g. article dates). */
+  meta?: string;
+  /** Supporting line under the heading. Omit for title-only pages. */
+  lede?: string;
+  /** Landmark element. Articles use `article`; indexes use `main`. */
+  as?: 'main' | 'article';
+  /** Parent route for the quiet back link. Defaults to home. */
+  backHref?: string;
+  /** Label for the quiet back link. Defaults to `← Home`. */
+  backLabel?: string;
+}
+
+const {
+  title,
+  description,
+  heading = title,
+  meta,
+  lede,
+  as = 'main',
+  backHref = '/',
+  backLabel = '← Home',
+} = Astro.props;
+
+const isArticle = as === 'article';
+---
+
+<BaseLayout title={title} description={description}>
+  {
+    isArticle ? (
+      <article id="main" class="quiet wrap" tabindex="-1">
+        <p class="quiet__back">
+          <a href={backHref}>{backLabel}</a>
+        </p>
+        <header class="quiet__header">
+          {meta && <p class="quiet__meta">{meta}</p>}
+          <h1 class="quiet__title">{heading}</h1>
+          {lede && <p class="quiet__lede">{lede}</p>}
+        </header>
+        <div class="quiet__body">
+          <slot />
+        </div>
+      </article>
+    ) : (
+      <main id="main" class="quiet wrap" tabindex="-1">
+        <p class="quiet__back">
+          <a href={backHref}>{backLabel}</a>
+        </p>
+        <header class="quiet__header">
+          {meta && <p class="quiet__meta">{meta}</p>}
+          <h1 class="quiet__title">{heading}</h1>
+          {lede && <p class="quiet__lede">{lede}</p>}
+        </header>
+        <div class="quiet__body">
+          <slot />
+        </div>
+      </main>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .quiet {
+    padding-block: var(--space-6) var(--space-8);
+  }
+
+  .quiet__back {
+    margin: 0 0 var(--space-5);
+    font-weight: 500;
+  }
+
+  .quiet__back a {
+    color: var(--colour-ink);
+    text-decoration: none;
+  }
+
+  .quiet__back a:hover {
+    color: var(--colour-moss);
+  }
+
+  .quiet__header {
+    max-width: var(--measure);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--colour-rule);
+  }
+
+  .quiet__meta {
+    margin: 0 0 var(--space-3);
+    color: var(--colour-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .quiet__title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+
+  .quiet__header:not(:has(.quiet__lede)) .quiet__title {
+    margin-bottom: 0;
+  }
+
+  .quiet__lede {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 1.125rem;
+  }
+
+  .quiet__body {
+    max-width: none;
+  }
+</style>

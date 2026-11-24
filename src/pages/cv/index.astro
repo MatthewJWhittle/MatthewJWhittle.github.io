@@ -1,55 +1,35 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import CvNav from '../../components/CvNav.astro';
+import QuietLayout from '../../layouts/QuietLayout.astro';
 import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
 import { site } from '../../data/site';
-import '../../styles/shell.css';
 ---
 
-<BaseLayout
+<QuietLayout
   title="CV"
   description={`Professional experience for ${site.name}. Role history with employer, title and start dates.`}
+  lede="Professional experience. Expand a role for more detail."
 >
-  <div class="shell">
-    <aside class="shell__nav" aria-label="Site navigation">
-      <CvNav />
-    </aside>
-
-    <main id="main" class="shell__main">
-      <header class="block" aria-labelledby="cv-heading">
-        <h1 id="cv-heading" class="block__title">CV</h1>
-        <p class="block__lede">
-          Professional experience. Expand a role for more detail.
-        </p>
-      </header>
-
-      <section
-        id="experience"
-        class="block"
-        aria-labelledby="experience-heading"
-      >
-        <h2 id="experience-heading" class="block__title">Experience</h2>
-        <ExperienceTimeline />
-      </section>
-
-      <nav class="block cv-links" aria-label="Related pages">
-        <ul>
-          <li><a href="/">← Home</a></li>
-          <li><a href="/work/">Projects →</a></li>
-        </ul>
-      </nav>
-    </main>
-  </div>
-</BaseLayout>
+  <section
+    id="experience"
+    class="cv-experience"
+    aria-labelledby="experience-heading"
+  >
+    <h2 id="experience-heading" class="cv-experience__title">Experience</h2>
+    <ExperienceTimeline />
+  </section>
+</QuietLayout>
 
 <style>
-  .cv-links ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem 1.5rem;
+  .cv-experience {
+    max-width: var(--measure);
+  }
+
+  .cv-experience__title {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 1.85rem);
     font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 </style>

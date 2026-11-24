@@ -1,35 +1,35 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import QuietLayout from '../../layouts/QuietLayout.astro';
 import WorkTeaser from '../../components/WorkTeaser.astro';
 import { getPublishedWork } from '../../lib/content';
 
 const work = await getPublishedWork();
 ---
 
-<BaseLayout title="Projects" description="Selected projects and notes on things I have built.">
-  <main id="main" class="section wrap" tabindex="-1">
-    <p class="section__label">Projects</p>
-    <h1 class="section__title">Projects</h1>
-    {
-      work.length === 0 ? (
-        <p class="section__lede">Coming soon.</p>
-      ) : (
-        <div>
-          {work.map((project) => (
-            <WorkTeaser project={project} />
-          ))}
-        </div>
-      )
-    }
-    <p class="back">
-      <a href="/#projects">← Back</a>
-    </p>
-  </main>
-</BaseLayout>
+<QuietLayout
+  title="Projects"
+  description="Selected projects and notes on things I have built."
+>
+  {
+    work.length === 0 ? (
+      <p class="muted">Coming soon.</p>
+    ) : (
+      <div class="teaser-list">
+        {work.map((project) => (
+          <WorkTeaser project={project} />
+        ))}
+      </div>
+    )
+  }
+</QuietLayout>
 
 <style>
-  .back {
-    margin-top: var(--space-6);
-    font-weight: 500;
+  .muted {
+    margin: 0;
+    color: var(--colour-muted);
+  }
+
+  .teaser-list {
+    margin-top: 0;
   }
 </style>

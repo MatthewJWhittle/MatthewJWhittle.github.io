@@ -107,9 +107,10 @@ Keep the existing palette, fonts, legible article layouts and real project diagr
 
 Current routes and content:
 
-- `/` — homepage with About, Projects and Contact sections; About links to the CV;
+- `/` — homepage with About, Projects and Contact sections; sticky section nav tracks those on-page anchors; About links to the CV;
 - `/cv/` — shareable CV page with the experience timeline (progressive disclosure); room later for profile, education and skills without inventing content now;
 - `/work/` and `/work/[slug]/` — public project index and case studies;
+- Secondary pages (`/cv/`, `/work/`, articles, notes) share **QuietLayout**: one back link to the page’s parent only (no sibling cross-links, no site contents rail). Homepage alone keeps the sticky section shell;
 - `/notes/` and `/notes/[slug]/` — optional note infrastructure; do not advertise empty or unapproved content;
 - `/404.html` — helpful fallback.
 
