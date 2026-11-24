@@ -5,9 +5,18 @@ interface Props {
   title: string;
   description: string;
   meta?: string;
+  /** Parent route; project articles default to the projects index. */
+  backHref?: string;
+  backLabel?: string;
 }
 
-const { title, description, meta } = Astro.props;
+const {
+  title,
+  description,
+  meta,
+  backHref = '/work/',
+  backLabel = '← Projects',
+} = Astro.props;
 ---
 
 <QuietLayout
@@ -16,6 +25,8 @@ const { title, description, meta } = Astro.props;
   meta={meta}
   lede={description}
   as="article"
+  backHref={backHref}
+  backLabel={backLabel}
 >
   <div class="prose article__body">
     <slot />

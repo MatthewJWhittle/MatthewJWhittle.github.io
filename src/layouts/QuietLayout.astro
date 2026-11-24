@@ -3,7 +3,8 @@ import BaseLayout from './BaseLayout.astro';
 
 /**
  * Shared chrome for secondary pages (CV, project index, articles, notes).
- * Quiet ← Home — no site contents rail. Homepage keeps SectionNav + shell.
+ * One back link to the page’s parent — no sibling cross-links, no contents rail.
+ * Homepage keeps SectionNav + shell.
  */
 interface Props {
   title: string;
@@ -16,6 +17,10 @@ interface Props {
   lede?: string;
   /** Landmark element. Articles use `article`; indexes use `main`. */
   as?: 'main' | 'article';
+  /** Parent route for the quiet back link. Defaults to home. */
+  backHref?: string;
+  /** Label for the quiet back link. Defaults to `← Home`. */
+  backLabel?: string;
 }
 
 const {
@@ -25,6 +30,8 @@ const {
   meta,
   lede,
   as = 'main',
+  backHref = '/',
+  backLabel = '← Home',
 } = Astro.props;
 
 const Root = as;
@@ -32,7 +39,7 @@ const Root = as;
 
 <BaseLayout title={title} description={description}>
   <Root id="main" class:list={['quiet', 'wrap']} tabindex="-1">
-    <p class="quiet__home"><a href="/">← Home</a></p>
+    <p class="quiet__back"><a href={backHref}>{backLabel}</a></p>
 
     <header class="quiet__header">
       {meta && <p class="quiet__meta">{meta}</p>}
@@ -43,8 +50,6 @@ const Root = as;
     <div class="quiet__body">
       <slot />
     </div>
-
-    <slot name="after" />
   </Root>
 </BaseLayout>
 
@@ -53,17 +58,17 @@ const Root = as;
     padding-block: var(--space-6) var(--space-8);
   }
 
-  .quiet__home {
+  .quiet__back {
     margin: 0 0 var(--space-5);
     font-weight: 500;
   }
 
-  .quiet__home a {
+  .quiet__back a {
     color: var(--colour-ink);
     text-decoration: none;
   }
 
-  .quiet__home a:hover {
+  .quiet__back a:hover {
     color: var(--colour-moss);
   }
 
@@ -103,10 +108,5 @@ const Root = as;
 
   .quiet__body {
     max-width: none;
-  }
-
-  :global(.quiet__related) {
-    margin: var(--space-7) 0 0;
-    font-weight: 500;
   }
 </style>
