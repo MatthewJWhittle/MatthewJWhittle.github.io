@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CvNav from '../../components/CvNav.astro';
+import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
+import { site } from '../../data/site';
+import '../../styles/shell.css';
+---
+
+<BaseLayout
+  title="CV"
+  description={`Professional experience for ${site.name}. Role history with employer, title and start dates.`}
+>
+  <div class="shell">
+    <aside class="shell__nav" aria-label="Site navigation">
+      <CvNav />
+    </aside>
+
+    <main id="main" class="shell__main">
+      <header class="block" aria-labelledby="cv-heading">
+        <h1 id="cv-heading" class="block__title">CV</h1>
+        <p class="block__lede">
+          Professional experience. Expand a role for more detail.
+        </p>
+      </header>
+
+      <section
+        id="experience"
+        class="block"
+        aria-labelledby="experience-heading"
+      >
+        <h2 id="experience-heading" class="block__title">Experience</h2>
+        <ExperienceTimeline />
+      </section>
+
+      <nav class="block cv-links" aria-label="Related pages">
+        <ul>
+          <li><a href="/">← Home</a></li>
+          <li><a href="/work/">Projects →</a></li>
+        </ul>
+      </nav>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .cv-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    font-weight: 500;
+  }
+</style>

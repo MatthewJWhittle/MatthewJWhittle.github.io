@@ -1,0 +1,21 @@
+---
+import { site } from '../data/site';
+import '../styles/section-nav.css';
+---
+
+<nav class="section-nav" aria-label="Site">
+  <p class="section-nav__name">
+    <a href="/">{site.name}</a>
+  </p>
+  <ul class="section-nav__list">
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/cv/" aria-current="page" class="is-active">CV</a>
+    </li>
+    <li>
+      <a href="/work/">Projects</a>
+    </li>
+  </ul>
+</nav>

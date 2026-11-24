@@ -28,9 +28,9 @@ Examples of more natural editing:
 
 ## Current content boundaries
 
-- Homepage sections: **About → Projects → Experience → Contact**. Projects before experience, but career history must be easy to find.
+- Homepage sections: **About → Projects → Contact**. Career history lives on a shareable **`/cv/`** route, linked from the About introduction and the sticky nav — not as a full homepage section.
 - Featured public projects: **tilearray** and **Modelling bat habitat suitability across Yorkshire**. Do not invent, publish or link unpublished research or client work. Don't revive unmaintained libraries to fill a quota.
-- Experience timeline: show role, employer and a clear date label without opening it. Expansion should add substantive detail, not repeat the summary. Use verified career information and distinguish leadership, technical contributions and involvement in colleagues' work.
+- Experience timeline (on `/cv/`): show role, employer and a clear date label without opening it. Expansion should add substantive detail, not repeat the summary. Use verified career information and distinguish leadership, technical contributions and involvement in colleagues' work.
 - Project articles can be substantial case studies or informal notes. Their shape should follow the material, not a rigid template. Useful sequence: practical problem → personal contribution → what exists → important trade-off → limits/learning → links.
 - Only use assets and claims approved for public release. A public code repository is evidence that code is visible, not automatic permission to publish related client data or confidential outcomes.
 - **Draft flags do not make Git files private.** Do not place commercially sensitive or otherwise private material in this public repository, even as a draft or in a comment.
@@ -39,7 +39,7 @@ Examples of more natural editing:
 
 Before claiming a pass is finished:
 
-1. Read the **rendered** About, every visible experience summary/detail and every published project article — not merely the changed lines.
+1. Read the **rendered** About, the `/cv/` experience summaries/details and every published project article — not merely the changed lines.
 2. Check for phrases called out in previous reviews. If a phrase is marked for replacement, show the exact new text or explicitly explain why you kept it.
 3. Check for duplication: a collapsed timeline summary and its expanded text should give different value; the first two paragraphs of a case study should not say the same thing twice.
 4. Check the subject's contribution against verified information. Distinguish what was built from intended future work, a prototype from a maintained product, and model suitability from observed species presence.

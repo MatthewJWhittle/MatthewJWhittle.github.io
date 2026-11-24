@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionNav from '../components/SectionNav';
-import ExperienceTimeline from '../components/ExperienceTimeline.astro';
+import SectionNav from '../components/SectionNav.astro';
 import WorkTeaser from '../components/WorkTeaser.astro';
 import { site } from '../data/site';
 import { getPublishedWork } from '../lib/content';
+import '../styles/shell.css';
 
 const TEASER_CAP = 6;
 const allWork = await getPublishedWork();
@@ -15,7 +15,7 @@ const showAllWork = allWork.length > TEASER_CAP;
 <BaseLayout>
   <div class="shell">
     <aside class="shell__nav" aria-label="Section navigation">
-      <SectionNav client:load />
+      <SectionNav />
     </aside>
 
     <main id="main" class="shell__main">
@@ -24,6 +24,9 @@ const showAllWork = allWork.length > TEASER_CAP;
         <div class="prose">
           <p>{site.about}</p>
         </div>
+        <p class="cv-link">
+          <a href="/cv/">Find out more about me — CV</a>
+        </p>
         <ul class="about-links">
           <li>
             <a class="about-links__mail" href={`mailto:${site.email}`} aria-label="Email">
@@ -75,11 +78,6 @@ const showAllWork = allWork.length > TEASER_CAP;
         }
       </section>
 
-      <section id="experience" class="block" aria-labelledby="experience-heading">
-        <h2 id="experience-heading" class="block__title">Experience</h2>
-        <ExperienceTimeline />
-      </section>
-
       <section id="contact" class="block" aria-labelledby="contact-heading">
         <h2 id="contact-heading" class="block__title">Get in touch</h2>
         <ul class="contact-list">
@@ -94,50 +92,6 @@ const showAllWork = allWork.length > TEASER_CAP;
 </BaseLayout>
 
 <style>
-  .shell {
-    min-height: 100vh;
-  }
-
-  .shell__nav {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: color-mix(in srgb, var(--colour-paper) 92%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--colour-rule);
-  }
-
-  .shell__main {
-    padding-inline: var(--gutter);
-    padding-block: var(--space-5) var(--space-8);
-    max-width: calc(var(--measure) + var(--gutter) * 2);
-  }
-
-  .block {
-    padding-block: var(--space-7);
-    scroll-margin-top: 5.5rem;
-  }
-
-  .block + .block {
-    border-top: 1px solid var(--colour-rule);
-  }
-
-  .block__title {
-    margin: 0 0 var(--space-4);
-    font-family: var(--font-display);
-    font-size: clamp(1.85rem, 4vw, 2.6rem);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-  }
-
-  .block__lede {
-    margin: 0 0 var(--space-5);
-    max-width: var(--measure);
-    color: var(--colour-muted);
-    font-size: 1.125rem;
-  }
-
   .muted {
     margin: 0;
     color: var(--colour-muted);
@@ -145,6 +99,11 @@ const showAllWork = allWork.length > TEASER_CAP;
 
   .teaser-list {
     margin-top: var(--space-2);
+  }
+
+  .cv-link {
+    margin: var(--space-4) 0 0;
+    font-weight: 500;
   }
 
   .about-links {
@@ -205,44 +164,5 @@ const showAllWork = allWork.length > TEASER_CAP;
     color: var(--colour-muted);
     font-family: var(--font-mono);
     font-size: 0.75rem;
-  }
-
-  @media (min-width: 860px) {
-    .shell {
-      position: relative;
-      max-width: var(--max-page);
-      margin-inline: auto;
-      padding-inline: var(--gutter);
-    }
-
-    .shell__nav {
-      position: fixed;
-      top: 0;
-      left: max(var(--gutter), calc((100vw - var(--max-page)) / 2 + var(--gutter)));
-      width: 11.5rem;
-      height: 100vh;
-      z-index: 30;
-      border-bottom: 0;
-      background: var(--colour-paper);
-      backdrop-filter: none;
-      padding-block: var(--space-7) var(--space-5);
-      overflow-y: auto;
-    }
-
-    .shell__main {
-      margin-left: calc(11.5rem + var(--space-6));
-      padding-inline: 0;
-      padding-block: var(--space-7) var(--space-8);
-      max-width: none;
-    }
-
-    .block {
-      scroll-margin-top: var(--space-6);
-      padding-block: var(--space-8);
-    }
-
-    .block:first-child {
-      padding-top: var(--space-7);
-    }
   }
 </style>
