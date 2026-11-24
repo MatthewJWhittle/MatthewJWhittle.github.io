@@ -3,13 +3,13 @@ export const site = {
   name: 'Matthew Whittle',
   title: 'Matthew Whittle',
   description:
-    'I build data tools and software, with a background in ecology. West Yorkshire.',
+    'Data scientist and analytics lead with a background in ecology. Projects in software, geospatial data and machine learning.',
   email: 'matthewjwhittle@gmail.com',
   github: 'https://github.com/MatthewJWhittle',
   linkedin: 'https://www.linkedin.com/in/matthewjwhittle/',
   location: 'West Yorkshire, UK',
   about:
-    "These days I work across data, software and machine learning, and lead an analytics team at SLR. I'm particularly drawn to projects that help make sense of the natural world, or turn an interesting technical problem into something people can actually use. This is where I share some of those projects and what I've learnt along the way.",
+    "Hi, I'm Matt. I'm a data scientist and analytics lead with a background in ecology. These days I lead a team at SLR Consulting, working across data engineering, reporting and data science. This is where I share projects I've worked on, things I'm building and ideas I'm exploring.",
   /**
    * Full role chronology from Notion Master CV (career chronology).
    * startLabel = when the role began (no end dates in the UI).
@@ -22,9 +22,9 @@ export const site = {
       startLabel: 'Jan 2026',
       startYear: 2026,
       summary:
-        "Lead SLR's internal data and analytics team, covering engineering, reporting and governance.",
+        "Leading SLR's internal analytics work, from data engineering and reporting to governance.",
       detail:
-        "I lead a team working across data engineering, BI and analytics. A lot of my role is deciding what to build, setting technical direction and helping the team deliver reliable data and reporting across the business. I still get involved in the architecture and implementation.",
+        "I work with colleagues across Finance, Operations and People to decide what to prioritise, set technical direction for our data platform and help the team deliver reliable reporting. I still get involved in the architecture and implementation.",
     },
     {
       org: 'SLR Consulting',
@@ -32,9 +32,9 @@ export const site = {
       startLabel: 'Sep 2023',
       startYear: 2023,
       summary:
-        "Led geospatial data science in Europe, including habitat mapping and camera-trap machine learning.",
+        "Led geospatial data science projects in Europe, from habitat modelling to machine learning with camera-trap images.",
       detail:
-        "I led geospatial data science work in Europe, including machine learning for habitat mapping and camera-trap review. I also helped the GIS development team adopt version control, testing and more reliable ways of releasing software.",
+        "Alongside the modelling, I worked with the GIS development team to introduce version control, testing and more reliable ways of releasing software.",
     },
     {
       org: 'Jacobs',

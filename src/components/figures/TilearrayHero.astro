@@ -1,0 +1,97 @@
+---
+/**
+ * Hero: choose an area on NAIP aerial imagery and get that patch as an array.
+ * Composition bitmap has no titles/captions; chrome lives here.
+ */
+---
+
+<figure class="ta-fig ta-fig--wide">
+  <div class="ta-fig__chrome">
+    <p class="ta-fig__eyebrow">FIG. 01</p>
+    <p class="ta-fig__title">Choose an area, get the imagery into Python</p>
+    <p class="ta-fig__lede">
+      Aerial imagery around the Golden Gate in San Francisco. The highlighted area is shown
+      as a separate image patch — the sort of data you might want to work with in Python.
+    </p>
+  </div>
+  <div class="ta-fig__frame">
+    <picture>
+      <source
+        media="(max-width: 640px)"
+        srcset="/images/tilearray/fig01-hero-mobile.webp"
+      />
+      <img
+        class="ta-fig__img"
+        src="/images/tilearray/fig01-hero-desktop.webp"
+        alt="Aerial imagery around the Golden Gate, with a highlighted rectangle linked to an enlarged image patch of the same area."
+        width="1400"
+        height="720"
+        loading="eager"
+        decoding="async"
+      />
+    </picture>
+  </div>
+  <figcaption class="ta-fig__caption">
+    USGS / USDA NAIP NaturalColor (public domain). The highlighted patch is cropped for illustration;
+    TileArray returns a georeferenced mosaic that may extend beyond the selected area.
+  </figcaption>
+</figure>
+
+<style>
+  .ta-fig {
+    margin: 2rem 0;
+  }
+
+  .ta-fig--wide {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .ta-fig__chrome {
+    margin-bottom: 0.85rem;
+  }
+
+  .ta-fig__eyebrow {
+    margin: 0 0 0.2rem;
+    color: var(--colour-rust);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .ta-fig__title {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .ta-fig__lede {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.92rem;
+    max-width: 42rem;
+  }
+
+  .ta-fig__frame {
+    border: 1px solid var(--colour-rule);
+    background: color-mix(in srgb, var(--colour-paper) 92%, var(--colour-blue));
+    padding: 0.55rem;
+  }
+
+  .ta-fig__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ta-fig__caption {
+    margin: 0.65rem 0 0;
+    color: var(--colour-muted);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    max-width: 46rem;
+  }
+</style>

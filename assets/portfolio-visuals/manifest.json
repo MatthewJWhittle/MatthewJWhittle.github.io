@@ -1,0 +1,127 @@
+{
+  "status": "production-wired-pr25",
+  "issue": "https://github.com/MatthewJWhittle/MatthewJWhittle.github.io/issues/16",
+  "pr": "https://github.com/MatthewJWhittle/MatthewJWhittle.github.io/pull/25",
+  "generated": "2026-11-24",
+  "api_notes": {
+    "create_array": "Returns a lazy Dask-backed xarray by default",
+    "compute_mosaic": "Fetches and assembles pixels when values are needed",
+    "reprojection": "No automatic reprojection; mosaic stays in the source tile grid CRS",
+    "extent": "Illustrative display AOI crops are not claimed to equal default tile-union create_array extent"
+  },
+  "figures": [
+    {
+      "id": "fig01",
+      "role": "hero",
+      "claim": "Choose an area on aerial imagery and get that patch into a georeferenced Python array.",
+      "component": "src/components/figures/TilearrayHero.astro",
+      "exports": {
+        "desktop": "exports/fig01-hero-area-to-array-desktop.png",
+        "mobile": "exports/fig01-hero-area-to-array-mobile.png"
+      },
+      "public": {
+        "desktop": "/images/tilearray/fig01-hero-desktop.webp",
+        "mobile": "/images/tilearray/fig01-hero-mobile.webp"
+      },
+      "panels": [
+        "panels/panel-naip-sf.png",
+        "panels/panel-naip-sf-aoi.png"
+      ],
+      "source_ids": ["naip_sf"]
+    },
+    {
+      "id": "fig02",
+      "role": "output-gallery",
+      "claim": "CV imagery, numeric elevation, and a rendered environmental layer as arrays.",
+      "component": "src/components/figures/TilearrayGallery.astro",
+      "exports": {
+        "desktop": "exports/fig02-output-gallery-desktop.png",
+        "mobile": "exports/fig02-output-gallery-mobile.png"
+      },
+      "panels": [
+        "panels/panel-naip-sacramento.png",
+        "panels/panel-wcs-ea-helvellyn-hillshade.png",
+        "panels/panel-wms-ea-vom.png"
+      ],
+      "panel_purposes": [
+        "aerial patches for computer vision",
+        "numeric elevation for terrain analysis (hillshade derived for display)",
+        "rendered vegetation layer as an array (WMS imagery, not measurements)"
+      ],
+      "source_ids": ["naip_sacramento", "ea_helvellyn", "ea_vom"]
+    },
+    {
+      "id": "fig03",
+      "role": "pipeline-assets-only",
+      "claim": "Internals pipeline assets retained; live article uses TilearrayFigure.astro HTML diagram.",
+      "source_ids": ["osm_pipeline_tiles"]
+    }
+  ],
+  "sources": {
+    "naip_sf": {
+      "service": "WMS",
+      "host": "usgs-naip-plus",
+      "layers": "USGSNAIPPlus:NaturalColor",
+      "attribution": "USGS / USDA NAIP — public domain (The National Map Orthoimagery)",
+      "licence": "US Federal public domain",
+      "bbox_query": [-122.52, 37.78, -122.42, 37.86],
+      "crs_query": "EPSG:4326",
+      "location": "San Francisco — Golden Gate / Presidio / Marin Headlands",
+      "acquired": "2026-11-24",
+      "tooling": "tilearray WMSConfig → create_array → compute_mosaic"
+    },
+    "naip_sacramento": {
+      "service": "WMS",
+      "layers": "USGSNAIPPlus:NaturalColor",
+      "attribution": "USGS / USDA NAIP — public domain",
+      "licence": "US Federal public domain",
+      "bbox_query": [-121.55, 38.45, -121.48, 38.5],
+      "location": "Sacramento River / farmland",
+      "acquired": "2026-11-24",
+      "tooling": "tilearray WMSConfig → create_array → compute_mosaic"
+    },
+    "ea_helvellyn": {
+      "service": "WCS",
+      "host": "environment-agency-dsp",
+      "endpoint": "https://environment.data.gov.uk/spatialdata/lidar-composite-digital-terrain-model-dtm-1m/wcs",
+      "coverage_id": "13787b9a-26a4-4775-8523-806d13af58fc__Lidar_Composite_Elevation_DTM_1m",
+      "attribution": "Contains Environment Agency information © Environment Agency and/or database right",
+      "licence": "OGL v3.0",
+      "bbox": [333000.0, 514000.0, 335500.0, 516500.0],
+      "crs": "EPSG:27700",
+      "location": "Helvellyn / Striding Edge / Red Tarn, Lake District",
+      "elev_range_m": [422.38, 949.57],
+      "display_treatment": "NW hillshade derived for display; not a claim that grey equals raw elevation",
+      "acquired": "2026-11-24",
+      "fetch_policy": "ea_dsp_fetch_defaults",
+      "tooling": "tilearray WCSConfig.from_url → create_array → compute_mosaic"
+    },
+    "ea_vom": {
+      "service": "WMS",
+      "host": "environment-agency-dsp",
+      "endpoint": "https://environment.data.gov.uk/spatialdata/vegetation-object-model/wms",
+      "layers": "Vegetation_Object_Model_2022",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0",
+      "licence": "OGL v3.0",
+      "note": "Rendered WMS PNG. Pixels are map imagery, not scientific measurement values.",
+      "acquired": "2026-11-24",
+      "tooling": "tilearray WMSConfig.from_url → create_array → compute_mosaic"
+    }
+  },
+  "design": {
+    "palette": {
+      "paper": "#F5F2E9",
+      "ink": "#252D29",
+      "moss": "#506D5A",
+      "rust": "#CA754D",
+      "blue": "#A7B9BB"
+    },
+    "constraints": [
+      "No titles, captions, code or attribution text inside bitmap exports",
+      "Titles/captions/attribution live in HTML/Markdown outside the images",
+      "Do not label WMS/NAIP rendered pixels as scientific measurements",
+      "Do not imply automatic CRS reprojection",
+      "Do not claim display AOI crop equals default create_array tile-union extent"
+    ]
+  }
+}

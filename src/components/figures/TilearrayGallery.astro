@@ -1,0 +1,158 @@
+---
+/**
+ * Gallery: three use-led examples — CV imagery, numeric elevation, rendered vegetation.
+ * Labels and captions live in HTML; rasters have no baked typography.
+ */
+const panels = [
+  {
+    src: '/images/tilearray/panel-naip-sacramento.webp',
+    width: 1000,
+    height: 1000,
+    label: 'Aerial imagery',
+    meta: 'USGS NAIP · Sacramento, California',
+    alt: 'NAIP aerial photograph of farmland, river and suburban edge near Sacramento, California.',
+  },
+  {
+    src: '/images/tilearray/panel-wcs-ea-helvellyn-hillshade.webp',
+    width: 1200,
+    height: 1200,
+    label: 'Elevation for terrain analysis',
+    meta: 'EA Lidar DTM 1 m · Helvellyn',
+    alt: 'Hillshade derived from Environment Agency Lidar DTM over Helvellyn and Striding Edge in the Lake District.',
+  },
+  {
+    src: '/images/tilearray/panel-wms-ea-vom.webp',
+    width: 1000,
+    height: 1000,
+    label: 'Vegetation map layer',
+    meta: 'EA Vegetation Object Model · WMS',
+    alt: 'Rendered Environment Agency Vegetation Object Model layer showing canopy objects as green features on a grey base.',
+  },
+] as const;
+---
+
+<figure class="ta-gal ta-gal--wide">
+  <div class="ta-gal__chrome">
+    <p class="ta-gal__eyebrow">FIG. 02</p>
+    <p class="ta-gal__title">Different kinds of raster data</p>
+    <p class="ta-gal__lede">
+      Aerial imagery, elevation data and a vegetation map layer — three examples retrieved
+      from public services using TileArray.
+    </p>
+  </div>
+  <div class="ta-gal__grid">
+    {
+      panels.map((panel) => (
+        <div class="ta-gal__panel">
+          <p class="ta-gal__label">{panel.label}</p>
+          <p class="ta-gal__meta">{panel.meta}</p>
+          <img
+            src={panel.src}
+            alt={panel.alt}
+            width={panel.width}
+            height={panel.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      ))
+    }
+  </div>
+  <figcaption class="ta-gal__caption">
+    Aerial imagery: USGS / USDA NAIP NaturalColor (public domain).
+    Elevation: Environment Agency Lidar Composite DTM 1&nbsp;m (OGL v3.0), shown as a hillshade derived from numerical heights.
+    Vegetation: Environment Agency Vegetation Object Model 2022 via WMS (OGL v3.0), a rendered map layer rather than numerical measurements.
+  </figcaption>
+</figure>
+
+<style>
+  .ta-gal {
+    margin: 2rem 0;
+  }
+
+  .ta-gal--wide {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .ta-gal__chrome {
+    margin-bottom: 0.85rem;
+  }
+
+  .ta-gal__eyebrow {
+    margin: 0 0 0.2rem;
+    color: var(--colour-rust);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .ta-gal__title {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .ta-gal__lede {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.92rem;
+    max-width: 42rem;
+  }
+
+  .ta-gal__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+    border: 1px solid var(--colour-rule);
+    background: color-mix(in srgb, var(--colour-paper) 92%, var(--colour-blue));
+    padding: 0.85rem;
+  }
+
+  .ta-gal__panel {
+    min-width: 0;
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .ta-gal__label {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 500;
+  }
+
+  .ta-gal__meta {
+    margin: 0 0 0.15rem;
+    color: var(--colour-muted);
+    font-size: 0.76rem;
+  }
+
+  .ta-gal__panel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid var(--colour-rule);
+    background: var(--colour-paper);
+  }
+
+  .ta-gal__caption {
+    margin: 0.65rem 0 0;
+    color: var(--colour-muted);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    max-width: 48rem;
+  }
+
+  @media (max-width: 720px) {
+    .ta-gal__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

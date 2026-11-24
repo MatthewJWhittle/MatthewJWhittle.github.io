@@ -1,0 +1,74 @@
+{
+  "aoi_display": {
+    "desktop": {
+      "panel": [
+        727,
+        650
+      ],
+      "local": [
+        225,
+        182,
+        501,
+        455
+      ]
+    },
+    "mobile": {
+      "panel": [
+        742,
+        627
+      ],
+      "local": [
+        230,
+        175,
+        511,
+        438
+      ]
+    }
+  },
+  "hero_source": "panel-naip-sf.png",
+  "gallery": [
+    "panel-naip-sacramento.png",
+    "panel-wcs-ea-helvellyn-hillshade.png",
+    "panel-wms-ea-vom.png"
+  ],
+  "pipeline_tiles": {
+    "zoom": 15,
+    "grid": [
+      3,
+      2
+    ],
+    "tiles": [
+      {
+        "x": 16383,
+        "y": 10896,
+        "file": "tiles/tile_16383_10896.png"
+      },
+      {
+        "x": 16384,
+        "y": 10896,
+        "file": "tiles/tile_16384_10896.png"
+      },
+      {
+        "x": 16385,
+        "y": 10896,
+        "file": "tiles/tile_16385_10896.png"
+      },
+      {
+        "x": 16383,
+        "y": 10897,
+        "file": "tiles/tile_16383_10897.png"
+      },
+      {
+        "x": 16384,
+        "y": 10897,
+        "file": "tiles/tile_16384_10897.png"
+      },
+      {
+        "x": 16385,
+        "y": 10897,
+        "file": "tiles/tile_16385_10897.png"
+      }
+    ],
+    "attribution": "\u00a9 OpenStreetMap contributors"
+  }
+}
