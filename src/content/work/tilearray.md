@@ -1,6 +1,6 @@
 ---
 title: tilearray
-summary: A Python library for getting imagery and raster data from remote OGC and tile services into arrays you can work with.
+summary: TileArray is a Python library I'm building to make raster data from online mapping services easier to work with. You choose a source and an area; it handles the fetching and assembly, so you can get on with analysing the data instead of building a tile acquisition pipeline.
 startedYear: 2025
 tags: [geospatial, python, open-source]
 featured: true
@@ -10,36 +10,57 @@ docsUrl: https://matthewjwhittle.github.io/tilearray/
 figureId: tilearray
 ---
 
-## Why I built it
 
-A lot of useful imagery and raster data is available through online services rather than as files you can just download. WMS, WMTS, WCS and XYZ endpoints are everywhere, but getting a particular area into Python as something you can actually analyse can be surprisingly awkward.
+## I just wanted the imagery
 
-I kept running into this on geospatial and computer-vision projects. I knew which data I wanted, but first had to work out how the service was configured, which layers and coordinate systems it used, how its tiles fitted together, and how to deal with requests failing or being limited by the server. I tried existing tools, but often ended up wrestling with OGC configuration and writing more glue code for each service.
+I was working on a computer vision project and needed aerial imagery from a WMTS service. I knew which area I wanted; I just needed the images in Python so I could get on with the machine learning.
 
-After doing that a few times, I decided to pull the common work into a library. The aim was to make the thing I actually wanted to do — **specify a source and an area, then get an array back** — much easier.
+The data was available, but getting it wasn't straightforward. I had to work out how the service organised its tiles, which requests covered my area and how to assemble the results in the right place. Then there were failed requests, server limits and all the other things that come with fetching lots of small pieces of data.
 
-## What tilearray does
+Before long, I was maintaining an imagery acquisition system alongside the project it was meant to support.
 
-[tilearray](https://github.com/MatthewJWhittle/tilearray) provides a common way to work with WCS, WMS, WMTS and XYZ services. You configure the source, specify the area you want and call `create_array`. It returns a lazy, Dask-backed **xarray** object that you can use in Python for analysis, visualisation or machine-learning workflows.
+I'd run into a similar problem when retrieving environmental data from WCS services for habitat suitability modelling. The services were different, but the frustration was the same: I wanted to work with the data, not build another system for getting hold of it.
 
-The library handles the request planning, fetching, retries, decoding and assembly that would otherwise sit inside each project. You still need to describe a valid source, including details such as a layer or zoom level where the service requires them. The point isn't to make remote services magically simple; it's to put their complexity behind a consistent interface.
+## Getting data out of map services
 
-The [documentation](https://matthewjwhittle.github.io/tilearray/) has a [quick-start example](https://matthewjwhittle.github.io/tilearray/quickstart.html) and an explanation of [how the pipeline works](https://matthewjwhittle.github.io/tilearray/how-it-works.html).
+A lot of useful geospatial data is available through online services rather than as files you can download. That includes aerial imagery, rendered maps and numerical datasets such as elevation. Public data providers use services including WMS, WMTS and WCS, while XYZ tile services are common elsewhere.
 
-## Some choices that mattered
+These are useful ways to publish large datasets, but they can be awkward when your goal isn't to *view* a map — it's to analyse the data behind it, or use the imagery in a Python workflow.
 
-**Be careful with the server.** Tile requests need sensible concurrency limits, retries and caching. When a tile still can't be fetched, I'd rather see a clear failure than quietly get a mosaic with missing data.
+You need to know which layer to ask for, where the tiles sit in space, what area each request covers and how to put the responses back together. For a single small area that might be manageable. For a project that needs lots of areas, it quickly becomes a substantial job.
 
-**Keep the array lazy.** You can plan the request before downloading all the imagery. The result uses Dask, so work can happen when the array is computed.
+What I kept wanting was much simpler: **point at a data source, choose an area and get an array back**.
 
-**Don't hide reprojection.** TileArray keeps the result in the source tile grid's coordinate system. If the analysis needs a different CRS, that's a separate, explicit step using something like [rioxarray](https://corteva.github.io/rioxarray/).
+## What TileArray lets you do
+
+[TileArray](https://github.com/MatthewJWhittle/tilearray) is a Python library I'm building to take care of that common work. You describe the source and the area you need, and it gives you a georeferenced **xarray** object to use with other Python tools.
+
+A straightforward example uses OpenStreetMap tiles: choose an area around London and assemble the map tiles into an array with spatial coordinates. That's a rendered map, not the aerial photography that prompted the project, but the problem of retrieving a particular area is much the same.
+
+Other services provide different kinds of raster data. The Environment Agency's WCS service can provide numerical elevation values for terrain analysis. A Kartverket WMTS service provides topographic map imagery, while the Environment Agency's WMS service can provide a rendered vegetation layer.
+
+That distinction matters. A WCS elevation array contains values you can measure and analyse. A rendered map layer is imagery — useful for display or image-based work, but it doesn't necessarily preserve the underlying measurements.
+
+Once I've got the result in Python, I can use the usual tools to inspect, plot and process it, or pass it into a machine-learning workflow. The point is to spend less time on data acquisition and more time on the work that needed the data in the first place.
+
+The [documentation](https://matthewjwhittle.github.io/tilearray/) includes [working examples](https://matthewjwhittle.github.io/tilearray/guides/index.html) and a [quick start](https://matthewjwhittle.github.io/tilearray/quickstart.html).
+
+## How it works
+
+TileArray handles several different service types through a common interface. For a tiled source, it works out which requests cover the area and how their results fit together. It then provides a lazy, Dask-backed array; the actual pixel data is fetched and assembled when you compute it.
+
+There are a few decisions behind that workflow that I think are particularly important.
+
+**Be considerate of the server.** Fetching lots of tiles means respecting request limits, retrying failures and using a cache where appropriate. I'd rather see an explicit failure than quietly end up with missing pieces.
+
+**Keep the work lazy.** Planning an area shouldn't mean downloading every pixel immediately. With xarray and Dask, the data can be fetched when it's actually needed.
+
+**Keep coordinate systems explicit.** The mosaic retains its own coordinate system rather than being silently reprojected. If I need to transform it for analysis, I can do that separately using something like [rioxarray](https://corteva.github.io/rioxarray/).
+
+There's a more detailed [walkthrough of the pipeline](https://matthewjwhittle.github.io/tilearray/how-it-works.html) in the documentation.
 
 ## Where it fits
 
-It's a data-access library, not a replacement for GIS or raster-processing tools. It helps get remote imagery or raster data into Python; you can use other libraries for reprojection, processing and analysis. It's still alpha software, and the API may change.
+TileArray is a data-access library, not a replacement for GIS or raster-processing tools. You still need a valid source configuration, including a layer, coverage or zoom level where the service requires one. And services have their own quirks, so I wouldn't assume every endpoint works without testing it.
 
-You can install it with `pip install tilearray` or `uv add tilearray`. The [source code](https://github.com/MatthewJWhittle/tilearray) is public under the Apache 2.0 licence.
-
-## What I learnt
-
-The difficult part wasn't any single tile request. It was the number of small service-specific decisions needed before I could do any actual analysis. Having one place for that logic means I can concentrate on the data instead of solving the same access problem again.
+It's still alpha software, and the API may change. You can install it with `pip install tilearray` or `uv add tilearray`. The [source code](https://github.com/MatthewJWhittle/tilearray) is public under the Apache 2.0 licence.
