@@ -8,10 +8,10 @@
 <figure class="ta-fig ta-fig--wide">
   <div class="ta-fig__chrome">
     <p class="ta-fig__eyebrow">FIG. 01</p>
-    <p class="ta-fig__title">From an area on the map to pixels in Python</p>
+    <p class="ta-fig__title">Choose an area, get the imagery into Python</p>
     <p class="ta-fig__lede">
-      Aerial imagery over San Francisco Bay. The rust box marks the area of interest;
-      the second panel is that same display crop as an array — ready to inspect or pass into a model.
+      Aerial imagery around the Golden Gate in San Francisco. The highlighted area is shown
+      as a separate image patch — the sort of data you might want to work with in Python.
     </p>
   </div>
   <div class="ta-fig__frame">
@@ -23,7 +23,7 @@
       <img
         class="ta-fig__img"
         src="/images/tilearray/fig01-hero-desktop.webp"
-        alt="Side-by-side view: NAIP aerial mosaic of the Golden Gate with a rust area-of-interest box, linked to the extracted patch shown as a georeferenced array."
+        alt="Aerial imagery around the Golden Gate, with a highlighted rectangle linked to an enlarged image patch of the same area."
         width="1400"
         height="720"
         loading="eager"
@@ -32,9 +32,8 @@
     </picture>
   </div>
   <figcaption class="ta-fig__caption">
-    USGS / USDA NAIP NaturalColor (public domain). The rust box is an illustrative display crop for the story —
-    TileArray’s default mosaic follows the covering tile grid and may extend beyond a drawn AOI.
-    Mosaic seams in the water are from assembling adjacent image tiles.
+    USGS / USDA NAIP NaturalColor (public domain). The highlighted patch is cropped for illustration;
+    TileArray returns a georeferenced mosaic that may extend beyond the selected area.
   </figcaption>
 </figure>
 
