@@ -24,6 +24,8 @@ interface Props {
   backHref?: string;
   /** Label for the quiet back link. Defaults to `← Home`. */
   backLabel?: string;
+  /** Extra schema.org nodes for BaseLayout JSON-LD. */
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -35,12 +37,13 @@ const {
   as = 'main',
   backHref = '/',
   backLabel = '← Home',
+  structuredData,
 } = Astro.props;
 
 const isArticle = as === 'article';
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} structuredData={structuredData}>
   {
     isArticle ? (
       <article id="main" class="quiet wrap" tabindex="-1">

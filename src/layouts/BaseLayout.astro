@@ -13,11 +13,58 @@ import { site } from '../data/site';
 interface Props {
   title?: string;
   description?: string;
+  /** Extra schema.org nodes merged into the site @graph (verified facts only). */
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title = site.title, description = site.description } = Astro.props;
+const { title = site.title, description = site.description, structuredData } = Astro.props;
 const pageTitle = title === site.title ? title : `${title} · ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const siteUrl = Astro.site?.href ?? 'https://matthewjwhittle.github.io/';
+const personId = `${siteUrl}#person`;
+const websiteId = `${siteUrl}#website`;
+
+const extraNodes = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: site.name,
+      url: siteUrl,
+      email: `mailto:${site.email}`,
+      jobTitle: 'Data scientist and analytics lead',
+      description: site.description,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'West Yorkshire',
+        addressCountry: 'GB',
+      },
+      sameAs: [site.github, site.linkedin],
+      worksFor: {
+        '@type': 'Organization',
+        name: 'SLR Consulting',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      name: site.name,
+      url: siteUrl,
+      description: site.description,
+      inLanguage: 'en-GB',
+      author: { '@id': personId },
+      publisher: { '@id': personId },
+    },
+    ...extraNodes,
+  ],
+};
 ---
 
 <!doctype html>
@@ -31,6 +78,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content="en_GB" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />
@@ -53,6 +101,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       crossorigin
     />
     <title>{pageTitle}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
