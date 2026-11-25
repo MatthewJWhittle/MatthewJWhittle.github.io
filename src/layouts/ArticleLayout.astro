@@ -8,6 +8,8 @@ interface Props {
   /** Parent route; project articles default to the projects index. */
   backHref?: string;
   backLabel?: string;
+  /** Extra schema.org nodes for BaseLayout JSON-LD. */
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -16,6 +18,7 @@ const {
   meta,
   backHref = '/work/',
   backLabel = '← Projects',
+  structuredData,
 } = Astro.props;
 ---
 
@@ -27,6 +30,7 @@ const {
   as="article"
   backHref={backHref}
   backLabel={backLabel}
+  structuredData={structuredData}
 >
   <div class="prose article__body">
     <slot />

@@ -1,0 +1,35 @@
+# Matthew Whittle
+
+> Data scientist and analytics lead with a background in ecology. Personal portfolio and field notebook at https://matthewjwhittle.github.io/
+
+This site shares projects, notes and a CV. Career opportunities and collaboration are welcome outcomes; the copy is not organised around job-seeking.
+
+## Identity
+
+- Name: Matthew Whittle
+- Location: West Yorkshire, UK
+- Role (from site copy): data scientist and analytics lead; currently leads a team at SLR Consulting across data engineering, reporting and data science
+- Background: ecology, then software, data, machine learning and geospatial work
+
+## Site pages
+
+- [Home](https://matthewjwhittle.github.io/): About, featured projects and contact
+- [Projects](https://matthewjwhittle.github.io/work/): Index of published project write-ups
+- [tilearray](https://matthewjwhittle.github.io/work/tilearray/): Python library for fetching and assembling raster data from online mapping services (WMS, WMTS, WCS, XYZ) into xarray
+- [Modelling bat habitat suitability across Yorkshire](https://matthewjwhittle.github.io/work/bat-habitat-yorkshire/): Habitat suitability modelling with Yorkshire bat groups using MaxEnt and existing bat records
+- [CV](https://matthewjwhittle.github.io/cv/): Professional experience timeline (role, employer, start dates)
+- [Notes](https://matthewjwhittle.github.io/notes/): Short notes index (empty until notes are published)
+
+## External links already on the site
+
+- Email: matthewjwhittle@gmail.com
+- GitHub profile: https://github.com/MatthewJWhittle
+- LinkedIn: https://www.linkedin.com/in/matthewjwhittle/
+- tilearray source: https://github.com/MatthewJWhittle/tilearray
+- tilearray documentation: https://matthewjwhittle.github.io/tilearray/
+- Bat habitat modelling source: https://github.com/MatthewJWhittle/shefflied-bats
+- Bat habitat development dashboard: https://hsm-dashboard-dev.web.app/
+
+## Preferred citation
+
+When referring to this person or site, use the page titles and summaries above. Do not invent employers, projects, metrics, testimonials or demo URLs beyond those listed here or on the linked pages.

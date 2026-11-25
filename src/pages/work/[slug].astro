@@ -16,9 +16,47 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const meta = `Started ${entry.data.startedYear}${entry.data.tags.length ? ` · ${entry.data.tags.join(' · ')}` : ""}`;
 const hasLinks = Boolean(entry.data.repositoryUrl || entry.data.docsUrl || entry.data.demoUrl);
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const personId = new URL('#person', Astro.site).href;
+const isSoftware = entry.id === 'tilearray';
+const relatedUrls = [
+  !isSoftware ? entry.data.repositoryUrl : undefined,
+  entry.data.docsUrl,
+  entry.data.demoUrl,
+].filter((url): url is string => Boolean(url));
+
+/** Project schema only from verified frontmatter / page facts — no invented claims. */
+const projectSchema: Record<string, unknown> | undefined =
+  entry.data.repositoryUrl || entry.data.docsUrl || entry.data.demoUrl
+    ? {
+        '@type': isSoftware ? 'SoftwareSourceCode' : 'CreativeWork',
+        '@id': `${pageUrl}#project`,
+        name: entry.data.title,
+        description: entry.data.summary,
+        url: pageUrl,
+        dateCreated: String(entry.data.startedYear),
+        author: { '@id': personId },
+        ...(isSoftware && entry.data.repositoryUrl
+          ? {
+              codeRepository: entry.data.repositoryUrl,
+              programmingLanguage: 'Python',
+              license: 'https://www.apache.org/licenses/LICENSE-2.0',
+            }
+          : {}),
+        ...(relatedUrls.length ? { sameAs: relatedUrls } : {}),
+        ...(entry.data.tags.length
+          ? { keywords: entry.data.tags.join(', ') }
+          : {}),
+      }
+    : undefined;
 ---
 
-<ArticleLayout title={entry.data.title} description={entry.data.summary} meta={meta}>
+<ArticleLayout
+  title={entry.data.title}
+  description={entry.data.summary}
+  meta={meta}
+  structuredData={projectSchema}
+>
   {
     hasLinks && (
       <p class="case-links case-links--top">
