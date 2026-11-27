@@ -6,30 +6,67 @@ import { site } from '../../data/site';
 
 <QuietLayout
   title="CV"
-  description={`Professional experience for ${site.name}. Role history with employer, title and start dates.`}
-  lede="Professional experience. Expand a role for more detail."
+  description={`CV for ${site.name}, covering ecology, data science, software and analytics leadership.`}
+  lede="I started out as a field ecologist, then moved into data science and software. I now lead analytics at SLR Consulting. I’m interested in how we can use data and software to solve practical problems, especially in ecology and the environment."
 >
-  <section
-    id="experience"
-    class="cv-experience"
-    aria-labelledby="experience-heading"
-  >
-    <h2 id="experience-heading" class="cv-experience__title">Experience</h2>
-    <ExperienceTimeline />
-  </section>
+  <div class="cv-content">
+    <section aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <ExperienceTimeline />
+    </section>
+
+    <section class="cv-section" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Selected projects</h2>
+      <ul>
+        <li>
+          <a href="/work/bat-habitat-yorkshire/">Modelling bat habitat suitability across Yorkshire</a>.
+          A collaboration with Greg Slack to turn bat records and environmental data into maps of suitable habitat.
+        </li>
+        <li>
+          <a href="/work/tilearray/">tilearray</a>.
+          A Python library for working with map tiles as arrays for geospatial analysis.
+        </li>
+      </ul>
+    </section>
+
+    <section class="cv-section" aria-labelledby="education-heading">
+      <h2 id="education-heading">Education and recognition</h2>
+      <ul>
+        <li>BSc (Hons) Zoology / Animal Biology, Newcastle University, 2011–2014.</li>
+        <li>
+          <a href="https://environment-analyst.com/global/108271/sustainability-consulting-awards-shortlist-announced">Rising Star Award shortlist</a>,
+          Environment Analyst Sustainability Consulting Awards, 2022.
+        </li>
+      </ul>
+    </section>
+  </div>
 </QuietLayout>
 
 <style>
-  .cv-experience {
+  .cv-content {
     max-width: var(--measure);
   }
 
-  .cv-experience__title {
-    margin: 0 0 var(--space-4);
+  h2 {
+    margin: 0 0 var(--space-3);
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 1.85rem);
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.2;
+  }
+
+  .cv-section {
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--colour-rule);
+  }
+
+  .cv-section ul {
+    margin: 0;
+    padding-inline-start: 1.2em;
+  }
+
+  .cv-section li + li {
+    margin-top: 0.3em;
   }
 </style>

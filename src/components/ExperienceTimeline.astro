@@ -1,33 +1,33 @@
 ---
-import { site } from '../data/site';
+import { experience } from '../data/experience';
 import '../styles/experience-timeline.css';
-
-const entries = site.timeline;
 ---
 
-<ol class="xtl" aria-label="Experience timeline">
-  <li class="xtl__now">
-    <span class="xtl__marker" aria-hidden="true"></span>
-    <span class="xtl__now-label">Now</span>
-  </li>
+<div class="xtl">
   {
-    entries.map((item, index) => (
-      <li class={`xtl__item${index === 0 ? ' is-current' : ''}`}>
-        <details class="xtl__details">
-          <summary class="xtl__summary">
-            <span class="xtl__marker" aria-hidden="true"></span>
-            <span class="xtl__head">
-              <span class="xtl__start">Started {item.startLabel}</span>
-              <span class="xtl__org">{item.org}</span>
-              <span class="xtl__role">{item.role}</span>
-              <span class="xtl__blurb">{item.summary}</span>
-            </span>
-          </summary>
-          <div class="xtl__detail">
-            <p>{item.detail}</p>
-          </div>
-        </details>
-      </li>
+    experience.map(({ employer, roles }) => (
+      <section class="xtl__employer">
+        <h3 class="xtl__org">{employer}</h3>
+        <ol class="xtl__roles" role="list">
+          {roles.map(({ title, dates, overview, highlights }) => (
+            <li class="xtl__role">
+              <div class="xtl__heading">
+                <h4>{title}</h4>
+                <p class="xtl__dates">{dates}</p>
+              </div>
+              {overview && <p class="xtl__overview">{overview}</p>}
+              <ul class="xtl__highlights">
+                {highlights.map(({ text, link }) => (
+                  <li>
+                    {text}
+                    {link && <> <a href={link.href}>{link.label}</a></>}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+      </section>
     ))
   }
-</ol>
+</div>
