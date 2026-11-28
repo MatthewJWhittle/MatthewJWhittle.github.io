@@ -10,12 +10,12 @@ export const experience: EmployerExperience[] = [
       {
         title: 'Interim Head of Data Warehouse & Analytics',
         dates: '2026–present',
-        overview: 'I lead SLR’s global data and analytics function, spanning data engineering, business intelligence and data science. My focus has been on developing a common enterprise data platform, building the team and engineering capability to support it, and making data more accessible across the business.',
+        overview: 'I lead SLR’s global data and analytics function, covering data engineering, business intelligence and data science. I took on the role during a period of investment in the company’s data infrastructure, with responsibility for bringing together technical teams, developing the platform and establishing how analytics is delivered across the business.',
         highlights: [
-          { label: 'Enterprise data platform', text: 'Led the technical direction and delivery of our Microsoft Fabric platform, bringing parallel engineering workstreams together around reusable data models and a governed analytics layer. Led the migration of priority Finance reporting into production.' },
-          { label: 'Team and capability development', text: 'Brought together internal engineers, BI developers and data scientists alongside specialist delivery partners. Established clearer ownership and delivery practices, with an emphasis on building the skills and knowledge needed to operate and develop the platform internally.' },
-          { label: 'Analytics strategy and self-service', text: 'Developed the enterprise analytics roadmap and established a cross-functional steering committee. Launched a central Analytics Hub and progressed governed self-service through shared semantic models, controlled data access and early trials of AI-assisted analytics.' },
-          { label: 'Hands-on engineering and data science', text: 'Continued to contribute directly to the platform, building and deploying a support analytics pipeline with Python and dbt, developing internal engineering tools, and prototyping and backtesting models for revenue and margin forecasting.' },
+          { label: 'Data architecture and delivery', text: 'Led the technical direction of our enterprise data platform, consolidating engineering workstreams around Microsoft Fabric and reusable data and semantic models. Oversaw the migration of core financial reporting into production.' },
+          { label: 'Technical team development', text: 'Brought together internal technical teams and specialist delivery partners, shaping engineering practices, recruitment priorities and investment decisions. A particular focus has been developing the internal capability to build, operate and maintain our own data products.' },
+          { label: 'Analytics strategy', text: 'Developed the enterprise analytics roadmap and established a steering committee with business leaders. Led initiatives to make data more accessible through shared definitions, governed self-service and early applications of AI-assisted analytics.' },
+          { label: 'Engineering and applied data science', text: 'Remained actively involved in development, building production data pipelines and dbt models, contributing to engineering and deployment tooling, and developing and evaluating predictive models for financial forecasting.' },
         ],
       },
       {
