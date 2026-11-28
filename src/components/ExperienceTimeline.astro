@@ -8,6 +8,7 @@ import '../styles/experience-timeline.css';
     experience.map(({ employer, logo, roles }) => (
       <section class="xtl__employer">
         <h3 class="xtl__org">
+          <span>{employer}</span>
           {logo && (
             <img
               class="xtl__logo"
@@ -19,7 +20,6 @@ import '../styles/experience-timeline.css';
               decoding="async"
             />
           )}
-          <span>{employer}</span>
         </h3>
         <ol class="xtl__roles" role="list">
           {roles.map(({ title, dates, overview, highlights }) => (
