@@ -4,6 +4,8 @@ export const site = {
   title: 'Matthew Whittle',
   description:
     'Data scientist and analytics lead with a background in ecology. Projects in software, geospatial data and machine learning.',
+  /** Short LinkedIn-style line under the CV name. */
+  headline: 'Data scientist and analytics lead with a background in ecology',
   email: 'matthewjwhittle@gmail.com',
   github: 'https://github.com/MatthewJWhittle',
   linkedin: 'https://www.linkedin.com/in/matthewjwhittle/',
