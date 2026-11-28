@@ -35,7 +35,7 @@ import '../styles/experience-timeline.css';
                       {link && (
                         <a class="xtl__evidence" href={link.href}>
                           <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false">
-                            <path d="M6.5 4H3.5v8.5H12v-3M9 3.5h3.5V7M12 4l-6 6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d={link.href.startsWith("/") ? "M3.5 3h6l3 3v7H3.5zM9.5 3v3h3M5.5 8.5h5M5.5 10.5h5" : "M6.5 4H3.5v8.5H12v-3M9 3.5h3.5V7M12 4l-6 6"} fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                           </svg>
                           <span>{link.label}</span>
                         </a>
