@@ -18,6 +18,26 @@ import { site } from '../../data/site';
       <a href={site.github}>GitHub</a>
       <a href={site.linkedin}>LinkedIn</a>
       <a href={`mailto:${site.email}`}>Email</a>
+      <span class="cv-profile-links__location">
+        <svg
+          class="cv-profile-links__pin"
+          viewBox="0 0 16 16"
+          width="14"
+          height="14"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M8 14l-4-4.5a5 5 0 119 0L8 14zm0-6.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        {site.location}
+      </span>
     </p>
     <CvOverview />
 
@@ -66,6 +86,17 @@ import { site } from '../../data/site';
     margin: 0 0 var(--space-3);
     color: var(--colour-muted);
     font-size: 0.9rem;
+  }
+
+  .cv-profile-links__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .cv-profile-links__pin {
+    flex: 0 0 auto;
+    color: var(--colour-moss);
   }
 
   h2 {

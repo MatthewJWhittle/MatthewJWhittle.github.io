@@ -9,7 +9,6 @@ export const cvOverview = [
   { id: 'ecology', label: 'Ecology' },
   { id: 'data-engineering', label: 'Data engineering' },
   { id: 'python', label: 'Python & software engineering' },
-  { id: 'location', label: 'West Yorkshire' },
 ] as const;
 
 export type CvOverviewId = (typeof cvOverview)[number]['id'];
