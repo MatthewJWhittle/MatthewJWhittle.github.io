@@ -9,28 +9,28 @@ export const experience = [
     roles: [
       {
         title: 'Interim Head of Data Warehouse & Analytics',
-        dates: 'January 2026–present',
-        overview: 'I lead the internal analytics function, covering data engineering, reporting and data science.',
+        dates: '2026–present',
+        overview: 'I lead a team of data engineers, BI developers and data scientists. Much of my work is about making our enterprise data reliable and useful, and helping people across the business answer more of their own questions.',
         highlights: [
-          { text: 'Brought the team’s data engineering and reporting work under a shared roadmap with colleagues in Finance, Operations and People.' },
-          { text: 'Coordinated internal engineers and delivery partners as we brought the warehouse and reporting work onto a shared Microsoft Fabric platform.' },
-          { text: 'Led the launch of an Analytics Hub and prioritised Finance reporting migration, documentation and knowledge transfer.' },
+          { text: 'Set a shared technical direction and roadmap for the analytics team, bringing together internal developers, delivery partners and colleagues in finance, operations and people.' },
+          { text: 'Led the development of our data warehouse and reporting platform in Microsoft Fabric, with a focus on reusable data models, engineering standards and reliable delivery.' },
+          { text: 'Led the launch of an Analytics Hub to make it easier for people to find and use trusted data and reports, alongside the migration of existing reporting to the new platform.' },
         ],
       },
       {
         title: 'Geospatial Data Science Lead',
         dates: 'September 2023–January 2026',
-        overview: 'I led geospatial data science projects, working with ecologists and GIS developers.',
+        overview: 'I helped develop SLR’s geospatial data science capability, working with environmental specialists and developers on problems that needed a mixture of scientific knowledge, machine learning and software engineering.',
         highlights: [
           {
-            text: 'Built the early computer vision pipeline for mapping UK habitats from aerial imagery and led the technical work as ecologists began using the maps in assessments.',
+            text: 'Developed the initial computer vision pipeline for mapping UK habitats from aerial imagery, then led the technical work with colleagues as we turned the approach into something ecologists could use. The aim was to make habitat information available early enough to influence decisions about infrastructure and development.',
             link: { label: 'Habitat mapping case study', href: 'https://bluesky-world.com/2026/01/29/slr-consulting-harnesses-bluesky-internationals-geospatial-data-to-advance-machine-learning-for-sustainability-and-renewable-energy-projects/' },
           },
           {
-            text: 'Led requirements and helped build a deforestation-risk API for the Book Chain Project to screen paper sourcing locations.',
+            text: 'Led the technical requirements and helped build an API for the Book Chain Project that screens the locations of paper suppliers for deforestation risk, bringing geospatial analysis into the wider due diligence workflow.',
             link: { label: 'Book Chain case study', href: 'https://pro-news.globalforestwatch.org/news-events/gfw-pro-user-spotlight-slr-consulting' },
           },
-          { text: 'Helped the GIS development team adopt version control, code reviews, automated testing and cloud deployment on Azure.' },
+          { text: 'Worked with the GIS development team to move towards shared codebases, pull requests, code review and automated testing. I also helped establish cloud development and deployment practices on Azure.' },
         ],
       },
     ],
@@ -47,14 +47,14 @@ export const experience = [
         dates: 'July 2022–September 2023',
         highlights: [
           {
-            text: 'Worked with transport planners to build and optimise a cycling-routing service for Velocity, turning OpenStreetMap data into a graph for comparing route options.',
+            text: 'Worked with transport planners on Velocity, a tool for modelling cycling journeys. I helped develop a routing service using a graph derived from OpenStreetMap, focusing on algorithm performance, memory use and testing.',
             link: { label: 'Velocity', href: 'https://www.jacobs.com/solutions/velocity' },
           },
           {
-            text: 'Contributed to the open-source Flood Modeller Python API, including work on automated testing.',
+            text: 'Contributed to the open-source Python API for Flood Modeller, including automated tests for the library.',
             link: { label: 'Flood Modeller Python API', href: 'https://github.com/People-Places-Solutions/floodmodeller-api' },
           },
-          { text: 'Helped grow a data science and programming community through mentoring and practical coding sessions.' },
+          { text: 'Helped develop an internal community of people using code in their work, through mentoring and practical programming sessions.' },
         ],
       },
       {
@@ -62,36 +62,36 @@ export const experience = [
         dates: 'September 2021–July 2022',
         highlights: [
           {
-            text: 'Helped design surveys and built spatial data pipelines for bat habitat suitability modelling on Anglian Water’s Strategic Pipeline Alliance. We published the method and results with CIEEM.',
+            text: 'Worked with ecologists on bat habitat suitability modelling for Anglian Water’s Strategic Pipeline Alliance. I helped design the surveys and built the spatial data pipelines for the modelling work; we later published the approach and findings through CIEEM.',
             link: { label: 'Habitat Suitability Modelling for Bats', href: 'https://cieem.net/wp-content/uploads/2025/03/InPractice118_Dec2022.pdf#page=46' },
           },
-          { text: 'Worked on making the habitat modelling approach easier to reuse on other projects.' },
-          { text: 'Led work with ecologists and GIS specialists to make Biodiversity Net Gain assessments more consistent and repeatable.' },
+          { text: 'Worked on making the habitat modelling workflow reusable across projects, an interest I’ve continued independently.', link: { label: 'Yorkshire bat habitat modelling', href: '/work/bat-habitat-yorkshire/' } },
+          { text: 'Led work with ecologists and GIS specialists to develop more consistent and repeatable methods for Biodiversity Net Gain assessments.' },
         ],
       },
       {
         title: 'Ecologist',
         dates: 'January–September 2021',
         highlights: [
-          { text: 'Coordinated survey delivery for up to ten habitat specialists as deputy habitats lead on Anglian Water’s Strategic Pipeline Alliance.' },
-          { text: 'Built a semi-automated R workflow to schedule surveys, track results and calculate Biodiversity Net Gain by pipeline route.' },
-          { text: 'Built an R pipeline to extract and standardise habitat records from ArcGIS Online for a road scheme’s biodiversity assessment.' },
+          { text: 'As deputy habitats lead on Anglian Water’s Strategic Pipeline Alliance, I coordinated survey work across a team of up to ten habitat specialists.' },
+          { text: 'Built a semi-automated survey management system in R, covering survey scheduling, progress tracking and Biodiversity Net Gain calculations for different pipeline routes.' },
+          { text: 'Developed a separate R workflow for a road scheme, extracting and standardising habitat survey data from ArcGIS Online for biodiversity assessment.' },
         ],
       },
       {
         title: 'Graduate Ecologist',
         dates: 'August 2017–January 2021',
         highlights: [
-          { text: 'Led otter surveys and analysed bat acoustic monitoring data for the A82 upgrade at Loch Lomond, building tools to automate survey data processing.' },
-          { text: 'Managed bat survey data and automated quality checks on HS2 Phase 2b. The team used the analysis to support design changes that maintained bat habitat connectivity.' },
-          { text: 'Carried out protected-species surveys and site work, including supervising clearance and installation of newt exclusion fencing.' },
+          { text: 'Led otter surveys and analysed bat acoustic monitoring data for the A82 upgrade at Loch Lomond. I started building tools to handle the volume of survey data and make the analysis more repeatable.' },
+          { text: 'Managed bat survey data on HS2 Phase 2b and developed automated quality checks. Our ecological analysis helped inform design changes to maintain connectivity between bat habitats.' },
+          { text: 'Carried out protected-species surveys and worked as an Ecological Clerk of Works, supervising activities such as vegetation clearance and installation of newt exclusion fencing.' },
         ],
       },
       {
         title: 'Seasonal Ecologist',
         dates: 'April–August 2017',
         highlights: [
-          { text: 'Carried out protected-species surveys and supported ecological assessments.' },
+          { text: 'Supported ecological assessments through protected-species field surveys.' },
         ],
       },
     ],
@@ -107,7 +107,7 @@ export const experience = [
         title: 'Assistant Ecologist',
         dates: 'May–October 2016',
         highlights: [
-          { text: 'Worked on field surveys and protected-species assessments.' },
+          { text: 'My first consultancy role, carrying out field surveys and supporting protected-species assessments.' },
         ],
       },
     ],
