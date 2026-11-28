@@ -111,7 +111,10 @@ const isArticle = as === 'article';
     border-bottom: 1px solid var(--colour-rule);
   }
 
+  /* No hairline, so drop the border padding and tighten the hand-off. */
   .quiet__header--plain {
+    margin-bottom: var(--space-5);
+    padding-bottom: 0;
     border-bottom: 0;
   }
 
