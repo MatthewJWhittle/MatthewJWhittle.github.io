@@ -8,6 +8,7 @@ import { site } from '../../data/site';
   title="CV"
   description={`CV for ${site.name}, covering ecology, data science, software and analytics leadership.`}
   lede="I started out as a field ecologist, then moved into data science and software. I now lead analytics at SLR Consulting. I’m interested in how we can use data and software to solve practical problems, especially in ecology and the environment."
+  headerRule={false}
 >
   <div class="cv-content">
     <section aria-labelledby="experience-heading">
@@ -58,7 +59,6 @@ import { site } from '../../data/site';
 
   .cv-section {
     padding-block: var(--space-5);
-    border-top: 1px solid var(--colour-rule);
   }
 
   .cv-section ul {

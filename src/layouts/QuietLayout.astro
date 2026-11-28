@@ -26,6 +26,8 @@ interface Props {
   backLabel?: string;
   /** Extra schema.org nodes for BaseLayout JSON-LD. */
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  /** Hairline under the page header. Default true; CV omits it. */
+  headerRule?: boolean;
 }
 
 const {
@@ -38,6 +40,7 @@ const {
   backHref = '/',
   backLabel = '← Home',
   structuredData,
+  headerRule = true,
 } = Astro.props;
 
 const isArticle = as === 'article';
@@ -50,7 +53,7 @@ const isArticle = as === 'article';
         <p class="quiet__back">
           <a href={backHref}>{backLabel}</a>
         </p>
-        <header class="quiet__header">
+        <header class:list={['quiet__header', { 'quiet__header--plain': !headerRule }]}>
           {meta && <p class="quiet__meta">{meta}</p>}
           <h1 class="quiet__title">{heading}</h1>
           {lede && <p class="quiet__lede">{lede}</p>}
@@ -64,7 +67,7 @@ const isArticle = as === 'article';
         <p class="quiet__back">
           <a href={backHref}>{backLabel}</a>
         </p>
-        <header class="quiet__header">
+        <header class:list={['quiet__header', { 'quiet__header--plain': !headerRule }]}>
           {meta && <p class="quiet__meta">{meta}</p>}
           <h1 class="quiet__title">{heading}</h1>
           {lede && <p class="quiet__lede">{lede}</p>}
@@ -101,6 +104,10 @@ const isArticle = as === 'article';
     margin-bottom: var(--space-6);
     padding-bottom: var(--space-5);
     border-bottom: 1px solid var(--colour-rule);
+  }
+
+  .quiet__header--plain {
+    border-bottom: 0;
   }
 
   .quiet__meta {
