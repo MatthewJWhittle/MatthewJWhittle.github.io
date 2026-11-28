@@ -22,9 +22,9 @@ export const site = {
       startLabel: 'Jan 2026',
       startYear: 2026,
       summary:
-        "Leading SLR's internal analytics work, from data engineering and reporting to governance.",
+        "Helping people across SLR make better use of data while leading our analytics team.",
       detail:
-        "I work with colleagues across Finance, Operations and People to decide what to prioritise, set technical direction for our data platform and help the team deliver reliable reporting. I still get involved in the architecture and implementation.",
+        "Much of the challenge is making reporting more reliable while giving colleagues better access to data without losing sight of its quality or ownership. I work with Finance, Operations and People on priorities and technical direction, and stay involved in designing the data platform.",
     },
     {
       org: 'SLR Consulting',
@@ -42,9 +42,9 @@ export const site = {
       startLabel: 'Jul 2022',
       startYear: 2022,
       summary:
-        "Built data science tools for ecology and infrastructure projects, and helped grow a coding community.",
+        "Moved from ecological consultancy into a dedicated data science role.",
       detail:
-        "I worked on models and software for ecology and infrastructure projects. Alongside the project work, I helped grow a coding community that had started within ecology into the wider Jacobs organisation.",
+        "I built models and software for ecology and infrastructure projects, and helped bring a coding community that had started within ecology to colleagues across Jacobs.",
     },
     {
       org: 'Jacobs',
@@ -62,9 +62,9 @@ export const site = {
       startLabel: 'Jan 2021',
       startYear: 2021,
       summary:
-        "Deputy habitats lead on Anglian Water's Strategic Pipeline Alliance; R and Python survey tools.",
+        "Combined habitat survey coordination with a growing interest in building tools to manage the data.",
       detail:
-        "I was deputy habitats lead on Anglian Water's Strategic Pipeline Alliance, organising habitat specialists across a programme of about 500 km. I built R and Python tools for the survey records and the Biodiversity Net Gain calculations.",
+        "On Anglian Water's Strategic Pipeline Alliance, I was deputy habitats lead, coordinating specialists across a programme of about 500 km. I also wrote R and Python tools for survey records and Biodiversity Net Gain calculations.",
     },
     {
       org: 'Jacobs',
