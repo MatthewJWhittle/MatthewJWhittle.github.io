@@ -30,6 +30,10 @@ export const experience = [
             text: 'Led the technical requirements and helped build an API for the Book Chain Project that screens the locations of paper suppliers for deforestation risk, bringing geospatial analysis into the wider due diligence workflow.',
             link: { label: 'Book Chain case study', href: 'https://pro-news.globalforestwatch.org/news-events/gfw-pro-user-spotlight-slr-consulting' },
           },
+          {
+            text: 'Worked with Dixy Msapato to develop a computer vision tool for screening camera trap footage using SpeciesNet. On a primate survey, it narrowed nearly 9,000 videos to around 1,600 for specialist review.',
+            link: { label: 'Camera trap case study', href: 'https://cieem.net/international-focus-using-machine-learning-to-analyse-camera-trap-footage/' },
+          },
           { text: 'Worked with the GIS development team to move towards shared codebases, pull requests, code review and automated testing. I also helped establish cloud development and deployment practices on Azure.' },
         ],
       },
