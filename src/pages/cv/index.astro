@@ -1,5 +1,6 @@
 ---
 import QuietLayout from '../../layouts/QuietLayout.astro';
+import CvOverview from '../../components/CvOverview.astro';
 import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
 import { site } from '../../data/site';
 ---
@@ -9,16 +10,16 @@ import { site } from '../../data/site';
   heading={site.name}
   tagline={site.headline}
   description={`CV for ${site.name}, covering ecology, data science, software and analytics leadership.`}
-  lede="I started my career as an ecologist, writing code to make better use of the data we collected in the field. These days I lead analytics at SLR Consulting, but I’m still particularly interested in using software and machine learning to understand environmental systems. For me, understanding the problem and the science behind it matters as much as the technology."
+  lede="I started my career as an ecologist and got into data science through the problems I encountered on projects. I now lead data and analytics at SLR Consulting, having spent much of my career building models, software and technical teams. I’m particularly interested in how we can use computing to better understand the natural world, and I’ve learnt that understanding the problem is as important as the technology we use to solve it."
   headerRule={false}
 >
   <div class="cv-content">
     <p class="cv-profile-links">
-      <span>{site.location}</span>
       <a href={site.github}>GitHub</a>
       <a href={site.linkedin}>LinkedIn</a>
       <a href={`mailto:${site.email}`}>Email</a>
     </p>
+    <CvOverview />
 
     <section aria-labelledby="experience-heading">
       <h2 id="experience-heading">Experience</h2>
@@ -30,11 +31,11 @@ import { site } from '../../data/site';
       <ul>
         <li>
           <a href="/work/bat-habitat-yorkshire/">Modelling bat habitat suitability across Yorkshire</a>.
-          An ongoing collaboration with Greg Slack to model bat habitat suitability from species records and environmental data. We use MaxEnt to produce habitat suitability maps and have been developing a reusable modelling workflow. <a href="https://github.com/MatthewJWhittle/shefflied-bats">Modelling code</a>.
+          A long-running collaboration with Greg Slack exploring how species records and environmental data can inform ecological assessments. We’ve built a reusable MaxEnt modelling workflow and interactive maps of predicted habitat suitability across Yorkshire. <a href="https://github.com/MatthewJWhittle/shefflied-bats">Modelling code</a>.
         </li>
         <li>
           <a href="/work/tilearray/">tilearray</a>.
-          An open-source Python library for turning remote geospatial tile services into Dask-backed xarray arrays. I built it to make getting imagery into analysis and machine learning workflows easier. It is currently in alpha. <a href="https://github.com/MatthewJWhittle/tilearray">Source code</a> · <a href="https://matthewjwhittle.github.io/tilearray/">Documentation</a>.
+          Getting raster data out of web map services can be surprisingly cumbersome. I built this open-source Python library to handle tile planning, fetching and mosaicking, returning Dask-backed xarray arrays for analysis and machine learning. Currently in alpha. <a href="https://github.com/MatthewJWhittle/tilearray">Source code</a> · <a href="https://matthewjwhittle.github.io/tilearray/">Documentation</a>.
         </li>
       </ul>
     </section>
@@ -42,7 +43,7 @@ import { site } from '../../data/site';
     <section class="cv-section" aria-labelledby="education-heading">
       <h2 id="education-heading">Education and recognition</h2>
       <ul>
-        <li>BSc (Hons) Zoology / Animal Biology, Newcastle University, 2011–2014.</li>
+        <li>BSc (Hons) Zoology / Animal Biology (2:1), Newcastle University, 2011–2014.</li>
         <li>
           <a href="https://environment-analyst.com/global/108271/sustainability-consulting-awards-shortlist-announced">Rising Star Award shortlist</a>,
           Environment Analyst Sustainability Consulting Awards, 2022.
@@ -62,7 +63,7 @@ import { site } from '../../data/site';
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.4rem 1rem;
-    margin: 0 0 var(--space-6);
+    margin: 0 0 var(--space-3);
     color: var(--colour-muted);
     font-size: 0.9rem;
   }
