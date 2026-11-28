@@ -10,12 +10,12 @@ export const experience: EmployerExperience[] = [
       {
         title: 'Interim Head of Data Warehouse & Analytics',
         dates: '2026–present',
-        overview: 'I lead SLR’s internal data and analytics function, responsible for the enterprise data platform, business intelligence and data science. My role combines technical direction, team development and working with senior leaders to decide how we use data across the business.',
+        overview: 'I lead SLR’s global data and analytics function, spanning data engineering, business intelligence and data science. My focus has been on developing a common enterprise data platform, building the team and engineering capability to support it, and making data more accessible across the business.',
         highlights: [
-          { label: 'Analytics strategy and team', text: 'Established a shared roadmap for analytics, bringing engineering, BI and data science together with specialist suppliers. Introduced a more structured approach to planning, delivery and ownership of data products.' },
-          { label: 'Data platform', text: 'Led the technical direction and delivery of our Microsoft Fabric data platform, consolidating parallel engineering workstreams around shared data models and a governed reporting layer.' },
-          { label: 'Reporting and self-service', text: 'Led the migration of existing reporting onto the new platform and launched an Analytics Hub to give colleagues a single place to find trusted reports and access support.' },
-          { label: 'Forecasting prototype', text: 'Worked hands-on with the team to prototype revenue and margin forecasting, building and backtesting models against historical data to assess their usefulness for business planning.' },
+          { label: 'Enterprise data platform', text: 'Led the technical direction and delivery of our Microsoft Fabric platform, bringing parallel engineering workstreams together around reusable data models and a governed analytics layer. Led the migration of priority Finance reporting into production.' },
+          { label: 'Team and capability development', text: 'Brought together internal engineers, BI developers and data scientists alongside specialist delivery partners. Established clearer ownership and delivery practices, with an emphasis on building the skills and knowledge needed to operate and develop the platform internally.' },
+          { label: 'Analytics strategy and self-service', text: 'Developed the enterprise analytics roadmap and established a cross-functional steering committee. Launched a central Analytics Hub and progressed governed self-service through shared semantic models, controlled data access and early trials of AI-assisted analytics.' },
+          { label: 'Hands-on engineering and data science', text: 'Continued to contribute directly to the platform, building and deploying a support analytics pipeline with Python and dbt, developing internal engineering tools, and prototyping and backtesting models for revenue and margin forecasting.' },
         ],
       },
       {
