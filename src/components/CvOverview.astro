@@ -1,0 +1,81 @@
+---
+import { cvOverview, type CvOverviewId } from '../data/cv-overview';
+
+/** Tiny stroke icons — one path language, currentColour. */
+const icons: Record<CvOverviewId, string> = {
+  leadership:
+    'M8 14V6m0 0L4.5 9.5M8 6l3.5 3.5M3 14h10',
+  'data-science':
+    'M3 12h2l2-6 3 10 2-4h3',
+  geospatial:
+    'M8 13.5c2.5-3 4-5.2 4-7a4 4 0 10-8 0c0 1.8 1.5 4 4 7zM8 7.5a1 1 0 110-2 1 1 0 010 2z',
+  ecology:
+    'M8 13V7.5M8 7.5C8 5 10 3.5 12.5 3.5 12.5 7 10 9 8 9.5 6 9 3.5 7 3.5 3.5 6 3.5 8 5 8 7.5z',
+  'data-engineering':
+    'M3 5h10M3 8h10M3 11h10M5 5v9M11 5v9',
+  python:
+    'M6 4.5h4a2 2 0 012 2V8H8.5A2.5 2.5 0 006 10.5v1A2 2 0 008 13.5h2M10 13.5H6a2 2 0 01-2-2V10h3.5A2.5 2.5 0 0110 7.5v-1A2 2 0 008 4.5H6',
+};
+---
+
+<section class="cv-overview" aria-label="Focus areas">
+  <ul class="cv-overview__list" role="list">
+    {
+      cvOverview.map(({ id, label }) => (
+        <li class="cv-overview__item">
+          <svg
+            class="cv-overview__icon"
+            viewBox="0 0 16 16"
+            width="14"
+            height="14"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d={icons[id]}
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>{label}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .cv-overview {
+    margin: 0 0 var(--space-6);
+  }
+
+  .cv-overview__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.65rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cv-overview__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.28rem 0.55rem 0.28rem 0.45rem;
+    border: 1px solid var(--colour-rule);
+    border-radius: var(--radius);
+    color: var(--colour-ink);
+    background: color-mix(in srgb, var(--colour-paper) 92%, var(--colour-blue));
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .cv-overview__icon {
+    flex: 0 0 auto;
+    color: var(--colour-moss);
+  }
+</style>

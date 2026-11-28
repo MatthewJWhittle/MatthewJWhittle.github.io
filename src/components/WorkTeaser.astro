@@ -3,48 +3,85 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   project: CollectionEntry<'work'>;
+  variant?: 'default' | 'cv';
 }
 
-const { project } = Astro.props;
+const { project, variant = 'default' } = Astro.props;
+const { data } = project;
 const href = `/work/${project.id}/`;
-const year = project.data.startedYear;
+const image = data.teaser?.image;
+const topics = data.teaser?.topics ?? data.tags.map((tag) => tag.replaceAll('-', ' '));
+const summary = variant === 'cv' ? data.teaser?.cvSummary ?? data.summary : data.summary;
 ---
 
 <article class="teaser">
-  <p class="teaser__meta">
-    <span>Started {year}</span>
-  </p>
-  <h3 class="teaser__title">
-    <a href={href}>{project.data.title}</a>
-  </h3>
-  <p class="teaser__summary">{project.data.summary}</p>
+  <div class:list={['teaser__layout', { 'teaser__layout--illustrated': image }]}>
+    <div class="teaser__body">
+      <p class="teaser__meta">
+        <span>Started {data.startedYear}</span>
+        {topics.length > 0 && <span>{topics.join(' · ')}</span>}
+      </p>
+      <h3 class="teaser__title">
+        <a href={href}>{data.title}</a>
+      </h3>
+      <p class="teaser__summary">{summary}</p>
+      {(data.repositoryUrl || data.docsUrl) && (
+        <p class="teaser__links">
+          {data.repositoryUrl && <a href={data.repositoryUrl}>Source code</a>}
+          {data.docsUrl && <a href={data.docsUrl}>Documentation</a>}
+        </p>
+      )}
+    </div>
+    {image && (
+      <figure class="teaser__figure">
+        <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
+        {image.caption && <figcaption>{image.caption}</figcaption>}
+      </figure>
+    )}
+  </div>
 </article>
 
 <style>
   .teaser {
     padding-block: var(--space-4);
+    container-type: inline-size;
   }
 
   .teaser + .teaser {
     border-top: 1px solid var(--colour-rule);
+    padding-top: var(--space-5);
+  }
+
+  .teaser__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .teaser__body {
+    min-width: 0;
   }
 
   .teaser__meta {
-    margin: 0 0 var(--space-2);
+    margin: 0 0 var(--space-1);
     display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem 0.5rem;
+    gap: 0.2rem 0.65rem;
     color: var(--colour-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .teaser__meta span:first-child {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
   }
 
   .teaser__title {
     margin: 0 0 var(--space-2);
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.25;
@@ -52,7 +89,7 @@ const year = project.data.startedYear;
 
   .teaser__title a {
     color: var(--colour-ink);
-    text-decoration: none;
+    text-decoration-color: var(--colour-rule);
   }
 
   .teaser__title a:hover {
@@ -61,7 +98,59 @@ const year = project.data.startedYear;
 
   .teaser__summary {
     margin: 0;
-    max-width: 38rem;
+    max-width: var(--measure);
+  }
+
+  .teaser__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin: var(--space-2) 0 0;
+    font-size: 0.9rem;
+  }
+
+  .teaser__figure {
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .teaser__figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--colour-rule);
+  }
+
+  .teaser__figure figcaption {
     color: var(--colour-muted);
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  /* Respond to the available content width, not the viewport: the homepage has a sidebar. */
+  @container (min-width: 32rem) {
+    .teaser__layout--illustrated {
+      grid-template-columns: clamp(9rem, 25cqi, 12rem) minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-5);
+    }
+
+    .teaser__layout--illustrated .teaser__body {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .teaser__figure {
+      grid-column: 1;
+      grid-row: 1;
+      display: block;
+    }
+
+    .teaser__figure figcaption {
+      margin-top: var(--space-1);
+    }
   }
 </style>

@@ -1,35 +1,151 @@
 ---
 import QuietLayout from '../../layouts/QuietLayout.astro';
+import CvOverview from '../../components/CvOverview.astro';
 import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
 import { site } from '../../data/site';
+import WorkTeaser from '../../components/WorkTeaser.astro';
+import { getPublishedWork } from '../../lib/content';
+
+const publishedWork = await getPublishedWork();
+const selectedProjects = ['bat-habitat-yorkshire', 'tilearray'].flatMap((id) => {
+  const project = publishedWork.find((entry) => entry.id === id);
+  return project ? [project] : [];
+});
 ---
 
 <QuietLayout
   title="CV"
-  description={`Professional experience for ${site.name}. Role history with employer, title and start dates.`}
-  lede="Professional experience. Expand a role for more detail."
+  heading={site.name}
+  tagline={site.headline}
+  description={`CV for ${site.name}, covering ecology, data science, software and analytics leadership.`}
+  lede="I started my career as an ecologist and got into data science through the problems I encountered on projects. I now lead data and analytics at SLR Consulting, having spent much of my career building models, software and technical teams. I’m particularly interested in how we can use computing to better understand the natural world, and I’ve learnt that understanding the problem is as important as the technology we use to solve it."
+  headerRule={false}
 >
-  <section
-    id="experience"
-    class="cv-experience"
-    aria-labelledby="experience-heading"
-  >
-    <h2 id="experience-heading" class="cv-experience__title">Experience</h2>
-    <ExperienceTimeline />
-  </section>
+  <div class="cv-content">
+    <p class="cv-profile-links">
+      <a href={site.github}>GitHub</a>
+      <a href={site.linkedin}>LinkedIn</a>
+      <a href={`mailto:${site.email}`}>Email</a>
+      <span class="cv-profile-links__location">
+        <svg
+          class="cv-profile-links__pin"
+          viewBox="0 0 16 16"
+          width="14"
+          height="14"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M8 14l-4-4.5a5 5 0 119 0L8 14zm0-6.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        {site.location}
+      </span>
+    </p>
+    <CvOverview />
+
+    <nav class="cv-jump" aria-label="On this page">
+      <a href="#experience-heading">Experience</a>
+      <a href="#projects-heading">Independent projects</a>
+      <a href="#education-heading">Education and recognition</a>
+    </nav>
+
+    <section aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <ExperienceTimeline />
+    </section>
+
+    <section class="cv-section" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Selected independent projects</h2>
+      <div>
+        {selectedProjects.map((project) => <WorkTeaser project={project} variant="cv" />)}
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="education-heading">
+      <h2 id="education-heading">Education and recognition</h2>
+      <ul>
+        <li>BSc (Hons) Zoology / Animal Biology (2:1), Newcastle University, 2011–2014.</li>
+        <li>
+          <a href="https://environment-analyst.com/global/108271/sustainability-consulting-awards-shortlist-announced">Rising Star Award shortlist</a>,
+          Environment Analyst Sustainability Consulting Awards, 2022.
+        </li>
+      </ul>
+    </section>
+  </div>
 </QuietLayout>
 
 <style>
-  .cv-experience {
-    max-width: var(--measure);
+  .cv-content {
+    max-width: 60rem;
   }
 
-  .cv-experience__title {
+  .cv-profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1rem;
+    margin: 0 0 var(--space-3);
+    color: var(--colour-muted);
+    font-size: 0.9rem;
+  }
+
+  .cv-profile-links__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .cv-profile-links__pin {
+    flex: 0 0 auto;
+    color: var(--colour-moss);
+  }
+
+  .cv-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.25rem;
+    padding-block: var(--space-3);
+    margin-bottom: var(--space-6);
+    border-block: 1px solid var(--colour-rule);
+    font-size: 0.9rem;
+  }
+
+  .cv-jump a {
+    color: var(--colour-muted);
+  }
+
+  .cv-jump a:hover {
+    color: var(--colour-ink);
+  }
+
+  h2 {
+    scroll-margin-top: 1.5rem;
     margin: 0 0 var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--colour-rule);
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 1.85rem);
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.2;
+  }
+
+  .cv-section {
+    padding-block: var(--space-6) var(--space-5);
+  }
+
+  .cv-section ul {
+    margin: 0;
+    padding-inline-start: 1.2em;
+  }
+
+  .cv-section li + li {
+    margin-top: 0.3em;
   }
 </style>
