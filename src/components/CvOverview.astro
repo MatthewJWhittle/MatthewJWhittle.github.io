@@ -20,8 +20,7 @@ const icons: Record<CvOverviewId, string> = {
 };
 ---
 
-<section class="cv-overview" aria-labelledby="overview-heading">
-  <h2 id="overview-heading" class="cv-overview__title">Focus</h2>
+<section class="cv-overview" aria-label="Focus areas">
   <ul class="cv-overview__list" role="list">
     {
       cvOverview.map(({ id, label }) => (
@@ -53,16 +52,6 @@ const icons: Record<CvOverviewId, string> = {
 <style>
   .cv-overview {
     margin: 0 0 var(--space-6);
-  }
-
-  .cv-overview__title {
-    margin: 0 0 var(--space-3);
-    color: var(--colour-muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
   }
 
   .cv-overview__list {
