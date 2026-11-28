@@ -9,7 +9,7 @@ export const experience = [
     roles: [
       {
         title: 'Interim Head of Data Warehouse & Analytics',
-        dates: '2026–present',
+        dates: 'January 2026–present',
         overview: 'I lead the internal analytics function, covering data engineering, reporting and data science.',
         highlights: [
           { text: 'Brought the team’s data engineering and reporting work under a shared roadmap with colleagues in Finance, Operations and People.' },
@@ -59,7 +59,7 @@ export const experience = [
       },
       {
         title: 'Senior Ecologist / Ecology Data Science Lead',
-        dates: '2021–July 2022',
+        dates: 'September 2021–July 2022',
         highlights: [
           {
             text: 'Helped design surveys and built spatial data pipelines for bat habitat suitability modelling on Anglian Water’s Strategic Pipeline Alliance. We published the method and results with CIEEM.',
