@@ -1,5 +1,30 @@
+.xtl {
+  --xtl-rail: 0.75rem;
+  --xtl-gutter: 0.85rem;
+  --xtl-inset: calc(var(--xtl-rail) + var(--xtl-gutter));
+  position: relative;
+  /* Shift employers and roles together so one rail can run the full career. */
+  padding-inline-start: var(--xtl-inset);
+}
+
+/* One continuous vertical rail across every employer and role. */
+.xtl::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: calc(var(--xtl-rail) / 2);
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 1px;
+  background: var(--colour-rule);
+  transform: translateX(-50%);
+}
+
 .xtl__employer {
   padding-block: var(--space-5);
+}
+
+.xtl__employer + .xtl__employer {
+  padding-top: var(--space-6);
 }
 
 .xtl__org {
@@ -23,27 +48,11 @@
 }
 
 .xtl__roles {
-  --xtl-rail: 0.75rem;
-  --xtl-gutter: 0.85rem;
-  position: relative;
   display: grid;
   gap: var(--space-5);
   margin: 0;
   padding: 0;
-  padding-inline-start: calc(var(--xtl-rail) + var(--xtl-gutter));
   list-style: none;
-}
-
-/* Subtle vertical rail; dots mark each role. */
-.xtl__roles::before {
-  content: '';
-  position: absolute;
-  inset-inline-start: calc(var(--xtl-rail) / 2);
-  top: 0.7rem;
-  bottom: 0.7rem;
-  width: 1px;
-  background: var(--colour-rule);
-  transform: translateX(-50%);
 }
 
 .xtl__role {
@@ -53,7 +62,7 @@
 .xtl__role::before {
   content: '';
   position: absolute;
-  inset-inline-start: calc(-1 * (var(--xtl-rail) + var(--xtl-gutter)) + var(--xtl-rail) / 2);
+  inset-inline-start: calc(-1 * var(--xtl-inset) + var(--xtl-rail) / 2);
   top: 0.55rem;
   width: 0.5rem;
   height: 0.5rem;
