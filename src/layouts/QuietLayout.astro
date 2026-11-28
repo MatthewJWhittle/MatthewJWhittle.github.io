@@ -16,6 +16,8 @@ interface Props {
   heading?: string;
   /** Optional mono line above the heading (e.g. article dates). */
   meta?: string;
+  /** Short LinkedIn-style line directly under the heading. */
+  tagline?: string;
   /** Supporting line under the heading. Omit for title-only pages. */
   lede?: string;
   /** Landmark element. Articles use `article`; indexes use `main`. */
@@ -26,6 +28,8 @@ interface Props {
   backLabel?: string;
   /** Extra schema.org nodes for BaseLayout JSON-LD. */
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  /** Hairline under the page header. Default true; CV omits it. */
+  headerRule?: boolean;
 }
 
 const {
@@ -33,11 +37,13 @@ const {
   description,
   heading = title,
   meta,
+  tagline,
   lede,
   as = 'main',
   backHref = '/',
   backLabel = '← Home',
   structuredData,
+  headerRule = true,
 } = Astro.props;
 
 const isArticle = as === 'article';
@@ -50,9 +56,10 @@ const isArticle = as === 'article';
         <p class="quiet__back">
           <a href={backHref}>{backLabel}</a>
         </p>
-        <header class="quiet__header">
+        <header class:list={['quiet__header', { 'quiet__header--plain': !headerRule }]}>
           {meta && <p class="quiet__meta">{meta}</p>}
           <h1 class="quiet__title">{heading}</h1>
+          {tagline && <p class="quiet__tagline">{tagline}</p>}
           {lede && <p class="quiet__lede">{lede}</p>}
         </header>
         <div class="quiet__body">
@@ -64,9 +71,10 @@ const isArticle = as === 'article';
         <p class="quiet__back">
           <a href={backHref}>{backLabel}</a>
         </p>
-        <header class="quiet__header">
+        <header class:list={['quiet__header', { 'quiet__header--plain': !headerRule }]}>
           {meta && <p class="quiet__meta">{meta}</p>}
           <h1 class="quiet__title">{heading}</h1>
+          {tagline && <p class="quiet__tagline">{tagline}</p>}
           {lede && <p class="quiet__lede">{lede}</p>}
         </header>
         <div class="quiet__body">
@@ -103,6 +111,13 @@ const isArticle = as === 'article';
     border-bottom: 1px solid var(--colour-rule);
   }
 
+  /* No hairline, so drop the border padding and tighten the hand-off. */
+  .quiet__header--plain {
+    margin-bottom: var(--space-5);
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
   .quiet__meta {
     margin: 0 0 var(--space-3);
     color: var(--colour-muted);
@@ -120,7 +135,19 @@ const isArticle = as === 'article';
     line-height: 1.15;
   }
 
-  .quiet__header:not(:has(.quiet__lede)) .quiet__title {
+  .quiet__header:not(:has(.quiet__lede)):not(:has(.quiet__tagline)) .quiet__title {
+    margin-bottom: 0;
+  }
+
+  .quiet__tagline {
+    margin: 0 0 var(--space-3);
+    color: var(--colour-moss);
+    font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .quiet__header:not(:has(.quiet__lede)) .quiet__tagline {
     margin-bottom: 0;
   }
 

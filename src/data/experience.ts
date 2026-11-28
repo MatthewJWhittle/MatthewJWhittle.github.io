@@ -2,6 +2,10 @@
 export const experience = [
   {
     employer: 'SLR Consulting',
+    logo: {
+      src: '/images/employers/slr.png',
+      alt: 'SLR Consulting logo',
+    },
     roles: [
       {
         title: 'Interim Head of Data Warehouse & Analytics',
@@ -33,6 +37,10 @@ export const experience = [
   },
   {
     employer: 'Jacobs',
+    logo: {
+      src: '/images/employers/jacobs.png',
+      alt: 'Jacobs logo',
+    },
     roles: [
       {
         title: 'Senior Data Scientist',
@@ -90,6 +98,10 @@ export const experience = [
   },
   {
     employer: 'Total Ecology',
+    logo: {
+      src: '/images/employers/total-ecology.png',
+      alt: 'Total Ecology logo',
+    },
     roles: [
       {
         title: 'Assistant Ecologist',
@@ -104,6 +116,10 @@ export const experience = [
 
 type EmployerExperience = {
   employer: string;
+  logo?: {
+    src: string;
+    alt: string;
+  };
   roles: {
     title: string;
     dates: string;

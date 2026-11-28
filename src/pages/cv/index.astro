@@ -1,15 +1,21 @@
 ---
 import QuietLayout from '../../layouts/QuietLayout.astro';
+import CvOverview from '../../components/CvOverview.astro';
 import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
 import { site } from '../../data/site';
 ---
 
 <QuietLayout
   title="CV"
+  heading={site.name}
+  tagline={site.headline}
   description={`CV for ${site.name}, covering ecology, data science, software and analytics leadership.`}
   lede="I started out as a field ecologist, then moved into data science and software. I now lead analytics at SLR Consulting. I’m interested in how we can use data and software to solve practical problems, especially in ecology and the environment."
+  headerRule={false}
 >
   <div class="cv-content">
+    <CvOverview />
+
     <section aria-labelledby="experience-heading">
       <h2 id="experience-heading">Experience</h2>
       <ExperienceTimeline />
@@ -48,7 +54,9 @@ import { site } from '../../data/site';
   }
 
   h2 {
-    margin: 0 0 var(--space-3);
+    margin: 0 0 var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--colour-rule);
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 1.85rem);
     font-weight: 500;
@@ -58,7 +66,6 @@ import { site } from '../../data/site';
 
   .cv-section {
     padding-block: var(--space-5);
-    border-top: 1px solid var(--colour-rule);
   }
 
   .cv-section ul {

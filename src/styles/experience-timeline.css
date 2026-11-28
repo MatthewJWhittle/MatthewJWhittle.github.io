@@ -1,9 +1,36 @@
+.xtl {
+  --xtl-rail: 0.75rem;
+  --xtl-gutter: 0.85rem;
+  --xtl-inset: calc(var(--xtl-rail) + var(--xtl-gutter));
+  position: relative;
+  /* Shift employers and roles together so one rail can run the full career. */
+  padding-inline-start: var(--xtl-inset);
+}
+
+/* One continuous vertical rail across every employer and role. */
+.xtl::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: calc(var(--xtl-rail) / 2);
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 1px;
+  background: var(--colour-rule);
+  transform: translateX(-50%);
+}
+
 .xtl__employer {
   padding-block: var(--space-5);
-  border-top: 1px solid var(--colour-rule);
+}
+
+.xtl__employer + .xtl__employer {
+  padding-top: var(--space-6);
 }
 
 .xtl__org {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   margin: 0 0 var(--space-4);
   color: var(--colour-moss);
   font-family: var(--font-display);
@@ -12,12 +39,38 @@
   line-height: 1.2;
 }
 
+.xtl__logo {
+  display: block;
+  flex: 0 0 auto;
+  width: 1.85rem;
+  height: 1.85rem;
+  object-fit: contain;
+}
+
 .xtl__roles {
   display: grid;
   gap: var(--space-5);
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.xtl__role {
+  position: relative;
+}
+
+.xtl__role::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: calc(-1 * var(--xtl-inset) + var(--xtl-rail) / 2);
+  top: 0.55rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1.5px solid color-mix(in srgb, var(--colour-moss) 65%, var(--colour-rule));
+  border-radius: 50%;
+  background: var(--colour-paper);
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 .xtl__heading {
