@@ -1,5 +1,6 @@
 ---
 import QuietLayout from '../../layouts/QuietLayout.astro';
+import CvOverview from '../../components/CvOverview.astro';
 import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
 import { site } from '../../data/site';
 ---
@@ -12,6 +13,8 @@ import { site } from '../../data/site';
   headerRule={false}
 >
   <div class="cv-content">
+    <CvOverview />
+
     <section aria-labelledby="experience-heading">
       <h2 id="experience-heading">Experience</h2>
       <ExperienceTimeline />
