@@ -7,7 +7,7 @@ export const cvOverview = [
   { id: 'data-science', label: 'Applied machine learning' },
   { id: 'geospatial', label: 'Geospatial & remote sensing' },
   { id: 'ecology', label: 'Ecology' },
-  { id: 'data-engineering', label: 'Data platforms & engineering' },
+  { id: 'data-engineering', label: 'Data architecture & engineering' },
   { id: 'python', label: 'Python & software engineering' },
 ] as const;
 
