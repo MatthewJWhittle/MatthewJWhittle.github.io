@@ -3,12 +3,12 @@
  * Keep the list small; do not invent tools or claims for completeness.
  */
 export const cvOverview = [
-  { id: 'leadership', label: 'Analytics leadership' },
-  { id: 'data-science', label: 'Data science & ML' },
-  { id: 'geospatial', label: 'Geospatial' },
+  { id: 'leadership', label: 'Technical leadership' },
+  { id: 'data-science', label: 'Applied machine learning' },
+  { id: 'geospatial', label: 'Geospatial & remote sensing' },
   { id: 'ecology', label: 'Ecology' },
   { id: 'data-engineering', label: 'Data engineering' },
-  { id: 'python', label: 'Python' },
+  { id: 'python', label: 'Python & software engineering' },
   { id: 'location', label: 'West Yorkshire' },
 ] as const;
 
