@@ -3,11 +3,9 @@
   --xtl-gutter: 0.85rem;
   --xtl-inset: calc(var(--xtl-rail) + var(--xtl-gutter));
   position: relative;
-  /* Shift employers and roles together so one rail can run the full career. */
   padding-inline-start: var(--xtl-inset);
 }
 
-/* One continuous vertical rail across every employer and role. */
 .xtl::before {
   content: '';
   position: absolute;
@@ -20,7 +18,7 @@
 }
 
 .xtl__employer {
-  padding-block: var(--space-5);
+  padding-block: var(--space-4) var(--space-5);
 }
 
 .xtl__employer + .xtl__employer {
@@ -31,10 +29,10 @@
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-5);
   color: var(--colour-moss);
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -49,7 +47,7 @@
 
 .xtl__roles {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-6);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -57,6 +55,13 @@
 
 .xtl__role {
   position: relative;
+  display: grid;
+  min-width: 0;
+  gap: 0.25rem;
+}
+
+.xtl__role + .xtl__role--brief {
+  margin-top: calc(-1 * var(--space-3));
 }
 
 .xtl__role::before {
@@ -73,17 +78,9 @@
   z-index: 1;
 }
 
-.xtl__heading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.25rem var(--space-3);
-}
-
-.xtl__heading h4 {
+.xtl__title {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.35;
 }
@@ -92,25 +89,79 @@
   margin: 0;
   color: var(--colour-muted);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.xtl__body {
+  min-width: 0;
+  max-width: var(--measure);
 }
 
 .xtl__overview {
-  margin: var(--space-2) 0 0;
+  margin: var(--space-2) 0 var(--space-3);
+  color: var(--colour-muted);
 }
 
 .xtl__highlights {
+  display: grid;
+  gap: var(--space-3);
   margin: var(--space-2) 0 0;
-  padding-inline-start: 1.2em;
+  padding: 0;
+  list-style: none;
 }
 
-.xtl__highlights li + li {
-  margin-top: 0.3em;
+.xtl__highlights p {
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
-@media (max-width: 37rem) {
-  .xtl__heading {
-    display: grid;
-    justify-content: start;
+.xtl__highlights strong {
+  font-weight: 600;
+  color: var(--colour-ink);
+}
+
+.xtl__evidence {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  max-width: 100%;
+}
+
+.xtl__evidence svg {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+@media (min-width: 64rem) {
+  .xtl__role {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    column-gap: var(--space-5);
+    align-items: start;
+  }
+
+  .xtl__title {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .xtl__dates {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding-top: 0.22rem;
+  }
+
+  .xtl__body {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+@media print {
+  .xtl__role {
+    break-inside: avoid;
   }
 }
