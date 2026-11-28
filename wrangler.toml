@@ -1,0 +1,7 @@
+# Cloudflare Pages — static Astro output.
+# GitHub Pages remains production (see .github/workflows/deploy.yml).
+# Use Cloudflare for PR/branch preview deployments after connecting the repo
+# in the dashboard (build settings documented in README.md).
+name = "matthewjwhittle-github-io"
+compatibility_date = "2026-11-27"
+pages_build_output_dir = "dist"
