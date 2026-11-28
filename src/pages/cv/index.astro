@@ -41,6 +41,12 @@ import { site } from '../../data/site';
     </p>
     <CvOverview />
 
+    <nav class="cv-jump" aria-label="On this page">
+      <a href="#experience-heading">Experience</a>
+      <a href="#projects-heading">Independent projects</a>
+      <a href="#education-heading">Education and recognition</a>
+    </nav>
+
     <section aria-labelledby="experience-heading">
       <h2 id="experience-heading">Experience</h2>
       <ExperienceTimeline />
@@ -48,16 +54,39 @@ import { site } from '../../data/site';
 
     <section class="cv-section" aria-labelledby="projects-heading">
       <h2 id="projects-heading">Selected independent projects</h2>
-      <ul>
-        <li>
-          <a href="/work/bat-habitat-yorkshire/">Modelling bat habitat suitability across Yorkshire</a>.
-          A long-running collaboration with Greg Slack exploring how species records and environmental data can inform ecological assessments. We’ve built a reusable MaxEnt modelling workflow and interactive maps of predicted habitat suitability across Yorkshire. <a href="https://github.com/MatthewJWhittle/shefflied-bats">Modelling code</a>.
-        </li>
-        <li>
-          <a href="/work/tilearray/">tilearray</a>.
-          Getting raster data out of web map services can be surprisingly cumbersome. I built this open-source Python library to handle tile planning, fetching and mosaicking, returning Dask-backed xarray arrays for analysis and machine learning. Currently in alpha. <a href="https://github.com/MatthewJWhittle/tilearray">Source code</a> · <a href="https://matthewjwhittle.github.io/tilearray/">Documentation</a>.
-        </li>
-      </ul>
+      <div class="cv-projects">
+        <article class="cv-project">
+          <figure>
+            <img src="/images/hsm/panel-daubenton-if.webp" alt="Modelled habitat suitability for Daubenton’s bat across Yorkshire, with higher scores along waterways." width="781" height="629" loading="lazy" decoding="async" />
+            <figcaption>Predicted suitability · Daubenton’s bat</figcaption>
+          </figure>
+          <div>
+            <p class="cv-project__meta">Ecology · Spatial modelling · Machine learning</p>
+            <h3><a href="/work/bat-habitat-yorkshire/">Modelling bat habitat suitability across Yorkshire</a></h3>
+            <p>A long-running collaboration with Greg Slack exploring how species records and environmental data can inform ecological assessments. We’ve built a reusable MaxEnt modelling workflow and interactive maps of predicted habitat suitability across Yorkshire.</p>
+            <p class="cv-project__links">
+              <a href="/work/bat-habitat-yorkshire/">Project article</a>
+              <a href="https://github.com/MatthewJWhittle/shefflied-bats">Modelling code</a>
+            </p>
+          </div>
+        </article>
+        <article class="cv-project">
+          <figure>
+            <img src="/images/tilearray/fig01-hero-desktop.webp" alt="Aerial image around the Golden Gate with a selected area shown as an enlarged image patch." width="1400" height="720" loading="lazy" decoding="async" />
+            <figcaption>USGS / USDA NAIP · public domain</figcaption>
+          </figure>
+          <div>
+            <p class="cv-project__meta">Python · Geospatial data engineering · Open source</p>
+            <h3><a href="/work/tilearray/">tilearray</a></h3>
+            <p>Getting raster data out of web map services can be surprisingly cumbersome. I built this open-source Python library to handle tile planning, fetching and mosaicking, returning Dask-backed xarray arrays for analysis and machine learning. Currently in alpha.</p>
+            <p class="cv-project__links">
+              <a href="/work/tilearray/">Project article</a>
+              <a href="https://github.com/MatthewJWhittle/tilearray">Source code</a>
+              <a href="https://matthewjwhittle.github.io/tilearray/">Documentation</a>
+            </p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="cv-section" aria-labelledby="education-heading">
@@ -75,7 +104,7 @@ import { site } from '../../data/site';
 
 <style>
   .cv-content {
-    max-width: var(--measure);
+    max-width: 60rem;
   }
 
   .cv-profile-links {
@@ -99,7 +128,26 @@ import { site } from '../../data/site';
     color: var(--colour-moss);
   }
 
+  .cv-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.25rem;
+    padding-block: var(--space-3);
+    margin-bottom: var(--space-6);
+    border-block: 1px solid var(--colour-rule);
+    font-size: 0.9rem;
+  }
+
+  .cv-jump a {
+    color: var(--colour-muted);
+  }
+
+  .cv-jump a:hover {
+    color: var(--colour-ink);
+  }
+
   h2 {
+    scroll-margin-top: 1.5rem;
     margin: 0 0 var(--space-4);
     padding-bottom: var(--space-3);
     border-bottom: 1px solid var(--colour-rule);
@@ -111,7 +159,93 @@ import { site } from '../../data/site';
   }
 
   .cv-section {
-    padding-block: var(--space-5);
+    padding-block: var(--space-6) var(--space-5);
+  }
+
+  .cv-projects {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .cv-project {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .cv-project + .cv-project {
+    border-top: 1px solid var(--colour-rule);
+    padding-top: var(--space-5);
+  }
+
+  .cv-project figure {
+    margin: 0;
+    max-width: 18rem;
+  }
+
+  .cv-project img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--colour-rule);
+  }
+
+  .cv-project figcaption {
+    color: var(--colour-muted);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-top: var(--space-1);
+  }
+
+  .cv-project h3 {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .cv-project h3 a {
+    color: var(--colour-ink);
+    text-decoration: none;
+  }
+
+  .cv-project h3 a:hover {
+    color: var(--colour-moss);
+  }
+
+  .cv-project p {
+    margin: 0;
+    max-width: var(--measure);
+  }
+
+  .cv-project .cv-project__meta {
+    margin-bottom: var(--space-1);
+    color: var(--colour-muted);
+    font-size: 0.78rem;
+  }
+
+  .cv-project .cv-project__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin-top: var(--space-2);
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 40rem) {
+    .cv-project {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-5);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .cv-project {
+      grid-template-columns: 12rem minmax(0, 1fr);
+    }
   }
 
   .cv-section ul {
