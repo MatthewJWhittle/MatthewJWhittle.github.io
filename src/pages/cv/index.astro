@@ -56,35 +56,33 @@ import { site } from '../../data/site';
       <h2 id="projects-heading">Selected independent projects</h2>
       <div class="cv-projects">
         <article class="cv-project">
-          <figure>
-            <img src="/images/hsm/panel-daubenton-if.webp" alt="Modelled habitat suitability for Daubenton’s bat across Yorkshire, with higher scores along waterways." width="781" height="629" loading="lazy" decoding="async" />
-            <figcaption>Predicted suitability · Daubenton’s bat</figcaption>
-          </figure>
           <div>
             <p class="cv-project__meta">Ecology · Spatial modelling · Machine learning</p>
             <h3><a href="/work/bat-habitat-yorkshire/">Modelling bat habitat suitability across Yorkshire</a></h3>
             <p>A long-running collaboration with Greg Slack exploring how species records and environmental data can inform ecological assessments. We’ve built a reusable MaxEnt modelling workflow and interactive maps of predicted habitat suitability across Yorkshire.</p>
             <p class="cv-project__links">
-              <a href="/work/bat-habitat-yorkshire/">Project article</a>
               <a href="https://github.com/MatthewJWhittle/shefflied-bats">Modelling code</a>
             </p>
           </div>
+          <figure>
+            <img src="/images/hsm/panel-daubenton-if.webp" alt="Modelled habitat suitability for Daubenton’s bat across Yorkshire, with higher scores along waterways." width="781" height="629" loading="lazy" decoding="async" />
+            <figcaption>Predicted suitability · Daubenton’s bat</figcaption>
+          </figure>
         </article>
         <article class="cv-project">
-          <figure>
-            <img src="/images/tilearray/fig01-hero-desktop.webp" alt="Aerial image around the Golden Gate with a selected area shown as an enlarged image patch." width="1400" height="720" loading="lazy" decoding="async" />
-            <figcaption>USGS / USDA NAIP · public domain</figcaption>
-          </figure>
           <div>
             <p class="cv-project__meta">Python · Geospatial data engineering · Open source</p>
             <h3><a href="/work/tilearray/">tilearray</a></h3>
             <p>Getting raster data out of web map services can be surprisingly cumbersome. I built this open-source Python library to handle tile planning, fetching and mosaicking, returning Dask-backed xarray arrays for analysis and machine learning. Currently in alpha.</p>
             <p class="cv-project__links">
-              <a href="/work/tilearray/">Project article</a>
               <a href="https://github.com/MatthewJWhittle/tilearray">Source code</a>
               <a href="https://matthewjwhittle.github.io/tilearray/">Documentation</a>
             </p>
           </div>
+          <figure>
+            <img src="/images/tilearray/fig01-hero-desktop.webp" alt="Aerial image around the Golden Gate with a selected area shown as an enlarged image patch." width="1400" height="720" loading="lazy" decoding="async" />
+            <figcaption>USGS / USDA NAIP · public domain</figcaption>
+          </figure>
         </article>
       </div>
     </section>
@@ -208,7 +206,7 @@ import { site } from '../../data/site';
 
   .cv-project h3 a {
     color: var(--colour-ink);
-    text-decoration: none;
+    text-decoration-color: var(--colour-rule);
   }
 
   .cv-project h3 a:hover {
@@ -234,11 +232,32 @@ import { site } from '../../data/site';
     font-size: 0.9rem;
   }
 
+  @media (max-width: 39.999rem) {
+    .cv-project figure {
+      display: grid;
+      grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+      gap: var(--space-3);
+      align-items: center;
+      max-width: none;
+    }
+  }
+
   @media (min-width: 40rem) {
     .cv-project {
       grid-template-columns: 11rem minmax(0, 1fr);
       align-items: start;
       gap: var(--space-5);
+    }
+
+    .cv-project > div {
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+    }
+
+    .cv-project figure {
+      grid-column: 1;
+      grid-row: 1;
     }
   }
 
