@@ -18,6 +18,17 @@ const work = defineCollection({
     demoUrl: z.string().url().optional(),
     demoLabel: z.string().optional(),
     figureId: z.string().optional(),
+    teaser: z.object({
+      topics: z.array(z.string()).optional(),
+      cvSummary: z.string().optional(),
+      image: z.object({
+        src: z.string(),
+        alt: z.string(),
+        width: z.number().int().positive(),
+        height: z.number().int().positive(),
+        caption: z.string().optional(),
+      }).optional(),
+    }).optional(),
   }),
 });
 
