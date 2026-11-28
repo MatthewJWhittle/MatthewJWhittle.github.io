@@ -23,11 +23,45 @@
 }
 
 .xtl__roles {
+  --xtl-rail: 0.75rem;
+  --xtl-gutter: 0.85rem;
+  position: relative;
   display: grid;
   gap: var(--space-5);
   margin: 0;
   padding: 0;
+  padding-inline-start: calc(var(--xtl-rail) + var(--xtl-gutter));
   list-style: none;
+}
+
+/* Subtle vertical rail; dots mark each role. */
+.xtl__roles::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: calc(var(--xtl-rail) / 2);
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 1px;
+  background: var(--colour-rule);
+  transform: translateX(-50%);
+}
+
+.xtl__role {
+  position: relative;
+}
+
+.xtl__role::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: calc(-1 * (var(--xtl-rail) + var(--xtl-gutter)) + var(--xtl-rail) / 2);
+  top: 0.55rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1.5px solid color-mix(in srgb, var(--colour-moss) 65%, var(--colour-rule));
+  border-radius: 50%;
+  background: var(--colour-paper);
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 .xtl__heading {
